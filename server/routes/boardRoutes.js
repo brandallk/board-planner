@@ -15,7 +15,7 @@ router.post("/api/boards/"), (req, res, next) => {
 
 // deleteBoard
 router.delete("/api/boards/:boardId", (req, res, next) => {
-    Boards.findOneAndRemove({ creatorId: req.session.uid, _id: req.params.boardId })
+    Boards.findOneAndRemove({ userId: req.session.uid, _id: req.params.boardId })
         .then(board => {
             if (!board) {
                 res.status(401).send({ error: "Not authorized to remove board" })
@@ -43,3 +43,5 @@ router.get("/api/boards/:userId", (req, res, next) => {
             return res.send(boards)
         })
 })
+
+module.exports = { router };

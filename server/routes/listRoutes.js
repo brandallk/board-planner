@@ -38,3 +38,5 @@ router.get("/api/boards/:boardId/lists", (req, res, next) => {
         })
         .catch(next)
 })
+
+module.exports = { router };
