@@ -36,4 +36,5 @@ router.get("/api/boards/:boardId/lists", (req, res, next) => {
         .then(lists => {
             return res.send(lists)
         })
+        .catch(next)
 })
