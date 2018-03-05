@@ -37,3 +37,5 @@ router.get("api/boards/lists/:listId/comments", (req, res, next) => {
         })
         .catch(next)
 })
+
+module.exports = { router };
