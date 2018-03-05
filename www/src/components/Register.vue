@@ -1,12 +1,12 @@
 <template>
-  <div class="?">
+  <div class="register">
  
   </div>
 </template>
 
 <script>
 export default {
-  name: '?',
+  name: 'Register',
   data () {
     return {
       
