@@ -77,6 +77,34 @@ export default new vuex.Store({
           commit('setAuthError', 'Log-in failed: Invalid username or password')
         })
     },
+    authenticateUser({commit, dispatch}) {
+      auth.get('authenticate')
+        .then(res => {
+          var sessionUser = res.data
+          console.log('returning user:', sessionUser)
+          commit('setUser', sessionUser)
+          router.push({
+            name: 'Home',
+            params: {userId: sessionUser._id}
+          })
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    },
+    logoutUser({commit, dispatch}) {
+      auth.delete('logout')
+        .then(() => {
+          console.log('User logged out')
+          commit('setUser', {})
+          router.push({
+            name: 'Welcome'
+          })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
 
   }
 })

@@ -45,7 +45,7 @@ router.get('/auth/authenticate', (req, res) => {
     .then(user => {
       if (!user) {
         return res.status(401).send({
-          error: 'Please login to Continue'
+          error: 'Please sign in to continue'
         })
       }
       user.password = null;

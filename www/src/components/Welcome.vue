@@ -1,5 +1,5 @@
 <template>
-  <div class="welcome container-fluid">
+  <div class="welcome container-fluid pb-5">
     <topBar></topBar>
     <div class="welcome-message container">
       <h1 class="text-center m-5">Welcome to Board-Planner!</h1>

@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    Home
+    <h1>'HOME' COMPONENT</h1>
+
+    <a href="#" @click.prevent="logout">LOGOUT</a>
   </div>
 </template>
 
@@ -10,6 +12,11 @@ export default {
   data () {
     return {
       
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logoutUser')
     }
   }
 }
