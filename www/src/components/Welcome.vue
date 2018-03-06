@@ -1,8 +1,8 @@
 <template>
-  <div class="welcome">
+  <div class="welcome container-fluid">
     <topBar></topBar>
-    <signIn></signIn>
-    <register></register>
+    <signIn v-on:showRegisterForm="showRegisterForm" v-if="showSignIn"></signIn>
+    <register v-on:showSignInForm="showSignInForm" v-if="!showSignIn"></register>
   </div>
 </template>
 
@@ -19,13 +19,20 @@
     },
     data () {
       return {
-        
+        showSignIn: true
+      }
+    },
+    methods: {
+      showSignInForm() {
+        this.showSignInForm = true
+      },
+      showRegisterForm() {
+        this.showSignInForm = false
       }
     }
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
 </style>
