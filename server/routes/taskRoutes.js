@@ -3,7 +3,7 @@ var Tasks = require("../models/task")
 
 // createTask
 
-router.post("/api/boards/lists/:listId/tasks", (req, res, next) => {
+router.post("/api/tasks", (req, res, next) => {
     Tasks.create(req.body)
         .then(task => {
             res.send(task)

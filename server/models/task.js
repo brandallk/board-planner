@@ -14,8 +14,8 @@ var schema = new Schema({
     },
     listId: {
         type: ObjectId,
-        ref: "List"
-            //required: true
+        ref: "List",
+        required: true
     },
     userId: {
         type: ObjectId,
@@ -26,10 +26,6 @@ var schema = new Schema({
         type: ObjectId,
         ref: "Board",
         required: true
-    },
-    commentsIds: {
-        type: Array
-            // required: true
     }
 })
 
