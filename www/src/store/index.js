@@ -33,7 +33,8 @@ export default new vuex.Store({
       message: ""
     },
     activeBoard: {},
-    userBoards: []
+    userBoards: [],
+    boardLists: []
   },
 
   mutations: {
@@ -51,18 +52,21 @@ export default new vuex.Store({
     },
     setUserBoards(state, boardsArr) {
       state.userBoards = boardsArr
+    },
+    setBoardLists(state, lists) {
+      state.boardLists = lists
     }
   },
 
   actions: {
     // Auth
-    registerUser({commit, dispatch}, user) {
+    registerUser({ commit, dispatch }, user) {
       auth.post('register', user)
         .then(res => {
           var newUser = res.data
           console.log('newUser:', newUser)
           commit('setUser', newUser)
-          commit('setAuthError', {error: false, message: ''})
+          commit('setAuthError', { error: false, message: '' })
 
           var defaultBoard = {
             title: 'Untitled Board',
@@ -78,17 +82,17 @@ export default new vuex.Store({
         })
         .catch(err => {
           console.log(err)
-          commit('setAuthError', {error: true, message: 'Register failed: Invalid username, email, or password given'})
+          commit('setAuthError', { error: true, message: 'Register failed: Invalid username, email, or password given' })
         })
     },
 
-    loginUser({commit, dispatch}, user) {
+    loginUser({ commit, dispatch }, user) {
       auth.post('login', user)
         .then(res => {
           var newUser = res.data
           console.log('logged-in user:', newUser)
           commit('setUser', newUser)
-          commit('setAuthError', {error: false, message: ''})
+          commit('setAuthError', { error: false, message: '' })
           return newUser
         })
         .then(newUser => {
@@ -105,11 +109,11 @@ export default new vuex.Store({
         })
         .catch(err => {
           console.log(err)
-          commit('setAuthError', {error: true, message: 'Log-in failed: Invalid username or password'})
+          commit('setAuthError', { error: true, message: 'Log-in failed: Invalid username or password' })
         })
     },
 
-    authenticateUser({commit, dispatch}) {
+    authenticateUser({ commit, dispatch }) {
       auth.get('authenticate')
         .then(res => {
           var sessionUser = res.data
@@ -123,12 +127,12 @@ export default new vuex.Store({
           console.error(err)
         })
     },
-    logoutUser({commit, dispatch}) {
+    logoutUser({ commit, dispatch }) {
       auth.delete('logout')
         .then(() => {
           console.log('User logged out')
           commit('setUser', {})
-          commit('setAuthError', {error: false, message: ''})
+          commit('setAuthError', { error: false, message: '' })
           router.push({
             name: 'Welcome'
           })
@@ -136,7 +140,19 @@ export default new vuex.Store({
         .catch(err => {
           console.log(err)
         })
-    }
+    },
+    getBoardLists({commit, dispatch},boardId) {
+      api
+        .get(`boards/${boardId}/lists`)
+        .then(res => {
+          var lists = res.data
+          console.log('User Board Lists', lists)
+          commit('setBoardLists', lists)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
 
   }
 })
