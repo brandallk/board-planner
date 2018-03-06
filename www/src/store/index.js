@@ -17,6 +17,12 @@ var auth = axios.create({
   withCredentials: true
 })
 
+var unconventionalRoutes = axios.create({
+  baseURL: '//localhost:3000/',
+  timeout: 3000,
+  withCredentials: true
+})
+
 vue.use(vuex)
 
 export default new vuex.Store({
@@ -67,16 +73,15 @@ export default new vuex.Store({
           commit('setUserBoards', [defaultBoard])
 
           router.push({
-            name: 'Home',
-            params: {
-              userId: newUser._id
-            }
+            name: 'Home'
           })
         })
         .catch(err => {
           console.log(err)
+          commit('setAuthError', {error: true, message: 'Register failed: Invalid username, email, or password given'})
         })
     },
+
     loginUser({commit, dispatch}, user) {
       auth.post('login', user)
         .then(res => {
@@ -84,11 +89,18 @@ export default new vuex.Store({
           console.log('logged-in user:', newUser)
           commit('setUser', newUser)
           commit('setAuthError', {error: false, message: ''})
+          return newUser
+        })
+        .then(newUser => {
+          // unconventionalRoutes.get('myBoards') // <--- CHANGE LINE BELOW WHEN CHANGES TO THIS GET ROUTE ARE PUSHED!!!
+          return api.get(`users/${newUser._id}/boards`)
+        })
+        .then(res => {
+          var userBoards = res.data
+          console.log('user boards:', userBoards)
+          commit('setUserBoards', userBoards)
           router.push({
-            name: 'Home',
-            params: {
-              userId: newUser._id
-            }
+            name: 'Home'
           })
         })
         .catch(err => {
@@ -96,6 +108,7 @@ export default new vuex.Store({
           commit('setAuthError', {error: true, message: 'Log-in failed: Invalid username or password'})
         })
     },
+
     authenticateUser({commit, dispatch}) {
       auth.get('authenticate')
         .then(res => {
@@ -103,8 +116,7 @@ export default new vuex.Store({
           console.log('returning user:', sessionUser)
           commit('setUser', sessionUser)
           router.push({
-            name: 'Home',
-            params: {userId: sessionUser._id}
+            name: 'Home'
           })
         })
         .catch(err => {
