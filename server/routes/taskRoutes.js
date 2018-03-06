@@ -12,8 +12,8 @@ router.post("/api/boards/lists/:listId/tasks", (req, res, next) => {
 })
 
 //deleteTask
-router.delete("/api/boards/lists/list:Id/tasks/taskId", (req, res, next) => {
-    Tasks.findByIdAndRemove(req.params.taskId)
+router.delete("/api/tasks/:taskId", (req, res, next) => {
+    Tasks.findByIdAndRemove(req.params.taskId) //
         .then(comment => {
             res.send({ message: "Successfully deleted task" })
         })
@@ -21,18 +21,18 @@ router.delete("/api/boards/lists/list:Id/tasks/taskId", (req, res, next) => {
 })
 
 // updateTask (put)
-
-
-router.put("/api/boards/lists/:listId/tasks/:taskId", (req, res, next) => {
-    Tasks.findByIdAndUpdate(req.params.taskId, req.body, { new: true })
+router.put("/api/tasks/:taskId", (req, res, next) => {
+    Tasks.findByIdAndUpdate(req.params.listId, req.body, { new: true })
         .then(comment => {
-            res.send({ message: "Successfully updated task", data: comment })
+            res.send({ message: "Successfully updated list", data: comment })
         })
         .catch(next)
 })
 
-//getTaskByListId
+// router.put("/api/userId/boards/lists/tasks/:taskId", (req, res, next) => {
+
 router.get("/api/boards/lists/:listId", (req, res, next) => {
+
     Tasks.find({ listId: req.params.listId })
         .then(tasks => {
             return res.send(tasks)
@@ -41,7 +41,13 @@ router.get("/api/boards/lists/:listId", (req, res, next) => {
         .catch(next)
 })
 
-
-
+//FOR TESTING ONLY - GET ALL TASKS
+router.get("/api/tasks", (req, res, next) => {
+    Tasks.find()
+        .then(tasks => {
+            return res.send(tasks)
+        })
+        .catch(next)
+})
 
 module.exports = { router };

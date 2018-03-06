@@ -34,12 +34,24 @@ router.put("/api/boards/:boardId", (req, res, next) => {
 })
 
 // getBoardsByUserId
-router.get("/api/users/:userId/boards", (req, res, next) => {
-    Boards.find({userId: req.params.userId})
+router.get("/myBoards", (req, res, next) => {
+    //req.body.userId = req.session.uid; // Get the userId from the logged-in user's session
+    var userId = req.session.uid
+    Boards.find({ userId: userId })
         .then(boards => {
             return res.send(boards)
         })
         .catch(next)
 })
+
+// FOR TESTING ONLY: Get all boards
+router.get("/api/boards", (req, res, next) => {
+    Boards.find()
+        .then(boards => {
+            return res.send(boards)
+        })
+        .catch(next)
+})
+
 
 module.exports = { router }
