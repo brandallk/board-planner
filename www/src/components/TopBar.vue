@@ -1,17 +1,22 @@
 <template>
-  <div class="topbar">
-    <h1 class="text-center bg-dark text-light py-4">Board-Planner</h1>
+  <div class="topbar bg-dark row">
+   <div class="col">
+
+     <h1 class="text-center bg-dark text-light py-4">Board-Planner</h1>
+    </div>
   </div>
+ 
 </template>
 
 <script>
   export default {
     name: 'TopBar',
-    data () {
+    data() {
       return {
-        
+
       }
-    }
+    },
+  
   }
 </script>
 
