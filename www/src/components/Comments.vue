@@ -1,19 +1,15 @@
 <template>
-  <div class="taskCard">
+  <div class="comments">
     <div class="">
-      <comments></comments>
-  </div>
+      <p>I'm a comment</p>
+    </div>
 
   </div>
 </template>
 
 <script>
-  import Comments from './Comments'
   export default {
-    name: 'TaskCard',
-    components: {
-      comments: Comments,
-    },
+    name: 'Comments',
     data() {
       return {
 
