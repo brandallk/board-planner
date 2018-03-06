@@ -1,6 +1,7 @@
 <template>
   <div class="list">
     <li class="list-group-item" v-for="">{{title}}</li>
+    
   </div>
 </template>
 

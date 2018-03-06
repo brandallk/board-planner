@@ -1,6 +1,7 @@
 <template>
   <div class="taskCard">
     <div class="">
+      <p>This is a taskCard!</p>
       <comments></comments>
   </div>
 
