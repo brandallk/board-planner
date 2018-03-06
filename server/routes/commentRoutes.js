@@ -3,7 +3,7 @@ var Comments = require("../models/comment")
 
 //  createComment
 
-router.post("/api/boards/lists/:listId/comments", (req, res, next) => {
+router.post("/api/boards/lists/tasks/:taskId/comments", (req, res, next) => {
     Comments.create(req.body)
         .then(comment => {
             res.send(comment)
@@ -12,7 +12,7 @@ router.post("/api/boards/lists/:listId/comments", (req, res, next) => {
 })
 
 // deleteComment
-router.delete("/api/boards/lists/:listId/comments/:commentId", (req, res, next) => {
+router.delete("/api/boards/lists/tasks/:taskId/comments/:commentId", (req, res, next) => {
     Comments.findByIdAndRemove(req.params.commentId)
         .then(commt => {
             res.send({ message: "Successfully deleted comment" })
@@ -21,7 +21,7 @@ router.delete("/api/boards/lists/:listId/comments/:commentId", (req, res, next) 
 })
 
 // updateComment (put)
-router.put("api/boards/lists/;listId/comments/:commentId", (req, res, next) => {
+router.put("api/boards/lists/tasks/:taskId/comments/:commentId", (req, res, next) => {
     Comments.findByIdAndUpdate(req.params.commentId, req.body, ({ new: true }))
         .then(commt => {
             res.send({ message: "Successfully updated list", data: commt })
@@ -30,8 +30,8 @@ router.put("api/boards/lists/;listId/comments/:commentId", (req, res, next) => {
 })
 
 // getCommentsByListId
-router.get("api/boards/lists/:listId/comments", (req, res, next) => {
-    Comments.find({ listId: req.params.listId })
+router.get("api/boards/lists/tasks/:taskId/comments", (req, res, next) => {
+    Comments.find({ taskId: req.params.taskId })
         .then(comments => {
             return res.send(comments)
         })
