@@ -7,6 +7,7 @@ require('./db/mlab-config')
 var port = 3000
 var session = require("./auth/session")
 var authRoutes = require("./auth/authRoutes")
+var userRoutes = require("./routes/userRoutes")
 var boardRoutes = require("./routes/boardRoutes")
 var listRoutes = require("./routes/listRoutes")
 var taskRoutes = require("./routes/taskRoutes")
@@ -28,13 +29,14 @@ server.use(bp.urlencoded({ extended: true }));
 
 server.use(authRoutes);
 
-server.use("/api?*", (req, res, next) => {
-    if (req.method.toLowerCase() !== "get" && !req.session.uid) {
-        return res.status(401).send({ error: "PLEASE LOG IN TO CONTINUE" });
-    }
-    next()
-})
+// server.use("/api/*", (req, res, next) => {
+//     if (req.method.toLowerCase() !== "get" && !req.session.uid) {
+//         return res.status(401).send({ error: "PLEASE LOG IN TO CONTINUE" });
+//     }
+//     next()
+// })
 
+server.use(userRoutes.router)
 server.use(boardRoutes.router)
 server.use(listRoutes.router)
 server.use(taskRoutes.router)

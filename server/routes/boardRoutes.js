@@ -2,16 +2,14 @@ var router = require("express").Router()
 var Boards = require("../models/board")
 
 // createBoard - by userId
-
-router.post("/api/boards/"), (req, res, next) => {
-    req.body.userId = req.session.uid;
-
+router.post("/api/boards/", (req, res, next) => {
+    // req.body.userId = req.session.uid; // Get the userId from the logged-in user's session
     Boards.create(req.body)
         .then(board => {
             res.send(board);
         })
         .catch(next)
-}
+})
 
 // deleteBoard
 router.delete("/api/boards/:boardId", (req, res, next) => {
@@ -26,7 +24,7 @@ router.delete("/api/boards/:boardId", (req, res, next) => {
         .catch(next)
 })
 
-//  updateBoard
+// updateBoard
 router.put("/api/boards/:boardId", (req, res, next) => {
     Boards.findByIdAndUpdate(req.params.boardId, req.body, { new: true })
         .then(board => {
@@ -36,12 +34,12 @@ router.put("/api/boards/:boardId", (req, res, next) => {
 })
 
 // getBoardsByUserId
-router.get("/api/boards/:userId", (req, res, next) => {
-    req.body.userId = req.session.uid
-    Boards.findById(req.params.userId)
+router.get("/api/users/:userId/boards", (req, res, next) => {
+    Boards.find({userId: req.params.userId})
         .then(boards => {
             return res.send(boards)
         })
+        .catch(next)
 })
 
-module.exports = { router };
+module.exports = { router }

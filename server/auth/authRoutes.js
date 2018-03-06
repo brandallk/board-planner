@@ -1,26 +1,20 @@
 var User = require('../models/user')
 var router = require('express').Router()
-var errorMessage = { err: 'Invalid Username and/or Password' }
+var errorMessage = { error: 'Invalid Username and/or Password' }
 
 router.post('/auth/register', (req, res) => {
   req.body.password = User.generateHash(req.body.password)
   User.create(req.body)
     .then(user => {
       if (!user) {
-        console.log('error1')
-        return res.status(401).send({
-          error: 'Invlid username and/or password'
-        })
+        return res.status(401).send(errorMessage)
       }
       user.password = null
       req.session.uid = user._id
       res.send(user)
     })
     .catch(err => {
-      console.log('error2', err)
-      res.status(401).send({
-        error: 'Invalid username and/or password'
-      })
+      res.status(401).send(errorMessage)
     })
 })
 
