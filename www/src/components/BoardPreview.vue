@@ -13,9 +13,13 @@
               <div class="card-Body">
                 {{board.description}}
               </div>
+              <ul class="list-group list-group-flush">
+                  <li v-for="list in lists">
+                    <p>{{list.title}}</p>
+                  </li>
+                 </ul>
             </div>
-          <list></list>
-          </div>
+                   </div>
           <footer class="modal-footer">
             <slot name="footer">
               <button type="button" class="btn" @click="close" aria-label="Close modal">Close me!</button>
@@ -41,13 +45,12 @@
     },
     data() {
       return {
-        board: {
-          title: 'title',
-          description: 'description',
-        },
+        
         isModalVisible: false,
       }
     },
+    props: ['board','lists'],
+    
     methods: {
       close() {
         this.$emit('close');
