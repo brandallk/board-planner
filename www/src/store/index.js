@@ -24,7 +24,7 @@ export default new vuex.Store({
     user: {},
     authError: {
       error: false,
-      msg: ""
+      message: ""
     }
   },
 
@@ -32,10 +32,10 @@ export default new vuex.Store({
     setUser(state, user) {
       state.user = user
     },
-    setAuthError(state, msg) {
+    setAuthError(state, error) {
       state.authError = {
-        error: true,
-        message: msg
+        error: error.error,
+        message: error.message
       }
     }
   },
@@ -48,6 +48,7 @@ export default new vuex.Store({
           var newUser = res.data
           console.log('newUser:', newUser)
           commit('setUser', newUser)
+          commit('setAuthError', {error: false, message: ''})
           router.push({
             name: 'Home',
             params: {
@@ -65,6 +66,7 @@ export default new vuex.Store({
           var newUser = res.data
           console.log('logged-in user:', newUser)
           commit('setUser', newUser)
+          commit('setAuthError', {error: false, message: ''})
           router.push({
             name: 'Home',
             params: {
@@ -74,7 +76,7 @@ export default new vuex.Store({
         })
         .catch(err => {
           console.log(err)
-          commit('setAuthError', 'Log-in failed: Invalid username or password')
+          commit('setAuthError', {error: true, message: 'Log-in failed: Invalid username or password'})
         })
     },
     authenticateUser({commit, dispatch}) {
@@ -97,6 +99,7 @@ export default new vuex.Store({
         .then(() => {
           console.log('User logged out')
           commit('setUser', {})
+          commit('setAuthError', {error: false, message: ''})
           router.push({
             name: 'Welcome'
           })
