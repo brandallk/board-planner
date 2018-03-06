@@ -78,6 +78,7 @@ export default new vuex.Store({
         })
         .catch(err => {
           console.log(err)
+          commit('setAuthError', {error: true, message: 'Register failed: Invalid username, email, or password given'})
         })
     },
 
@@ -91,7 +92,7 @@ export default new vuex.Store({
           return newUser
         })
         .then(newUser => {
-          // unconventionalRoutes.get('myBoards')
+          // unconventionalRoutes.get('myBoards') // <--- CHANGE LINE BELOW WHEN CHANGES TO THIS GET ROUTE ARE PUSHED!!!
           return api.get(`users/${newUser._id}/boards`)
         })
         .then(res => {
