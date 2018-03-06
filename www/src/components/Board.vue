@@ -1,6 +1,6 @@
 <template>
   <div class="board">
-    <topBar></topBar>
+    <!-- <topBar></topBar> -->
     <!-- <a href="#" class="logout btn btn-alert" @click.prevent="logout">LOGOUT</a> -->
     <h1 class="p-3">'My Boards</h1>
     <div class="row page">

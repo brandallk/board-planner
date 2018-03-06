@@ -1,8 +1,6 @@
 <template>
   <div class="boardlist">
-      <topBar></topBar>
-      <!-- <a href="#" class="logout btn btn-alert" @click.prevent="logout">LOGOUT</a> -->
-      <h1 class="p-3">'My Boards</h1>
+              <h1 class="p-3">'My Boards</h1>
       <div class="row page">
         <div class="col boards">
           <div class="card" style="width: 18rem;">
@@ -20,7 +18,6 @@
               <a href="#" class="card-link">Card link</a>
               <a href="#" class="card-link">Another link</a>
             </div>
-  
           </div>
         </div>
         <div class="col boards">
@@ -124,8 +121,12 @@
 </template>
 
 <script>
+  // import TopBar from './TopBar'
 export default {
   name: 'BoardList',
+  // components: {
+  //     TopBar: TopBar,
+  // },
   data () {
     return {
       
