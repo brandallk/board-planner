@@ -39,4 +39,13 @@ router.get("/api/boards/:boardId/lists", (req, res, next) => {
         .catch(next)
 })
 
+//FOR TESTING ONLY: Get all lists
+router.get("/api/boards/lists", (req, res, next) => {
+    Lists.find()
+        .then(lists => {
+            return res.send(lists)
+        })
+        .catch(next)
+})
+
 module.exports = { router };
