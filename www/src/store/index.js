@@ -25,7 +25,9 @@ export default new vuex.Store({
     authError: {
       error: false,
       message: ""
-    }
+    },
+    activeBoard: {},
+    userBoards: []
   },
 
   mutations: {
@@ -37,6 +39,12 @@ export default new vuex.Store({
         error: error.error,
         message: error.message
       }
+    },
+    setActiveBoard(state, board) {
+      state.activeBoard = board
+    },
+    setUserBoards(state, boardsArr) {
+      state.userBoards = boardsArr
     }
   },
 
@@ -49,6 +57,15 @@ export default new vuex.Store({
           console.log('newUser:', newUser)
           commit('setUser', newUser)
           commit('setAuthError', {error: false, message: ''})
+
+          var defaultBoard = {
+            title: 'Untitled Board',
+            desctiption: 'Your first board! Click here to customize and start planning you project!',
+            userId: newUser._id
+          }
+          commit('setActiveBoard', defaultBoard)
+          commit('setUserBoards', [defaultBoard])
+
           router.push({
             name: 'Home',
             params: {
