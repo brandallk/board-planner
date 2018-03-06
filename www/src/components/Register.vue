@@ -1,5 +1,5 @@
 <template>
-  <div class="register container mt-4 w-50">
+  <div class="register container mt-4">
     <form action="#" class="border border-secondary p-4" @submit.prevent="submit">
 
       <h4 class="text-center">Register</h4>
@@ -51,6 +51,14 @@ export default {
 </script>
 
 <style scoped>
+  div.register {
+    width: 95%;
+  }
+  @media (min-width: 576px) {
+    div.register {
+      width: 50%;
+    }
+  }
   form {
     background-color: rgb(219, 219, 219);
   }

@@ -1,13 +1,7 @@
 <template>
-  <div class="signIn container w-50">
-    <div class="row signInForm">
-      <div class="col ">
-        <h1 class="text-center m-5">Welcome to Board-Planner!</h1>
-        <p>We are a startup that is aimed at helping people plan out their projects...</p>
-        <p class="p-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda dolores alias id, quaerat quos dolore earum ducimus
-          eaque velit dignissimos. Doloremque blanditiis aliquid nesciunt! Delectus, aperiam quisquam? Atque dolores autem
-          explicabo porro facere accusamus sint libero, reprehenderit soluta labore voluptatem!</p>
-        <form class="border border-secondary p-4" @click="">
+  <div class="signIn container">
+    <div class="signInForm">
+        <form class="border border-secondary p-4" @click.prevent="submit">
           <h4 class="text-center">Sign In</h4>
           <div class="form-group">
             <label class="ml-4" for="email">Email:</label>
@@ -22,8 +16,6 @@
         <div class="text-center pt-4">
           <a href="#" class="text-muted" @click.prevent="showRegisterForm">Register!</a>
         </div>
-
-      </div>
     </div>
   </div>
 </template>
@@ -40,6 +32,9 @@
       }
     },
     methods: {
+      submit() {
+        this.$store.dispatch('loginUser', this.user)
+      },
       showRegisterForm() {
         this.$emit('showRegisterForm')
       }
@@ -50,6 +45,14 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  div.signIn {
+    width: 95%;
+  }
+  @media (min-width: 576px) {
+    div.signIn {
+      width: 50%;
+    }
+  }
   .signInForm {
     /* height: 160px;
     width: 130px; */
