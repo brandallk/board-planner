@@ -1,7 +1,7 @@
 <template>
   <div class="signIn container">
     <div class="signInForm">
-        <form class="border border-secondary p-4" @click.prevent="submit">
+        <form class="border border-secondary p-4" @submit.prevent="submit">
           <h4 class="text-center">Sign In</h4>
           <div class="form-group">
             <label class="ml-4" for="email">Email:</label>
@@ -9,7 +9,7 @@
           </div>
           <div class="form-group">
             <label class="ml-4" for="password">Password:</label>
-            <input type="text" id="password" class="form-control" v-model="user.password">
+            <input type="password" id="password" class="form-control" v-model="user.password">
           </div>
           <button class="btn btn-info px-4" type="submit">I want in!</button>
         </form>
