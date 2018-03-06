@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <TopBar></TopBar>
-    <boardList></boardList>
-    <board></board>
+    <topBar v-on:showBoardsList="showBoardsList = true"></topBar>
+    <boardList v-if="showBoardsList"></boardList>
+    <board v-if="!showBoardsList"></board>
   </div>
 </template>
 
@@ -13,13 +13,13 @@
   export default {
     name: 'Home',
     components: {
-      TopBar: TopBar,
-      BoardList: BoardList,
-      Board: Board
+      topBar: TopBar,
+      boardList: BoardList,
+      board: Board
     },
     data() {
       return {
-
+        showBoardsList: true
       }
     }
   
