@@ -34,9 +34,7 @@
           </footer>
         </div>
       </div>
-    </transition>
- 
- 
+    </transition>  
   </div>
  
  
@@ -60,7 +58,7 @@
     ], 
     methods: {
       close() {
-        this.$emit('close');
+        this.$emit('closeBoardPreview')
       },
       gotoBoard(board) {
         this.$emit('close')

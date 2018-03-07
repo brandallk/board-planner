@@ -93,18 +93,7 @@ export default new vuex.Store({
           console.log('logged-in user:', newUser)
           commit('setUser', newUser)
           commit('setAuthError', { error: false, message: '' })
-
           dispatch('getUserBoards')
-
-        //   return newUser
-        // })
-        // .then(newUser => {
-        //   return unconventionalRoutes.get('myBoards')
-        // })
-        // .then(res => {
-        //   var userBoards = res.data
-        //   console.log('user boards:', userBoards)
-        //   commit('setUserBoards', userBoards)
           router.push({
             name: 'Home'
           })
@@ -168,6 +157,18 @@ export default new vuex.Store({
     },
     sendingActiveBoard({commit, dispatch}, board) {
       commit('setActiveBoard', board)
+    },
+    createBoard({commit, dispatch}, board) {
+      api
+        .post('boards', board)
+        .then(res => {
+          var newBoard = res.data
+          console.log('new board:', newBoard)
+          dispatch('getUserBoards')
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
 
   }
