@@ -4,7 +4,6 @@
     <div class="row page">
       <div class="col boards" v-for="board in userBoards">
         <div @click="showModal(board)" class="boardPreview">
-          <!-- <button type="button" @click="showModal" @load="">Preview Board</button> -->
           <div class="card" style="width: 18rem;">
             <img class="card-img-top" src="http://placehold.it/10x10" alt="Card image cap">
             <div class="card-body">
@@ -53,17 +52,12 @@
         this.$store.dispatch('getBoardLists', board._id)
       },
       showModal(board) {
-        console.log("Here", board)
         this.getBoardLists(board)
-        this.isModalVisible = true;
-
+        this.isModalVisible = true
       },
       closeModal() {
-        this.isModalVisible = false;
-      },
-      // getBoard() {
-      //   this.$store.dispatch('getBoardData')
-      // },
+        this.isModalVisible = false
+      }
 
     }
   }

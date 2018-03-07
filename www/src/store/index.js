@@ -96,8 +96,7 @@ export default new vuex.Store({
           return newUser
         })
         .then(newUser => {
-          // unconventionalRoutes.get('myBoards') // <--- CHANGE LINE BELOW WHEN CHANGES TO THIS GET ROUTE ARE PUSHED!!!
-          return api.get(`users/${newUser._id}/boards`)
+          return unconventionalRoutes.get('myBoards')
         })
         .then(res => {
           var userBoards = res.data

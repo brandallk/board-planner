@@ -35,8 +35,7 @@ router.put("/api/boards/:boardId", (req, res, next) => {
 
 // getBoardsByUserId
 router.get("/myBoards", (req, res, next) => {
-    //req.body.userId = req.session.uid; // Get the userId from the logged-in user's session
-    var userId = req.session.uid
+    var userId = req.session.uid // Get the userId from the logged-in user's session
     Boards.find({ userId: userId })
         .then(boards => {
             return res.send(boards)
