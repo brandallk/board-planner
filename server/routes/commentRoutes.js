@@ -38,6 +38,14 @@ router.get("/api/tasks/:taskId/comments", (req, res, next) => {
         .catch(next)
 })
 
+// Get comments by boardId
+router.get('/api/boards/:boardId/comments', (req, res, next) => {
+    Comments.find({boardId: req.params.boardId})
+        .then(comments => {
+            return res.send(comments)
+        })
+})
+
 //TEST ONLY
 router.get("/api/comments", (req, res, next) => {
     Comments.find()

@@ -41,6 +41,14 @@ router.get("/api/boards/lists/:listId", (req, res, next) => {
         .catch(next)
 })
 
+// Get tasks by boardId
+router.get('/api/boards/:boardId/tasks', (req, res, next) => {
+    Tasks.find({boardId: req.params.boardId})
+        .then(tasks => {
+            return res.send(tasks)
+        })
+})
+
 //FOR TESTING ONLY - GET ALL TASKS
 router.get("/api/tasks", (req, res, next) => {
     Tasks.find()
