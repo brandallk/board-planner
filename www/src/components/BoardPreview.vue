@@ -4,27 +4,33 @@
       <div class="modal-backdrop">
         <div class="modal" role="dialog">
           <header class="modal-header" id="modalTitle">
-            <div name="header">{{board.title}}
-              <button type="button" class="btn-close" @click="close">x</button>
-            </div>
+            <h5>{{board.title}}</h5>
           </header>
           <div class="modal-body" id="modalDescription">
             <div name="section body">
               <div class="card-Body">
                 {{board.description}}
               </div>
-              <ul class="list-group list-group-flush">
-                  <li v-for="list in lists">
-                    <p>{{list.title}}</p>
-                  </li>
-                 </ul>
+
             </div>
-                   </div>
+          </div>
+          <div class="row boardList p-3">
+            <h5 class="p-3">Board Lists:</h5>
+            <ol class="">
+              <li class="listEntry mt-4" v-for="list in lists">
+                <div class="col">
+                  {{list.title}}
+                </div>
+                <div class="col">
+                  {{list.description}}
+                </div>
+
+              </li>
+            </ol>
+          </div>
           <footer class="modal-footer">
-            <slot name="footer">
-              <button type="button" class="btn" @click="close" aria-label="Close modal">Close me!</button>
-              <button type="button" class="btn" @click="" aria-label="Edit Board">Edit Board</button>
-            </slot>
+            <button type="button" class="btn" @click="close">Close me!</button>
+            <button type="button" class="btn" @click="gotoBoard(board)">Edit Board</button>
           </footer>
         </div>
       </div>
@@ -45,15 +51,21 @@
     },
     data() {
       return {
-        
+
         isModalVisible: false,
       }
     },
-    props: ['board','lists'],
-    
+    props: ['board', 'lists'],
+
     methods: {
       close() {
         this.$emit('close');
+      },
+      gotoBoard(board) {
+        this.$emit('close')
+        console.log('board', board)
+        this.$store.dispatch('sendingActiveBoard', board)
+        this.$router.push('Board')
       }
     }
   }
@@ -88,12 +100,25 @@
   }
 
   .modal {
-    background: black;
+    background: grey;
     box-shadow: 2px 2px 20px 1px;
-    /* overflow-x: auto; */
-    display: flex !important;
+
+    overflow: hidden;
+    display: flex;
     align-self: center;
     flex-direction: column;
-    width: 350px;
+    width: 550px;
+    position: relative;
+  }
+
+  .boardList {
+    min-height: 300px;
+
+    outline: 2px solid black;
+  }
+
+  .list-group {
+    height: 20px;
+
   }
 </style>

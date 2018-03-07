@@ -2,7 +2,7 @@
   <div class="home">
     <topBar v-on:showBoardsList="showBoardsList = true"></topBar>
     <boardList v-if="showBoardsList"></boardList>
-    <board v-if="!showBoardsList"></board>
+    <!-- <board v-if="!showBoardsList"></board> -->
   </div>
 </template>
 

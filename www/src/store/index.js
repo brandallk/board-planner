@@ -153,6 +153,8 @@ export default new vuex.Store({
           console.log(err)
         })
     },
-
+    sendingActiveBoard({commit, dispatch},activeBoard){
+      commit('setActiveBoard',activeBoard)
+    }
   }
 })

@@ -6,14 +6,14 @@
         <div @click="showModal(board)" class="boardPreview">
           <!-- <button type="button" @click="showModal" @load="">Preview Board</button> -->
           <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="http://placehold.it/10x10" alt="Card image cap">
+            <h5 class="card-title">{{board.title}}</h5>
             <div class="card-body">
-              <h5 class="card-title">{{board.title}}</h5>
+              
               <p class="card-text">{{board.description}}</p>
             </div>
             
             <div class="card-body">
-              <a href="#" @click="" class="btn card-link">Go to Board</a>
+             
             </div>
           </div>
         </div>

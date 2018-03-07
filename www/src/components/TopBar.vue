@@ -29,7 +29,7 @@
     },
     methods: {
       showBoardsList() {
-        this.$emit('showBoardsList')
+        this.$router.push('Home')
       },
       logout() {
         this.$store.dispatch('logoutUser')
