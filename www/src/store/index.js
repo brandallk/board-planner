@@ -73,7 +73,7 @@ export default new vuex.Store({
             desctiption: 'Your first board! Click here to customize and start planning you project!',
             userId: newUser._id
           }
-          commit('setActiveBoard', defaultBoard)
+          // commit('setActiveBoard', defaultBoard)
           commit('setUserBoards', [defaultBoard])
 
           router.push({
@@ -93,15 +93,18 @@ export default new vuex.Store({
           console.log('logged-in user:', newUser)
           commit('setUser', newUser)
           commit('setAuthError', { error: false, message: '' })
-          return newUser
-        })
-        .then(newUser => {
-          return unconventionalRoutes.get('myBoards')
-        })
-        .then(res => {
-          var userBoards = res.data
-          console.log('user boards:', userBoards)
-          commit('setUserBoards', userBoards)
+
+          dispatch('getUserBoards')
+
+        //   return newUser
+        // })
+        // .then(newUser => {
+        //   return unconventionalRoutes.get('myBoards')
+        // })
+        // .then(res => {
+        //   var userBoards = res.data
+        //   console.log('user boards:', userBoards)
+        //   commit('setUserBoards', userBoards)
           router.push({
             name: 'Home'
           })
@@ -140,7 +143,18 @@ export default new vuex.Store({
           console.log(err)
         })
     },
-    getBoardLists({commit, dispatch},boardId) {
+
+    // API
+    getUserBoards({commit, dispatch}) {
+      unconventionalRoutes
+        .get('myBoards')
+        .then(res => {
+          var userBoards = res.data
+          console.log('user boards:', userBoards)
+          commit('setUserBoards', userBoards)
+        })
+    },
+    getBoardLists({commit, dispatch}, boardId) {
       api
         .get(`boards/${boardId}/lists`)
         .then(res => {
@@ -152,6 +166,9 @@ export default new vuex.Store({
           console.log(err)
         })
     },
+    sendingActiveBoard({commit, dispatch}, board) {
+      commit('setActiveBoard', board)
+    }
 
   }
 })

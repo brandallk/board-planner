@@ -35,8 +35,8 @@
     },
     data() {
       return {
-        isModalVisible: false,
-              }
+        isModalVisible: false
+      }
     },
     computed: {
       userBoards() {
@@ -44,7 +44,6 @@
       },
       userBoardLists() {
         return this.$store.state.boardLists
-
       }
     },
     methods: {
@@ -58,12 +57,13 @@
       closeModal() {
         this.isModalVisible = false
       }
-
+    },
+    mounted() {
+      this.$store.dispatch('getUserBoards')
     }
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .boardList {
     display: flex;

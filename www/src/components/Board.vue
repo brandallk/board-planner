@@ -1,40 +1,45 @@
 <template>
   <div class="board">
-
-    <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="http://placehold.it/10x10" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">{{title}}</h5>
-        <p class="card-text">{{description}}</p>
-      </div>
-      <ul class="list-group list-group-flush" v-for="">
-        <list></list>
-      </ul>
-      <div class="card-body">
-        <a href="#" @click="" class="btn card-link">Go to Board</a>
+    <topBar v-on:showBoardList="showBoardList"></topBar>
+    <div class="boardList p-3">
+      <h5>You are currently on your {{activeBoard.title}} board!</h5>
+      <div class="text-center">
+       <ul>
+         <list></list>
+ 
+       </ul>
+        
       </div>
     </div>
   </div>
-  
-</template>
-
-<script>
+ </template>
+ 
+ <script>
   import List from './List'
+  import TopBar from './TopBar'
   export default {
     name: 'Board',
     components: {
       list: List,
+      topBar: TopBar
     },
     data() {
       return {
-        title: 'title',
-        description: 'description',
-
+        activeBoard: this.$store.state.activeBoard
       }
-    }
+    },
+    methods: {
+      showBoardList() {
+        this.$router.push('Home')
+      }
+    },
+    mounted() {
+      this.activeBoard = this.$store.state.activeBoard
+    },
+ 
   }
-</script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>
+ 
+ </script>
+ 
+ <style scoped>
+ </style>
