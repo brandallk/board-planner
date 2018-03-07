@@ -6,7 +6,7 @@ var Comments = require("../models/comment")
 
 // createBoard - by userId
 router.post("/api/boards", (req, res, next) => {
-    req.body.userId = req.session.uid; // Get the userId from the logged-in user's session
+    req.body.userId = req.session.uid // Get the userId from the logged-in user's session
     Boards.create(req.body)
         .then(board => {
             res.send(board);

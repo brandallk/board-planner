@@ -4,6 +4,7 @@ var Tasks = require("../models/task")
 // createTask
 
 router.post("/api/tasks", (req, res, next) => {
+    req.body.userId = req.session.uid
     Tasks.create(req.body)
         .then(task => {
             res.send(task)

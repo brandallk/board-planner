@@ -1,8 +1,5 @@
 <template>
   <div class="taskEditForm">
-<<<<<<< HEAD
-    
-=======
 <p>Hello</p>
     <button id="show-modal" @click="showEditModal = true">Edit Task</button>
     <!-- use the modal component, pass in the prop -->
@@ -13,7 +10,6 @@
             -->
       <h3 slot="header">custom header</h3>
     </modal>
->>>>>>> 2af501e74cf2c0129857f9c708c5d0a9e224e160
   </div>
 
 </template>

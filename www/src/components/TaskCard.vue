@@ -1,32 +1,37 @@
 <template>
   <div class="taskCard">
-    <div class="">
-      <h6 class="text-left">Current Tasks:</h6>
-      <p class="tasks">This is a taskCard Placeholder!</p>
-      <comments v-for="comment in boardComments"></comments>
-  </div>
+
+      <span class="bg-white d-block px-2 py-1 rounded mb-2">{{task.title}}</span>
+
+      <!-- <comment v-for="comment in taskComments"></comment> -->
 
   </div>
 </template>
 
 <script>
-  import Comments from './Comments'
+  import Comment from './Comment'
   export default {
     name: 'TaskCard',
     components: {
-      comments: Comments,
+      comment: Comment,
     },
+    props: [
+      'task'
+    ],
     data() {
       return {
-        boardComments: this.$store.state.boardComments
         
       }
     },
-
+    computed: {
+      taskComments() {
+        var boardComments = this.$store.state.boardComments
+        return boardComments.filter(comment => comment.taskId === this.task._id)
+      }
+    }
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .tasks {
     font-size: 12px;

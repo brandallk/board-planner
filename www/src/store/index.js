@@ -221,6 +221,15 @@ export default new vuex.Store({
         .catch(err => {
           console.log(err)
         })
+    },
+    createTask({commit, dispatch}, task) {
+      api
+        .post('tasks', task)
+        .then(res => {
+          var newTask = res.data
+          console.log('new task:', newTask)
+          dispatch('getBoardTasks', newTask.boardId)
+        })
     }
 
   }

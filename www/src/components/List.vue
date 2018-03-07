@@ -1,20 +1,21 @@
 <template>
-  <div>
+    <div class="listComponent">
 
-    <div class="col-2 listComponent">
-      <p class="list-group-item">{{list.title}}</p>
+      <span class="d-block mb-2">{{list.title}}</span>
+
       <div class="row">
         <div class="col">
-          <taskCard></taskCard>
-          <div class="row">
-            
-            <button class="addTask" >+</button>
-          </div>
+
+          <taskCard v-for="task in listTasks" :task="task"></taskCard>
+          
+          <input type="text" class="form-control mt-2" v-model="task.title">
+
+          <button class="btn btn-success px-3 mt-2" @click="addNewTask">Add</button>
+
         </div>
       </div>
-    </div>
 
-  </div>
+    </div>
  </template>
  
  <script>
@@ -22,36 +23,46 @@
   export default {
     name: 'List',
     components: {
-      taskCard: TaskCard,
+      taskCard: TaskCard
     },
     props: [
-      'list',
-      'boardTasks',
-      'boardComments'
+      'list'
     ],
     data() {
       return {
-        
+        task: {
+          title: ""
+        }
       }
     },
     computed: {
-      getTasksForList(list) {
-        return this.boardTasks.filter(task => task.listId === list._id)
+      board() {
+        return this.$store.state.activeBoard
       },
-      getCommentsForTask(task) {
-        return this.boardComments.filter(comments => comment.taskId === task._id)
+      listTasks() {
+        var boardTasks = this.$store.state.boardTasks
+        return boardTasks.filter(task => task.listId === this.list._id)
+      }
+    },
+    methods: {
+      addNewTask() {
+        var newTask = {
+          title: this.task.title,
+          description: "A new task",
+          listId: this.list._id,
+          boardId: this.board._id
+        }
+      this.$store.dispatch('createTask', newTask)
       }
     }
   }
  </script>
  
- <!-- Add "scoped" attribute to limit CSS to this component only -->
  <style scoped>
   .listComponent {
-    outline: 2px solid black;
-    padding: 1px;
-    margin: 4px;
+    background-color: rgb(226,228,230);
   }
+  
   .addTask {
     margin-left: 18px;
     height: 30px;

@@ -1,20 +1,24 @@
 <template>
-  <div class="board">
-    <topBar></topBar>
-    <div class="boardList p-3">
-      <h5>You are currently on your {{activeBoard.title}} board!</h5>
+  <div class="board bg-info">
 
-      <div class="list text-center">
-        <h5 class="text-left">Here are your current Lists:</h5>
+    <topBar></topBar>
+
+    <div class="boardList container p-3">
+
+      <h5 class="text-white">You are currently on your {{activeBoard.title}} board!</h5>
+
+      <div class="list">
         <div class="row">
-          <list v-for="list in boardLists" :list="list" :boardTasks="boardTasks" :boardComments="boardComments"></list>
+
+          <list v-for="list in boardLists" :list="list" class="col-3 rounded p-3 mt-4 mr-3"></list>
+
+          <div class="col-3 mt-4">
+            <button disabled="disabled">add List</button>
+          </div>
+
         </div>
       </div>
       
-    </div>
-  
-    <div class="col-1">
-      <button disabled="disabled">add List</button>
     </div>
 
   </div>
@@ -37,26 +41,19 @@
     computed: {
       boardLists() {
         return this.$store.state.boardLists
-      },
-      boardTasks() {
-        return this.$store.state.boardTasks
-      },
-      boardComments() {
-        return this.$store.state.boardComments
       }
     },
     methods: {
       showBoardList() {
         this.$router.push('Home')
       }
-    },
-    mounted() {
-      // this.activeBoard = this.$store.state.activeBoard
-    },
- 
+    }
   }
  
  </script>
  
  <style scoped>
+   .board {
+     min-height: 100vh;
+   }
  </style>
