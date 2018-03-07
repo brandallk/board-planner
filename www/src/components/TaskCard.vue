@@ -3,7 +3,7 @@
     <div class="">
       <h6 class="text-left">Current Tasks:</h6>
       <p class="tasks">This is a taskCard Placeholder!</p>
-      <!-- <comments></comments> -->
+      <comments v-for="comment in boardComments"></comments>
   </div>
 
   </div>
@@ -18,9 +18,11 @@
     },
     data() {
       return {
-
+        boardComments: this.$store.state.boardComments
+        
       }
-    }
+    },
+
   }
 </script>
 
