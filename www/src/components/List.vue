@@ -18,13 +18,8 @@
         <button disabled="disabled">add List</button>
       </div>
     </div>
-<<<<<<< HEAD
-
-
-=======
  
  
->>>>>>> 593e5e4afc1d512f49894be083df5b713a34516c
   </div>
  </template>
  
@@ -42,17 +37,10 @@
       }
     }
   }
-<<<<<<< HEAD
-</script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-=======
  </script>
  
  <!-- Add "scoped" attribute to limit CSS to this component only -->
  <style scoped>
->>>>>>> 593e5e4afc1d512f49894be083df5b713a34516c
   .listComponent {
     outline: 2px solid black;
     padding: 1px;
@@ -63,8 +51,4 @@
     height: 30px;
      width: 30px
   }
-<<<<<<< HEAD
-</style>
-=======
  </style>
->>>>>>> 593e5e4afc1d512f49894be083df5b713a34516c

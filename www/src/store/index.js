@@ -155,11 +155,6 @@ export default new vuex.Store({
           console.log(err)
         })
     },
-<<<<<<< HEAD
-    sendingActiveBoard({commit, dispatch},activeBoard){
-      commit('setActiveBoard',activeBoard)
-    }
-=======
     sendingActiveBoard({commit, dispatch}, board) {
       commit('setActiveBoard', board)
     },
@@ -176,6 +171,5 @@ export default new vuex.Store({
         })
     }
 
->>>>>>> 593e5e4afc1d512f49894be083df5b713a34516c
   }
 })
