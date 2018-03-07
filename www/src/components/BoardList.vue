@@ -6,12 +6,11 @@
       <div class="col boards" v-for="board in userBoards">
         <div @click="showBoardPreview(board)" class="boardPreview" style="width: 18rem;">
           <div class="card">
+            <div class="card-body">
               <h5 class="card-title text-center m-4">{{board.title}}</h5>
               <hr>
-            
               <p class="m-1 ml-2 pb-4">{{board.description}}</p>
-            
-            
+            </div>
           </div>
         </div>
 

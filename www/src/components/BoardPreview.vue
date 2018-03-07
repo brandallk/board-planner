@@ -30,21 +30,18 @@
           </div>
           <footer class="modal-footer">
             <div class="col">
-
               <button type="button" class="btn btn-alert btnDelete" @click="close">Delete!</button>
             </div>
-            <button type="button" class="btn" @click="close">Close!</button>
-            <button type="button" class="btn" @click="gotoBoard(board)">Go!</button>
+            <button type="button" class="btn" @click="close">Close me!</button>
+            <button type="button" class="btn" @click="gotoBoard(board)">Edit Board</button>
           </footer>
         </div>
       </div>
     </transition>  
   </div>
+</template>
  
- 
- </template>
- 
- <script>
+<script>
   import List from './List'
   export default {
     name: 'BoardPreview',
@@ -72,9 +69,9 @@
       }
     }
   }
- </script>
+</script>
  
- <style scoped>
+<style scoped>
   .modal-body {
     background-color: white;
     display: block;
