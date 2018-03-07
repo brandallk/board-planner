@@ -73,7 +73,7 @@ export default new vuex.Store({
             desctiption: 'Your first board! Click here to customize and start planning you project!',
             userId: newUser._id
           }
-          commit('setActiveBoard', defaultBoard)
+          // commit('setActiveBoard', defaultBoard)
           commit('setUserBoards', [defaultBoard])
 
           router.push({
@@ -93,16 +93,7 @@ export default new vuex.Store({
           console.log('logged-in user:', newUser)
           commit('setUser', newUser)
           commit('setAuthError', { error: false, message: '' })
-          return newUser
-        })
-        .then(newUser => {
-          // unconventionalRoutes.get('myBoards') // <--- CHANGE LINE BELOW WHEN CHANGES TO THIS GET ROUTE ARE PUSHED!!!
-          return api.get(`users/${newUser._id}/boards`)
-        })
-        .then(res => {
-          var userBoards = res.data
-          console.log('user boards:', userBoards)
-          commit('setUserBoards', userBoards)
+          dispatch('getUserBoards')
           router.push({
             name: 'Home'
           })
@@ -141,7 +132,18 @@ export default new vuex.Store({
           console.log(err)
         })
     },
-    getBoardLists({commit, dispatch},boardId) {
+
+    // API
+    getUserBoards({commit, dispatch}) {
+      unconventionalRoutes
+        .get('myBoards')
+        .then(res => {
+          var userBoards = res.data
+          console.log('user boards:', userBoards)
+          commit('setUserBoards', userBoards)
+        })
+    },
+    getBoardLists({commit, dispatch}, boardId) {
       api
         .get(`boards/${boardId}/lists`)
         .then(res => {
@@ -153,8 +155,27 @@ export default new vuex.Store({
           console.log(err)
         })
     },
+<<<<<<< HEAD
     sendingActiveBoard({commit, dispatch},activeBoard){
       commit('setActiveBoard',activeBoard)
     }
+=======
+    sendingActiveBoard({commit, dispatch}, board) {
+      commit('setActiveBoard', board)
+    },
+    createBoard({commit, dispatch}, board) {
+      api
+        .post('boards', board)
+        .then(res => {
+          var newBoard = res.data
+          console.log('new board:', newBoard)
+          dispatch('getUserBoards')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+
+>>>>>>> 593e5e4afc1d512f49894be083df5b713a34516c
   }
 })

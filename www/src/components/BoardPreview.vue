@@ -11,7 +11,11 @@
               <div class="card-Body">
                 {{board.description}}
               </div>
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> 593e5e4afc1d512f49894be083df5b713a34516c
             </div>
           </div>
           <div class="row boardList p-3">
@@ -24,7 +28,11 @@
                 <div class="col">
                   {{list.description}}
                 </div>
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> 593e5e4afc1d512f49894be083df5b713a34516c
               </li>
             </ol>
           </div>
@@ -34,15 +42,13 @@
           </footer>
         </div>
       </div>
-    </transition>
-
-
+    </transition>  
   </div>
-
-
-</template>
-
-<script>
+ 
+ 
+ </template>
+ 
+ <script>
   import List from './List'
   export default {
     name: 'BoardPreview',
@@ -50,6 +56,7 @@
       list: List,
     },
     data() {
+<<<<<<< HEAD
       return {
 
         isModalVisible: false,
@@ -60,6 +67,19 @@
     methods: {
       close() {
         this.$emit('close');
+=======
+      return { 
+        isModalVisible: false,
+      }
+    },
+    props: [
+      'board',
+      'lists'
+    ], 
+    methods: {
+      close() {
+        this.$emit('closeBoardPreview')
+>>>>>>> 593e5e4afc1d512f49894be083df5b713a34516c
       },
       gotoBoard(board) {
         this.$emit('close')
@@ -69,25 +89,24 @@
       }
     }
   }
-</script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+ </script>
+ 
+ <style scoped>
   .modal-body {
     background-color: white;
     display: block;
   }
-
+ 
   .modal-fade-enter,
   .modal-fade-leave-active {
     opacity: 0;
   }
-
+ 
   .modal-fade-enter-active,
   .modal-fade-leave-active {
     transition: opacity .5 ease;
   }
-
+ 
   .modal-backdrop {
     top: 0;
     bottom: 0;
@@ -98,11 +117,15 @@
     justify-content: center;
     align-items: center;
   }
-
+ 
   .modal {
     background: grey;
     box-shadow: 2px 2px 20px 1px;
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> 593e5e4afc1d512f49894be083df5b713a34516c
     overflow: hidden;
     display: flex;
     align-self: center;
@@ -110,6 +133,7 @@
     width: 550px;
     position: relative;
   }
+<<<<<<< HEAD
 
   .boardList {
     min-height: 300px;
@@ -120,5 +144,17 @@
   .list-group {
     height: 20px;
 
+=======
+ 
+  .boardList {
+    min-height: 300px;
+ 
+    outline: 2px solid black;
   }
-</style>
+ 
+  .list-group {
+    height: 20px;
+ 
+>>>>>>> 593e5e4afc1d512f49894be083df5b713a34516c
+  }
+ </style>

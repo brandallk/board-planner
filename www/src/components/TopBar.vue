@@ -2,7 +2,7 @@
   <div class="topbar bg-dark row">
     
     <div class="col-sm-4 menu p-4" v-if="user._id">
-      <a href="#" class="btn btn-info text-light" @click.prevent="showBoardsList">Home</a>
+      <a href="#" class="btn btn-info text-light" @click.prevent="showBoardList">Home</a>
     </div>
     <div :class="{ 'col-sm-4': user._id, 'col-sm-12': !user._id }">
       <h1 class="text-center text-light py-4">Board-Planner</h1>
@@ -28,8 +28,13 @@
       }
     },
     methods: {
+<<<<<<< HEAD
       showBoardsList() {
         this.$router.push('Home')
+=======
+      showBoardList() {
+        this.$emit('showBoardList')
+>>>>>>> 593e5e4afc1d512f49894be083df5b713a34516c
       },
       logout() {
         this.$store.dispatch('logoutUser')
