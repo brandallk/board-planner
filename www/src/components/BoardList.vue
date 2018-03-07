@@ -4,16 +4,9 @@
     <div class="row page">
 
       <div class="col boards" v-for="board in userBoards">
-<<<<<<< HEAD
-        <div @click="showModal(board)" class="boardPreview">
-          <!-- <button type="button" @click="showModal" @load="">Preview Board</button> -->
-          <div class="card" style="width: 18rem;">
-            <h5 class="card-title">{{board.title}}</h5>
-=======
         <div @click="showBoardPreview(board)" class="boardPreview" style="width: 18rem;">
           <div class="card">
             <img class="card-img-top" src="http://placehold.it/10x10" alt="Card image cap">
->>>>>>> 593e5e4afc1d512f49894be083df5b713a34516c
             <div class="card-body">
               
               <p class="card-text">{{board.description}}</p>
