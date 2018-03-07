@@ -34,6 +34,7 @@
     methods: {
       submit() {
         this.$store.dispatch('createBoard', this.board)
+        this.close()
       },
       close() {
         this.$emit('closeAddBoardForm')

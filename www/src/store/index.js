@@ -34,7 +34,9 @@ export default new vuex.Store({
     },
     activeBoard: {},
     userBoards: [],
-    boardLists: []
+    boardLists: [],
+    boardTasks: [],
+    boardComments: []
   },
 
   mutations: {
@@ -55,6 +57,12 @@ export default new vuex.Store({
     },
     setBoardLists(state, lists) {
       state.boardLists = lists
+    },
+    setBoardTasks(state, tasks) {
+      state.boardTasks = tasks
+    },
+    setBoardComments(state, comments) {
+      state.boardComments = comments
     }
   },
 
@@ -155,8 +163,35 @@ export default new vuex.Store({
           console.log(err)
         })
     },
+    getBoardTasks({commit, dispatch}, boardId) {
+      api
+        .get(`boards/${boardId}/tasks`)
+        .then(res => {
+          var tasks = res.data
+          console.log('User Board Tasks', tasks)
+          commit('setBoardTasks', tasks)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    getBoardComments({commit, dispatch}, boardId) {
+      api
+        .get(`boards/${boardId}/comments`)
+        .then(res => {
+          var comments = res.data
+          console.log('User Board Comments', comments)
+          commit('setBoardComments', comments)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
     sendingActiveBoard({commit, dispatch}, board) {
       commit('setActiveBoard', board)
+      dispatch('getBoardLists', board._id)
+      dispatch('getBoardTasks', board._id)
+      dispatch('getBoardComments', board._id)
     },
     createBoard({commit, dispatch}, board) {
       api

@@ -18,7 +18,7 @@
           </div>
         </div>
 
-        <boardPreview :board="board" :lists="userBoardLists" v-show="isBoardPreviewVisible" @closeBoardPreview="closeBoardPreview"></boardPreview>
+        <boardPreview :board="board" :lists="boardLists" v-show="isBoardPreviewVisible" @closeBoardPreview="closeBoardPreview"></boardPreview>
       </div>
 
       <div class="col new-board" @click="showAddBoardForm">
@@ -57,7 +57,7 @@
       userBoards() {
         return this.$store.state.userBoards
       },
-      userBoardLists() {
+      boardLists() {
         return this.$store.state.boardLists
       }
     },
