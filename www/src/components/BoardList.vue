@@ -6,15 +6,12 @@
       <div class="col boards" v-for="board in userBoards">
         <div @click="showBoardPreview(board)" class="boardPreview" style="width: 18rem;">
           <div class="card">
-            <img class="card-img-top" src="http://placehold.it/10x10" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">{{board.title}}</h5>
-              <p class="card-text">{{board.description}}</p>
-            </div>
+              <h5 class="card-title text-center m-4">{{board.title}}</h5>
+              <hr>
             
-            <div class="card-body">
-              <a href="#" @click="" class="btn card-link">Go to Board</a>
-            </div>
+              <p class="m-1 ml-2 pb-4">{{board.description}}</p>
+            
+            
           </div>
         </div>
 

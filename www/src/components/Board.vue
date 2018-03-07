@@ -1,6 +1,6 @@
 <template>
   <div class="board">
-    <topBar v-on:showBoardList="showBoardList"></topBar>
+    <topBar></topBar>
     <div class="boardList p-3">
       <h5>You are currently on your {{activeBoard.title}} board!</h5>
       <div class="text-center">

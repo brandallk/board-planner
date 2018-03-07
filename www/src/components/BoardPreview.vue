@@ -29,8 +29,12 @@
             </ol>
           </div>
           <footer class="modal-footer">
-            <button type="button" class="btn" @click="close">Close me!</button>
-            <button type="button" class="btn" @click="gotoBoard(board)">Edit Board</button>
+            <div class="col">
+
+              <button type="button" class="btn btn-alert btnDelete" @click="close">Delete!</button>
+            </div>
+            <button type="button" class="btn" @click="close">Close!</button>
+            <button type="button" class="btn" @click="gotoBoard(board)">Go!</button>
           </footer>
         </div>
       </div>
@@ -117,6 +121,9 @@
  
   .list-group {
     height: 20px;
- 
-  }
+   }
+   .btnDelete {
+     display: flex;
+    justify-content: flex-start;
+   }
  </style>

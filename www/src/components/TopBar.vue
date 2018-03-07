@@ -28,8 +28,8 @@
       }
     },
     methods: {
-      showBoardList() {
-        this.$emit('showBoardList')
+      showBoardsList() {
+        this.$router.push('Home')
       },
       logout() {
         this.$store.dispatch('logoutUser')
