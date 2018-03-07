@@ -1,25 +1,23 @@
 <template>
-  <div class="list">
-    <H5 class="text-left">Here are your current Lists:</H5>
-    <div class="row">
-      <div class="col-2 listComponent" v-for="list in boardLists">
-        <p class="list-group-item">{{list.title}}</p>
-        <div class="row">
-          <div class="col">
-            <taskCard></taskCard>
-            <div class="row">
-              
-              <button class="addTask" >+</button>
-            </div>
+  <div>
+
+    <div class="col-2 listComponent">
+      <p class="list-group-item">{{list.title}}</p>
+      <div class="row">
+        <div class="col">
+          <taskCard></taskCard>
+          <div class="row">
+            
+            <button class="addTask" >+</button>
           </div>
         </div>
       </div>
-      <div class="col-1">
-        <button disabled="disabled">add List</button>
-      </div>
     </div>
- 
- 
+  
+    <div class="col-1">
+      <button disabled="disabled">add List</button>
+    </div>
+
   </div>
  </template>
  
@@ -30,10 +28,22 @@
     components: {
       taskCard: TaskCard,
     },
- 
+    props: [
+      'list',
+      'boardTasks',
+      'boardComments'
+    ],
     data() {
       return {
-        boardLists: this.$store.state.boardLists
+        
+      }
+    },
+    computed: {
+      getTasksForList(list) {
+        return this.boardTasks.filter(task => task.listId === list._id)
+      },
+      getCommentsForTask(task) {
+        return this.boardComments.filter(comments => comment.taskId === task._id)
       }
     }
   }
