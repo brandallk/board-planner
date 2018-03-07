@@ -3,12 +3,14 @@
     <topBar></topBar>
     <div class="boardList p-3">
       <h5>You are currently on your {{activeBoard.title}} board!</h5>
-      <div class="text-center">
-       <ul>
-         <list></list> 
-       </ul>
-        
+
+      <div class="list text-center">
+        <h5 class="text-left">Here are your current Lists:</h5>
+        <div class="row">
+          <list v-for="list in boardLists" :list="list" :boardTasks="boardTasks" :boardComments="boardComments"></list>
+        </div>
       </div>
+      
     </div>
   </div>
  </template>

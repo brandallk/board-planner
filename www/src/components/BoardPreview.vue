@@ -1,12 +1,15 @@
 <template>
   <div class="boardPreview">
+
+    <!-- {{ board.title }} -->
+
     <transition name="modal-fade">
       <div class="modal-backdrop">
         <div class="modal" role="dialog">
-          <header class="modal-header" id="modalTitle">
+          <header class="modal-header">
             <h5>{{board.title}}</h5>
           </header>
-          <div class="modal-body" id="modalDescription">
+          <div class="modal-body">
             <div name="section body">
               <div class="card-Body">
                 {{board.description}}
@@ -38,6 +41,7 @@
         </div>
       </div>
     </transition>  
+
   </div>
 </template>
  

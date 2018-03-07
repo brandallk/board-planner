@@ -14,7 +14,7 @@
           </div>
         </div>
 
-        <boardPreview :board="board" :lists="boardLists" v-show="isBoardPreviewVisible" @closeBoardPreview="closeBoardPreview"></boardPreview>
+        <boardPreview :board="board" :lists="boardLists" v-if="showBoard(board)" @closeBoardPreview="closeBoardPreview"></boardPreview>
       </div>
 
       <div class="col new-board" @click="showAddBoardForm">
@@ -46,7 +46,8 @@
     data() {
       return {
         isBoardPreviewVisible: false,
-        isAddBoardFormVisible: false
+        isAddBoardFormVisible: false,
+        activeBoardId: ""
       }
     },
     computed: {
@@ -63,7 +64,11 @@
       },
       showBoardPreview(board) {
         this.getBoardLists(board)
+        this.activeBoardId = board._id
         this.isBoardPreviewVisible = true
+      },
+      showBoard(board) {
+        return this.isBoardPreviewVisible && board._id === this.activeBoardId
       },
       closeBoardPreview() {
         this.isBoardPreviewVisible = false
