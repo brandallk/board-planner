@@ -44,7 +44,7 @@
               </div>
               <div class="row">
                 <div class="col">
-                  <comments></comments>
+                  <comment></comment>
 
                 </div>
               </div>
@@ -66,11 +66,11 @@
 </template>
 
 <script>
-  import Comments from './Comments'
+  import Comment from './Comment'
   export default {
     name: 'TaskEditForm',
     components: {
-      comments: Comments,
+      comment: Comment,
     },
     data() {
       return {
