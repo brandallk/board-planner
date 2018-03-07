@@ -132,6 +132,11 @@ export default new vuex.Store({
           console.log('User logged out')
           commit('setUser', {})
           commit('setAuthError', { error: false, message: '' })
+          commit('setActiveBoard', {})
+          commit('setUserBoards', [])
+          commit('setBoardLists', [])
+          commit('setBoardTasks', [])
+          commit('setBoardComments', [])
           router.push({
             name: 'Welcome'
           })
@@ -199,6 +204,18 @@ export default new vuex.Store({
         .then(res => {
           var newBoard = res.data
           console.log('new board:', newBoard)
+          dispatch('getUserBoards')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    deleteBoard({commit, dispatch}, board) {
+      api
+        .delete(`boards/${board._id}`)
+        .then(res => {
+          var deletedBoard = board
+          console.log('deleted board:', deletedBoard)
           dispatch('getUserBoards')
         })
         .catch(err => {

@@ -1,8 +1,11 @@
 var router = require("express").Router()
 var Boards = require("../models/board")
+var Lists = require("../models/list")
+var Tasks = require("../models/task")
+var Comments = require("../models/comment")
 
 // createBoard - by userId
-router.post("/api/boards/", (req, res, next) => {
+router.post("/api/boards", (req, res, next) => {
     req.body.userId = req.session.uid; // Get the userId from the logged-in user's session
     Boards.create(req.body)
         .then(board => {
@@ -20,6 +23,21 @@ router.delete("/api/boards/:boardId", (req, res, next) => {
             } else {
                 res.send({ message: "Successfully deleted board" })
             }
+        })
+        .catch(next)
+    Lists.deleteMany({boardId: req.params.boardId})
+        .then(() => {
+        console.log('Deleted user lists')
+        })
+        .catch(next)
+    Tasks.deleteMany({boardId: req.params.boardId})
+        .then(() => {
+        console.log('Deleted user tasks')
+        })
+        .catch(next)
+    Comments.deleteMany({boardId: req.params.boardId})
+        .then(() => {
+        console.log('Deleted user comments')
         })
         .catch(next)
 })

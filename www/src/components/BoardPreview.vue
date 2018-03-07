@@ -30,7 +30,7 @@
           </div>
           <footer class="modal-footer">
             <div class="col">
-              <button type="button" class="btn btn-alert btnDelete" @click="close">Delete!</button>
+              <button type="button" class="btn btn-alert btnDelete" @click="deleteBoard(board)">Delete!</button>
             </div>
             <button type="button" class="btn" @click="close">Close me!</button>
             <button type="button" class="btn" @click="gotoBoard(board)">Edit Board</button>
@@ -66,6 +66,10 @@
         console.log('board', board)
         this.$store.dispatch('sendingActiveBoard', board)
         this.$router.push('Board')
+      },
+      deleteBoard(board) {
+        this.$store.dispatch('deleteBoard', board)
+        this.close()
       }
     }
   }
