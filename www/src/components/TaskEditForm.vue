@@ -1,61 +1,86 @@
 <template>
   <div class="taskEditForm">
-<<<<<<< HEAD
-    
-=======
-<p>Hello</p>
-    <button id="show-modal" @click="showEditModal = true">Edit Task</button>
-    <!-- use the modal component, pass in the prop -->
-    <modal v-if="showModal" @close="showEditModal = false">
-      <!--
-              you can use custom content here to overwrite
-              default content
-            -->
-      <h3 slot="header">custom header</h3>
+    <button @click="showModal = true">Edit Tasks</button>
+    <modal v-if="showModal" @close="showModal = false">
+      <transition name="modal">
+        <div class="modal-mask">
+          <div class="modal-wrapper">
+            <div class="modal-container">
+
+              <div class="modal-header">
+                <div class="col">
+                  <h3>Edit Form</h3>
+                  <p class="px-4">{Task Name}</p>
+
+                </div>
+                <div class="div">
+                  <p>{Board Name}</p>
+                  <p>{List Name}</p>
+
+                </div>
+              </div>
+
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-6">
+                    <h5>Task Description:</h5>
+                    <textarea class="p-1" name="taskDescription">add a description</textarea>
+                  </div>
+                  <div class="col-6">
+                    <h5>Attachments?</h5>
+                    <input class="p-1" type="file" id="myFile">
+                  </div>
+                </div>
+                <div class="row mt-4">
+                  <div class="col commentBody">
+                    <h5>Add Comment</h5>
+                    <textarea class="p-1" name="commentDescription">write a comment</textarea>
+
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <h6>Existing Comment:</h6>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <comments></comments>
+
+                </div>
+              </div>
+              
+              <div class="">
+
+              </div>
+
+              <div class="modal-footer">
+                <button class=" btn btn-success" @click='close'>OK</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </transition>
     </modal>
->>>>>>> 2af501e74cf2c0129857f9c708c5d0a9e224e160
   </div>
 
 </template>
-<script type="text/x-template" id="modal-template">
-  <transition name="modal">
-    <div class="modal-mask">
-      <div class="modal-wrapper">
-        <div class="modal-container">
-
-          <div class="modal-header">
-            <slot name="header">
-              default header
-            </slot>
-          </div>
-
-          <div class="modal-body">
-            <slot name="body">
-              default body
-            </slot>
-          </div>
-
-          <div class="modal-footer">
-            <slot name="footer">
-              default footer
-              <button class="modal-default-button" @click="$emit('close')">
-                OK
-              </button>
-            </slot>
-          </div>
-        </div>
-      </div>
-    </div>
-  </transition>
-</script>
 
 <script>
+  import Comments from './Comments'
   export default {
     name: 'TaskEditForm',
+    components: {
+      comments: Comments,
+    },
     data() {
       return {
-        showEditModal: false
+        showModal: false
       }
+    },
+    methods: {
+      close() {
+        this.showModal = false
+      },
     }
   }
 </script>
@@ -80,7 +105,7 @@
   }
 
   .modal-container {
-    width: 300px;
+    width: 600px;
     margin: 0px auto;
     padding: 20px 30px;
     background-color: #fff;
@@ -124,5 +149,11 @@
   .modal-leave-active .modal-container {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
+  }
+
+  .commentBody textarea {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
   }
 </style>
