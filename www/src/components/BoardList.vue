@@ -29,6 +29,8 @@
 
     <addBoardForm v-if="isAddBoardFormVisible" @closeAddBoardForm="closeAddBoardForm"></addBoardForm>
 
+    <taskEditForm></taskEditForm>
+
   </div>
 </template>
 
@@ -36,12 +38,14 @@
   import boardPreview from './BoardPreview'
   import List from './List'
   import AddBoardForm from './AddBoardForm'
+  import TaskEditForm from './TaskEditForm'
   export default {
     name: 'BoardList',
     components: {
       boardPreview: boardPreview,
       list: List,
-      addBoardForm: AddBoardForm
+      addBoardForm: AddBoardForm,
+      taskEditForm: TaskEditForm
     },
     data() {
       return {
