@@ -1,6 +1,6 @@
 <template>
   <div class="spacer px-2">
-    <div class="listComponent rounded p-3">
+    <div class="listComponent rounded p-3" @drop="taskDrop"  @dragover.prevent="dragover">
 
       <div class="list-title">
         <div class="d-flex">
@@ -28,73 +28,84 @@
 </template>
 
 <script>
-  import TaskCard from './TaskCard'
-  export default {
-    name: 'List',
-    components: {
-      taskCard: TaskCard
-    },
-    props: [
-      'list'
-    ],
-    data() {
-      return {
-        task: {
-          title: ""
+    import TaskCard from './TaskCard'
+    export default {
+        name: 'List',
+        components: {
+            taskCard: TaskCard
         },
-        showDeleteListDropdown: false
-      }
-    },
-    computed: {
-      board() {
-        return this.$store.state.activeBoard
-      },
-      listTasks() {
-        var boardTasks = this.$store.state.boardTasks
-        return boardTasks.filter(task => task.listId === this.list._id)
-      }
-    },
-    methods: {
-      addNewTask() {
-        var newTask = {
-          title: this.task.title,
-          description: "A new task",
-          listId: this.list._id,
-          boardId: this.board._id
+        props: [
+            'list'
+        ],
+        data() {
+            return {
+                task: {
+                    title: ""
+                },
+                showDeleteListDropdown: false
+            }
+        },
+        computed: {
+            board() {
+                return this.$store.state.activeBoard
+            },
+            listTasks() {
+                var boardTasks = this.$store.state.boardTasks
+                return boardTasks.filter(task => task.listId === this.list._id)
+            }
+        },
+        methods: {
+            addNewTask() {
+                var newTask = {
+                    title: this.task.title,
+                    description: "A new task",
+                    listId: this.list._id,
+                    boardId: this.board._id
+                }
+                this.$store.dispatch('createTask', newTask)
+                this.task.title = ""
+            },
+            toggleDeleteListDropdown() {
+                this.showDeleteListDropdown = this.showDeleteListDropdown ? false : true
+            },
+            deleteList() {
+                this.showDeleteListDropdown = false
+                this.$store.dispatch('deleteList', this.list)
+            },
+            dragover() {
+                //console.log("dragover")
+            },
+            taskDrop() {
+
+                var data = {
+                    draggedTask: this.$store.state.draggedTask,
+                    dropListId: this.list._id
+                }
+                this.$store.dispatch("updateTask", data)
+
+            }
         }
-      this.$store.dispatch('createTask', newTask)
-      this.task.title = ""
-      },
-      toggleDeleteListDropdown() {
-        this.showDeleteListDropdown = this.showDeleteListDropdown ? false : true
-      },
-      deleteList() {
-        this.showDeleteListDropdown = false
-        this.$store.dispatch('deleteList', this.list)
-      }
     }
-  }
 </script>
 
 <style scoped>
-  .listComponent {
-    background-color: rgb(226, 228, 230);
-  }
-
-  .removeList {
-    display: flex;
-    justify-content: flex-end;
-    align-self: flex-end;
-
-  }
-
-  .addTask {
-    margin-left: 18px;
-    height: 30px;
-    width: 30px
-  }
-
-  .delete-list-toggle:hover {
-    background-color: rgb(213, 213, 213);
-  }
- </style>
+    .listComponent {
+        background-color: rgb(226, 228, 230);
+    }
+    
+    .removeList {
+        display: flex;
+        justify-content: flex-end;
+        align-self: flex-end;
+    }
+    
+    .addTask {
+        margin-left: 18px;
+        height: 30px;
+        width: 30px
+    }
+    
+    .delete-list-toggle:hover {
+        background-color: rgb(213, 213, 213);
+    }
+</style>
