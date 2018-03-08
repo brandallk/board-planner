@@ -2,9 +2,13 @@
   <div class="spacer px-2">
     <div class="listComponent rounded p-3">
 
-      <div class="list-title">
+      <div class="list-heading">
         <div class="d-flex">
-          <span class="d-block mb-2">{{list.title}}</span>
+          <div class="list-title">
+            <span v-if="!showListTitleEdit" class="d-block mb-2 pr-4 pb-2 rounded" @click="showListTitleEdit = true">{{list.title}}</span>
+            <input v-if="showListTitleEdit" type="text" class="form-content d-block rounded pl-3" v-model="updatedList.title">
+            <button v-if="showListTitleEdit" class="btn btn-success btn-sm mb-2" @click="editListTitle">save</button>
+          </div>
           <a href="#" class="delete-list-toggle ml-auto px-2 rounded text-muted" @click.prevent="toggleDeleteListDropdown">
             <i class="fas fa-ellipsis-h"></i>
           </a>
@@ -42,7 +46,11 @@
         task: {
           title: ""
         },
-        showDeleteListDropdown: false
+        updatedList: {
+          title: this.list.title
+        },
+        showDeleteListDropdown: false,
+        showListTitleEdit: false
       }
     },
     computed: {
@@ -71,6 +79,12 @@
       deleteList() {
         this.showDeleteListDropdown = false
         this.$store.dispatch('deleteList', this.list)
+      },
+      editListTitle() {
+        // var updatedList = this.list
+        // updatedList.title = this.updatedList.title
+        // this.$store.dispatch('updateList', updatedList)
+        this.showListTitleEdit = false
       }
     }
   }
@@ -92,6 +106,15 @@
     margin-left: 18px;
     height: 30px;
     width: 30px
+  }
+
+  .list-title input {
+    width: 95%;
+  }
+
+  .list-title:hover span {
+    cursor: pointer;
+    background-color: rgb(213, 213, 213);
   }
 
   .delete-list-toggle:hover {
