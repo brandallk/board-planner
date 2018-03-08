@@ -230,6 +230,32 @@ export default new vuex.Store({
           console.log('new task:', newTask)
           dispatch('getBoardTasks', newTask.boardId)
         })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    editTask({commit, dispatch}, task) {
+      api
+        .put(`tasks/${task._id}`, task)
+        .then(res => {
+          var updatedTask = res.data.data
+          console.log('updated task:', updatedTask)
+          dispatch('getBoardTasks', updatedTask.boardId)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    deleteTask({commit, dispatch}, task) {
+      api
+        .delete(`tasks/${task._id}`)
+        .then(res => {
+          console.log('deleted task')
+          dispatch('getBoardTasks', task.boardId)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
 
   }

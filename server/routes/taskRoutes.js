@@ -1,5 +1,6 @@
 var router = require("express").Router()
 var Tasks = require("../models/task")
+var Comments = require("../models/comment")
 
 // createTask
 
@@ -15,17 +16,22 @@ router.post("/api/tasks", (req, res, next) => {
 //deleteTask
 router.delete("/api/tasks/:taskId", (req, res, next) => {
     Tasks.findByIdAndRemove(req.params.taskId) //
-        .then(comment => {
+        .then(task => {
             res.send({ message: "Successfully deleted task" })
+        })
+        .catch(next)
+    Comments.deleteMany({taskId: req.params.taskId})
+        .then(() => {
+            console.log('Deleted task comments')
         })
         .catch(next)
 })
 
 // updateTask (put)
 router.put("/api/tasks/:taskId", (req, res, next) => {
-    Tasks.findByIdAndUpdate(req.params.listId, req.body, { new: true })
-        .then(comment => {
-            res.send({ message: "Successfully updated list", data: comment })
+    Tasks.findByIdAndUpdate(req.params.taskId, req.body, { new: true })
+        .then(task => {
+            res.send({ message: "Successfully updated task", data: task })
         })
         .catch(next)
 })

@@ -53,6 +53,7 @@
           boardId: this.board._id
         }
       this.$store.dispatch('createTask', newTask)
+      this.task.title = ""
       }
     }
   }
