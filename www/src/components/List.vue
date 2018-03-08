@@ -8,6 +8,7 @@
             <span v-if="!showListTitleEdit" class="d-block mb-2 pr-4 pb-2 rounded" @click="showListTitleEdit = true">{{list.title}}</span>
             <input v-if="showListTitleEdit" type="text" class="form-content d-block rounded pl-3" v-model="updatedList.title">
             <button v-if="showListTitleEdit" class="btn btn-success btn-sm mb-2" @click="editListTitle">save</button>
+            <button v-if="showListTitleEdit" class="btn btn-danger btn-sm mb-2" @click="showListTitleEdit = false">cancel</button>
           </div>
           <a href="#" class="delete-list-toggle ml-auto px-2 rounded text-muted" @click.prevent="toggleDeleteListDropdown">
             <i class="fas fa-ellipsis-h"></i>
@@ -78,9 +79,9 @@
                 this.showDeleteListDropdown = this.showDeleteListDropdown ? false : true
             },
             editListTitle() {
-              // var updatedList = this.list
-              // updatedList.title = this.updatedList.title
-              // this.$store.dispatch('updateList', updatedList)
+              var updatedList = this.list
+              updatedList.title = this.updatedList.title
+              this.$store.dispatch('updateList', updatedList)
               this.showListTitleEdit = false
             },
             deleteList() {
