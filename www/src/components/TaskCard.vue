@@ -14,7 +14,7 @@
         <button class="btn btn-sm btn-danger ml-auto" @click="deleteTask">delete task</button>
       </div>
     </div>
-    <taskEditForm v-if="showTaskEditForm" @closeTaskEditForm='closeTaskEditForm'></taskEditForm>
+    <taskEditForm :task="task" v-if="showTaskEditForm" @closeTaskEditForm='closeTaskEditForm'></taskEditForm>
     <!-- <comment v-for="comment in taskComments"></comment> -->
 
   </div>
@@ -61,13 +61,12 @@
         this.showQuickieEdit = false
       },
       openTaskEditForm() {
-        console.log("hello")
         // this.getBoardLists(board)
         // this.activeBoardId = board._id
         this.showTaskEditForm = true
       },
       closeTaskEditForm() {
-        console.log("hello")
+       
         // this.getBoardLists(board)
         // this.activeBoardId = board._id
         this.showTaskEditForm = false
