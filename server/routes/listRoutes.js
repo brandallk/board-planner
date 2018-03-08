@@ -34,10 +34,10 @@ router.delete("/api/lists/:listId", (req, res, next) => {
 
 // updateList  (put)
 
-router.put("/api/boards/:boardId/lists/:listId", (req, res, next) => {
+router.put("/api/lists/:listId", (req, res, next) => {
     Lists.findByIdAndUpdate(req.params.listId, req.body, { new: true })
-        .then(comment => {
-            res.send({ message: "Successfully updated list", data: comment })
+        .then(list => {
+            res.send({ message: "Successfully updated list", data: list })
         })
         .catch(next)
 })

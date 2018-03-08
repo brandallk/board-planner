@@ -274,6 +274,18 @@ export default new vuex.Store({
                     console.log(err)
                 })
         },
+        updateList({ commit, dispatch}, list) {
+          api
+            .put(`lists/${list._id}`, list)
+            .then(res => {
+              var updatedList = res.data.data
+              console.log('updated list:', updatedList)
+              dispatch('getBoardLists', updatedList.boardId)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        },
         deleteList({ commit, dispatch }, list) {
             api
                 .delete(`lists/${list._id}`)
