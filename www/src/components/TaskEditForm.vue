@@ -42,7 +42,7 @@
                 </div>
                 <div class="row">
                   <div class="col">
-                    <comment v-for comment in Comments>Comment Here</comment>
+                    <comment  v-for="comment in taskComments" :comment='comment'>Comment Here</comment>
                   </div>
                 </div>
               </div>
@@ -80,9 +80,10 @@
       "task"
     ],
     computed: {
-      comments() {
-        this.$store.state.boardComments
-      }
+       taskComments() {
+                var boardComments = this.$store.state.boardComments
+                return boardComments.filter(comment => comment.taskId === this.task._id)
+            }
     },
       methods: {
         close() {
@@ -107,7 +108,7 @@
           console.log('comment', comment)
 
           this.$store.dispatch('createComment', comment)
-
+          this.commentDescription = ''
         },
       }
     }

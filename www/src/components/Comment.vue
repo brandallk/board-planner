@@ -6,7 +6,7 @@
         <button class="fas fa-edit"></button>
       </div>
       <div class="col-10">
-        <p>I'm a comment</p>
+      {{comment.body}}
       </div>
     </div>
   </div>
@@ -19,10 +19,12 @@
       return {
 
       }
-    }
+    },
+    props: [
+      'comment'
+    ]
   }
 </script>
 
 <style scoped>
- 
 </style>
