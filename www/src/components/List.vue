@@ -2,7 +2,18 @@
   <div class="spacer px-2">
     <div class="listComponent rounded p-3">
 
-      <span class="d-block mb-2">{{list.title}}</span>
+      <div class="list-title">
+        <div class="d-flex">
+          <span class="d-block mb-2">{{list.title}}</span>
+          <a href="#" class="delete-list-toggle ml-auto px-2 rounded text-muted" @click.prevent="toggleDeleteListDropdown">
+            <i class="fas fa-ellipsis-h"></i>
+          </a>
+        </div>
+
+        <div v-if="showDeleteListDropdown" class="delete-list-dropdown d-block mb-3">
+          <button class="btn btn-danger btn-sm btn-block" @click="deleteList">delete list</button>
+        </div>
+      </div>
 
       <div class="row">
         <div class="col">
@@ -34,7 +45,8 @@
       return {
         task: {
           title: ""
-        }
+        },
+        showDeleteListDropdown: false
       }
     },
     computed: {
@@ -56,6 +68,13 @@
         }
       this.$store.dispatch('createTask', newTask)
       this.task.title = ""
+      },
+      toggleDeleteListDropdown() {
+        this.showDeleteListDropdown = this.showDeleteListDropdown ? false : true
+      },
+      deleteList() {
+        this.showDeleteListDropdown = false
+        this.$store.dispatch('deleteList', this.list)
       }
     }
   }
@@ -70,5 +89,9 @@
     margin-left: 18px;
     height: 30px;
      width: 30px
+  }
+
+  .delete-list-toggle:hover {
+    background-color: rgb(213, 213, 213);
   }
  </style>

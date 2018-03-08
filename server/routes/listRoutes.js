@@ -1,5 +1,7 @@
 var router = require("express").Router()
 var Lists = require("../models/list")
+var Tasks = require("../models/task")
+var Comments = require("../models/comment")
 
 //createList
 router.post("/api/lists", (req, res, next) => {
@@ -12,10 +14,20 @@ router.post("/api/lists", (req, res, next) => {
 })
 
 // deleteList
-router.delete("/api/boards/:boardId/lists/:listId", (req, res, next) => {
+router.delete("/api/lists/:listId", (req, res, next) => {
     Lists.findByIdAndRemove(req.params.listId)
         .then(comment => {
             res.send({ message: "Successfully deleted list" })
+        })
+        .catch(next)
+    Tasks.deleteMany({listId: req.params.listId})
+        .then(() => {
+        console.log('Deleted list tasks')
+        })
+        .catch(next)
+    Comments.deleteMany({listId: req.params.listId})
+        .then(() => {
+        console.log('Deleted list comments')
         })
         .catch(next)
 })

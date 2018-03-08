@@ -268,6 +268,18 @@ export default new vuex.Store({
         .catch(err => {
           console.log(err)
         })
+    },
+    deleteList({commit, dispatch}, list) {
+      api
+        .delete(`lists/${list._id}`)
+        .then(res => {
+          var deletedList = list
+          console.log('deleted list:', deletedList)
+          dispatch('getBoardLists', deletedList.boardId)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
 
   }
