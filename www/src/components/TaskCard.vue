@@ -18,7 +18,7 @@
         <button class="btn btn-sm btn-danger ml-auto" @click="deleteTask">delete task</button>
       </div>
     </div>
-    <taskEditForm v-if="showTaskEditForm"></taskEditForm>
+    <taskEditForm :task="task" v-if="showTaskEditForm" @closeTaskEditForm='closeTaskEditForm'></taskEditForm>
     <!-- <comment v-for="comment in taskComments"></comment> -->
 
   </div>
@@ -41,7 +41,6 @@
                 },
                 showQuickieEdit: false,
                 showTaskEditForm: false
-
             }
         },
         computed: {
@@ -57,7 +56,7 @@
             editTaskName() {
                 var task = this.task
                 task.title = this.updatedTask.title
-                    //console.log('line 52:', task)
+                console.log('line 52:', task)
                 this.$store.dispatch('editTask', task)
                 this.showQuickieEdit = false
             },
@@ -66,65 +65,98 @@
                 this.showQuickieEdit = false
             },
             openTaskEditForm() {
-                //console.log("hello")
                 // this.getBoardLists(board)
                 // this.activeBoardId = board._id
                 this.showTaskEditForm = true
             },
             closeTaskEditForm() {
-                //console.log("hello")
+
                 // this.getBoardLists(board)
                 // this.activeBoardId = board._id
                 this.showTaskEditForm = false
-            },
-
-            dragStart() {
-                this.$store.dispatch("setDraggedTask", this.task)
-                    // console.log("dragStart")
-            },
-            // drop() {
-
-            //     var dropTarget = this.task
-            //     var data = {
-            //         draggedTask: this.$store.state.draggedTask,
-            //         dropListId: dropTarget.listId
-            //     }
-            //     this.$store.dispatch("updateTask", data)
-            // }
+            }
         }
     }
 </script>
 
 <style scoped>
-    .task-card {
+.task-card {
         position: relative;
     }
-    
-    .task-title {
-        background-color: white;
+}
+
+}
+,
+computed: {
+    taskComments() {
+        var boardComments=this.$store.state.boardComments return boardComments.filter(comment=> comment.taskId===this.task._id)
     }
-    
-    .task-title:hover {
-        cursor: pointer;
-        background-color: rgb(240, 240, 240);
+}
+,
+methods: {
+    toggleQuickieEdit() {
+        this.showQuickieEdit=this.showQuickieEdit ? false: true
     }
-    
-    .edit-toggle {
-        background-color: white;
+    ,
+    editTaskName() {
+        var task=this.task task.title=this.updatedTask.title //console.log('line 52:', task)
+        this.$store.dispatch('editTask', task) this.showQuickieEdit=false
     }
-    
-    .edit-toggle:hover {
-        cursor: pointer;
-        background-color: rgb(213, 213, 213);
+    ,
+    deleteTask() {
+        this.$store.dispatch('deleteTask', this.task) this.showQuickieEdit=false
     }
-    
-    .edit-toggle a {
-        color: rgb(235, 235, 235);
+    ,
+    openTaskEditForm() {
+        //console.log("hello")
+        // this.getBoardLists(board)
+        // this.activeBoardId = board._id
+        this.showTaskEditForm=true
     }
-    
-    .edit-toggle:hover a {
-        color: rgb(125, 125, 125);
+    ,
+    closeTaskEditForm() {
+        //console.log("hello")
+        // this.getBoardLists(board)
+        // this.activeBoardId = board._id
+        this.showTaskEditForm=false
     }
-    
-    .quickieEdit {}
+    ,
+    dragStart() {
+        this.$store.dispatch("setDraggedTask", this.task) // console.log("dragStart")
+    }
+    , // drop() {
+    //     var dropTarget = this.task
+    //     var data = {
+    //         draggedTask: this.$store.state.draggedTask,
+    //         dropListId: dropTarget.listId
+    //     }
+    //     this.$store.dispatch("updateTask", data)
+    // }
+}
+
+}
+</script><style scoped>.task-card {
+    position: relative;
+}
+.task-title {
+    background-color: white;
+}
+.task-title:hover {
+    cursor: pointer;
+    background-color: rgb(240, 240, 240);
+}
+.edit-toggle {
+    background-color: white;
+}
+.edit-toggle:hover {
+    cursor: pointer;
+    background-color: rgb(213, 213, 213);
+}
+.edit-toggle a {
+    color: rgb(235, 235, 235);
+}
+.edit-toggle:hover a {
+    color: rgb(125, 125, 125);
+}
+.quickieEdit {}
 </style>
