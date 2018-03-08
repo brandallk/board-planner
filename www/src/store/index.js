@@ -269,6 +269,18 @@ export default new vuex.Store({
           console.log(err)
         })
     },
+    createComment({commit, dispatch}, comment) {
+      api
+        .post('comment', comment)
+        .then(res => {
+          var newComment = res.data
+          console.log('new comment:', newComment)
+          dispatch('getBoardComments', newComment.commentId)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      },
     deleteList({commit, dispatch}, list) {
       api
         .delete(`lists/${list._id}`)

@@ -1,7 +1,7 @@
 <template>
   <div class="taskCard">
     <div class="row py-1 px-3 mb-2">
-      <div v-if="!showQuickieEdit" @click='openTaskEditForm' @closeTaskCard='closeTaskEditForm' class="task-title col-9 d-inline-block rounded-left">{{task.title}}</div>
+      <div v-if="!showQuickieEdit" @click='openTaskEditForm'  class="task-title col-9 d-inline-block rounded-left">{{task.title}}</div>
       <input v-if="showQuickieEdit" type="text"  class="task-title col-9 d-inline-block rounded-left" v-model="updatedTask.title">
       <div class="edit-toggle col-3 d-inline-block d-flex justify-content-center align-items-center rounded-right" @click="toggleQuickieEdit">
         <a href="#">
@@ -14,7 +14,7 @@
         <button class="btn btn-sm btn-danger ml-auto" @click="deleteTask">delete task</button>
       </div>
     </div>
-    <taskEditForm v-if="showTaskEditForm" @closeTaskEditForm="closeTaskEditForm"></taskEditForm>
+    <taskEditForm :task="task" v-if="showTaskEditForm" @closeTaskEditForm='closeTaskEditForm'></taskEditForm>
     <!-- <comment v-for="comment in taskComments"></comment> -->
 
   </div>
@@ -61,13 +61,12 @@
         this.showQuickieEdit = false
       },
       openTaskEditForm() {
-        console.log("hello")
         // this.getBoardLists(board)
         // this.activeBoardId = board._id
         this.showTaskEditForm = true
       },
       closeTaskEditForm() {
-        console.log("hello")
+       
         // this.getBoardLists(board)
         // this.activeBoardId = board._id
         this.showTaskEditForm = false
