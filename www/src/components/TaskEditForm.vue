@@ -10,7 +10,7 @@
               <div class="modal-header">
                 <div class="col">
                   <h3>Edit Form</h3>
-                  <p class="px-4">{Task Name}</p>
+                  <p class="px-4">{task.Name}</p>
 
                 </div>
                 <div class="div">
@@ -22,10 +22,8 @@
                 <div class="row">
                   <div class="col-6">
                     <h5>Task Description:</h5>
-                    <textarea v-model="taskDescription" class="p-1" ></textarea>
-
-                    <!-- <b-form-textarea id="textarea1" v-model="taskDescription" placeholder="add a description" :rows="3" :max-rows="6">asdf</b-form-textarea> -->
-
+                    <textarea v-model="taskDescription" class="p-1"></textarea>
+                    <button class="btn btn-sm btn-success" @click="saveTaskDescription">save</button>
                   </div>
                   <div class="col-6">
                     <h5>Attachments?</h5>
@@ -35,29 +33,21 @@
                 <div class="row mt-4">
                   <div class="col commentBody">
                     <h5>Add Comment</h5>
-                    <textarea v-model="commentDescription" class="p-1" placeholder="write a comment"></textarea>
+                    <textarea v-model="commentDescription" class="p-1"></textarea>
+                    <button class="btn btn-sm btn-success" @click="saveCommentDescription">save</button>
+                  </div>
+                </div>
+                <div class="row existing">
+                  <h6>Existing Comments:</h6>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <comment  v-for="comment in taskComments" :comment='comment'>Comment Here</comment>
                   </div>
                 </div>
               </div>
-              <div class="row m-3">
-                <div v-if="showSaveEdit" class="SaveEdit-btns d-flex w-100 mt-1">
-                  <button class="btn btn-sm btn-success" @click="">save</button>
-                  <!-- <button class="btn btn-sm btn-danger ml-auto" @click="deleteTask">x</button> -->
-                </div>
-              </div>
-              <div class="row">
-                <h6>Existing Comment:</h6>
-              </div>
-              <div class="row">
-                <div class="col">
-                  <comment v-for comment in Comments>Comment Here</comment>
-                </div>
-              </div>
-
               <div class="">
-
               </div>
-
               <div class="modal-footer">
                 <button class=" btn btn-success" @click='close'>OK</button>
               </div>
@@ -82,7 +72,6 @@
 
       return {
         showModal: true,
-        showSaveEdit: true,
         taskDescription: this.task.description,
         commentDescription: ""
       }
@@ -90,24 +79,39 @@
     props: [
       "task"
     ],
-    // computed: {
-    //   taskDescription: 'c',
-    //   commentDescription: 'd'
-    // },
-    methods: {
-      close() {
-        // console.log('somewhere')
-        console.log('task description', this.taskDescription)
-        var updatetask = this.task
-        updatetask.description = this.taskDescription
-        this.$store.dispatch('editTask',updatetask)
-        // console.log('comment', this.commentDescription)
+    computed: {
+       taskComments() {
+                var boardComments = this.$store.state.boardComments
+                return boardComments.filter(comment => comment.taskId === this.task._id)
+            }
+    },
+      methods: {
+        close() {
+          this.$emit('closeTaskEditForm')
+        },
+        saveTaskDescription() {
+          console.log('task description', this.taskDescription)
+          var updatetask = this.task
+          updatetask.description = this.taskDescription
+          this.$store.dispatch('editTask', updatetask)
+        },
+        saveCommentDescription() {
+          var comment = {
+            body: this.commentDescription,
+            listId: this.task.listId,
+            taskId: this.task._id,
+            boardId: this.$store.state.activeBoard._id
+          }
 
-        // this.$store.dispatch('createComment', this.commentDescription)
-        this.$emit('closeTaskEditForm')
-      },
+          // updatetask.description = this.taskDescription
+          // this.$store.dispatch('editTask', updatetask)
+          console.log('comment', comment)
+
+          this.$store.dispatch('createComment', comment)
+          this.commentDescription = ''
+        },
+      }
     }
-  }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -180,5 +184,9 @@
     width: 100%;
     height: 100%;
     overflow: visible;
+  }
+
+  .existing {
+    margin-top: 80px;
   }
 </style>

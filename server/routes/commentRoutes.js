@@ -4,6 +4,7 @@ var Comments = require("../models/comment")
 //  createComment
 
 router.post("/api/comments", (req, res, next) => {
+    req.body.userId=req.session.uid
     Comments.create(req.body)
         .then(comment => {
             res.send(comment)

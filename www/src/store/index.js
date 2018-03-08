@@ -185,7 +185,8 @@ export default new vuex.Store({
                 })
         },
         getBoardComments({ commit, dispatch }, boardId) {
-            api
+          console.log('boardID',boardId)  
+          api
                 .get(`boards/${boardId}/comments`)
                 .then(res => {
                     var comments = res.data
@@ -317,7 +318,19 @@ export default new vuex.Store({
                 .catch(err => {
                     console.log(err)
                 })
-        }
+        },
+        createComment({ commit, dispatch }, comment) {
+          api
+            .post('comments', comment)
+            .then(res => {
+              var newComment = res.data
+              console.log('new comment:', newComment)
+              dispatch('getBoardComments', newComment.boardId)
+            })
+            .catch(err => {
+              console.log(err)
+            })
+        },
 
     }
 })
