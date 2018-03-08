@@ -11,7 +11,7 @@
           
           <input type="text" class="form-control mt-3 bg-light border-success" v-model="task.title">
 
-          <button class="btn btn-success px-3 mt-2" @click="addNewTask">Add</button>
+          <button class="btn btn-success px-3 mt-2" @click="addNewTask">Add task</button>
 
         </div>
       </div>

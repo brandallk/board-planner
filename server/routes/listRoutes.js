@@ -2,8 +2,8 @@ var router = require("express").Router()
 var Lists = require("../models/list")
 
 //createList
-
-router.post("/api/boards/:boardId/lists", (req, res, next) => {
+router.post("/api/lists", (req, res, next) => {
+    req.body.userId = req.session.uid // Get the userId from the logged-in user session
     Lists.create(req.body)
         .then(list => {
             res.send(list)
