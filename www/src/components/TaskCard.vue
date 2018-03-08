@@ -14,7 +14,7 @@
         <button class="btn btn-sm btn-danger ml-auto" @click="deleteTask">delete task</button>
       </div>
     </div>
-    <taskEditForm v-if="showTaskEditForm"></taskEditForm>
+    <taskEditForm v-if="showTaskEditForm" @closeTaskEditForm="closeTaskEditForm"></taskEditForm>
     <!-- <comment v-for="comment in taskComments"></comment> -->
 
   </div>

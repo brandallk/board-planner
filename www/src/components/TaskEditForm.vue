@@ -1,7 +1,8 @@
 <template>
   <div class="taskEditForm">
     <!-- <button @click="showModal = true">Edit Tasks</button> -->
-    <modal v-if="showModal" @close="showModal = false">
+    <!-- <modal v-if="showModal" @close="showModal = false"> -->
+    <modal>
       <transition name="modal">
         <div class="modal-mask">
           <div class="modal-wrapper">
@@ -78,10 +79,10 @@
     },
     methods: {
       close() {
-        this.showModal = false
+        // this.showModal = false
         // this.taskDescription.dispatch()
         // this.commentDescription.dispatch() 
-        // this.$emit('closeTaskEditForm')
+        this.$emit('closeTaskEditForm')
         console.log('somewhere')
       },
     }
