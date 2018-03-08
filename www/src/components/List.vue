@@ -1,6 +1,6 @@
 <template>
   <div class="spacer px-2">
-    <div class="listComponent rounded p-3">
+    <div class="listComponent rounded p-3" @drop="taskDrop"  @dragover.prevent="dragover">
 
       <div class="list-heading">
         <div class="d-flex">
@@ -15,7 +15,7 @@
         </div>
 
         <div v-if="showDeleteListDropdown" class="delete-list-dropdown d-block mb-3">
-          <button class="btn btn-danger btn-sm btn-block" @click="deleteList">delete list</button>
+          <button class="btn btn-danger btn-sm btn-block" @click="deleteList">delete   list</button>
         </div>
       </div>
 
@@ -32,62 +32,75 @@
 </template>
 
 <script>
-  import TaskCard from './TaskCard'
-  export default {
-    name: 'List',
-    components: {
-      taskCard: TaskCard
-    },
-    props: [
-      'list'
-    ],
-    data() {
-      return {
-        task: {
-          title: ""
+    import TaskCard from './TaskCard'
+    export default {
+        name: 'List',
+        components: {
+            taskCard: TaskCard
         },
-        updatedList: {
-          title: this.list.title
+        props: [
+            'list'
+        ],
+        data() {
+            return {
+                task: {
+                    title: ""
+                },
+                showDeleteListDropdown: false,
+                updatedList: {
+                  title: this.list.title
+                },
+                showDeleteListDropdown: false,
+                showListTitleEdit: false
+          }
         },
-        showDeleteListDropdown: false,
-        showListTitleEdit: false
-      }
-    },
-    computed: {
-      board() {
-        return this.$store.state.activeBoard
-      },
-      listTasks() {
-        var boardTasks = this.$store.state.boardTasks
-        return boardTasks.filter(task => task.listId === this.list._id)
-      }
-    },
-    methods: {
-      addNewTask() {
-        var newTask = {
-          title: this.task.title,
-          description: "A new task",
-          listId: this.list._id,
-          boardId: this.board._id
+        computed: {
+            board() {
+                return this.$store.state.activeBoard
+            },
+            listTasks() {
+                var boardTasks = this.$store.state.boardTasks
+                return boardTasks.filter(task => task.listId === this.list._id)
+            }
+        },
+        methods: {
+            addNewTask() {
+                var newTask = {
+                    title: this.task.title,
+                    description: "A new task",
+                    listId: this.list._id,
+                    boardId: this.board._id
+                }
+                this.$store.dispatch('createTask', newTask)
+                this.task.title = ""
+            },
+            toggleDeleteListDropdown() {
+                this.showDeleteListDropdown = this.showDeleteListDropdown ? false : true
+            },
+            editListTitle() {
+              // var updatedList = this.list
+              // updatedList.title = this.updatedList.title
+              // this.$store.dispatch('updateList', updatedList)
+              this.showListTitleEdit = false
+            },
+            deleteList() {
+                this.showDeleteListDropdown = false
+                this.$store.dispatch('deleteList', this.list)
+            },
+            dragover() {
+                //console.log("dragover")
+            },
+            taskDrop() {
+
+                var data = {
+                    draggedTask: this.$store.state.draggedTask,
+                    dropListId: this.list._id
+                }
+                this.$store.dispatch("updateTask", data)
+
+            }
         }
-      this.$store.dispatch('createTask', newTask)
-      this.task.title = ""
-      },
-      toggleDeleteListDropdown() {
-        this.showDeleteListDropdown = this.showDeleteListDropdown ? false : true
-      },
-      deleteList() {
-        this.showDeleteListDropdown = false
-        this.$store.dispatch('deleteList', this.list)
-      },
-      editListTitle() {
-        // var updatedList = this.list
-        // updatedList.title = this.updatedList.title
-        // this.$store.dispatch('updateList', updatedList)
-        this.showListTitleEdit = false
-      }
     }
-  }
 </script>
 
 <style scoped>
