@@ -1,24 +1,23 @@
 <template>
-    <div class="listComponent">
-
-      <span class="d-block mb-2">{{list.title}}</span>
-
+  <div class="spacer px-2">
+    <div class="listComponent rounded p-3">
+      <div class="row removeList">
+        <button class="btn btn-sm btn-danger" disabled="removeList">X</button>
+      </div>
+      <p class="d-block mb-2">{{list.title}}</p>
       <div class="row">
         <div class="col">
-
           <taskCard v-for="task in listTasks" :task="task"></taskCard>
-          
-          <input type="text" class="form-control mt-2" v-model="task.title">
-
-          <button class="btn btn-success px-3 mt-2" @click="addNewTask">Add</button>
-
+          <input type="text" class="form-control mt-3 bg-light border-success" v-model="task.title">
+          <button class="btn btn-success px-3 mt-2" @click="addNewTask">Add Task</button>
+          <!-- <input v-if="showQuickieEdit" type="text" class="task-title col-9 d-inline-block rounded-left" v-model="updatedTask.title"> -->
         </div>
       </div>
-
     </div>
- </template>
- 
- <script>
+  </div>
+</template>
+
+<script>
   import TaskCard from './TaskCard'
   export default {
     name: 'List',
@@ -52,21 +51,28 @@
           listId: this.list._id,
           boardId: this.board._id
         }
-      this.$store.dispatch('createTask', newTask)
-      this.task.title = ""
+        this.$store.dispatch('createTask', newTask)
+        this.task.title = ""
       }
     }
   }
- </script>
- 
- <style scoped>
+</script>
+
+<style scoped>
   .listComponent {
-    background-color: rgb(226,228,230);
+    background-color: rgb(226, 228, 230);
   }
-  
+
+  .removeList {
+    display: flex;
+    justify-content: flex-end;
+    align-self: flex-end;
+
+  }
+
   .addTask {
     margin-left: 18px;
     height: 30px;
-     width: 30px
+    width: 30px
   }
- </style>
+</style>

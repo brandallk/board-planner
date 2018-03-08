@@ -1,6 +1,6 @@
 <template>
   <div class="taskEditForm">
-    <button @click="showModal = true">Edit Tasks</button>
+    <!-- <button @click="showModal = true">Edit Tasks</button> -->
     <modal v-if="showModal" @close="showModal = false">
       <transition name="modal">
         <div class="modal-mask">
@@ -16,15 +16,13 @@
                 <div class="div">
                   <p>{Board Name}</p>
                   <p>{List Name}</p>
-
                 </div>
               </div>
-
               <div class="modal-body">
                 <div class="row">
                   <div class="col-6">
                     <h5>Task Description:</h5>
-                    <textarea class="p-1" name="taskDescription">add a description</textarea>
+                    <textarea form="taskDescription" class="p-1" placeholder="add a description" name="taskDescription"></textarea>
                   </div>
                   <div class="col-6">
                     <h5>Attachments?</h5>
@@ -34,8 +32,7 @@
                 <div class="row mt-4">
                   <div class="col commentBody">
                     <h5>Add Comment</h5>
-                    <textarea class="p-1" name="commentDescription">write a comment</textarea>
-
+                    <textarea form="commentDescription" class="p-1" placeholder="write a comment" name="commentDescription"></textarea>
                   </div>
                 </div>
               </div>
@@ -74,12 +71,18 @@
     },
     data() {
       return {
-        showModal: false
+        showModal: true,
+        taskDescription: '',
+        commentDescription: '' 
       }
     },
     methods: {
       close() {
         this.showModal = false
+        // this.taskDescription.dispatch()
+        // this.commentDescription.dispatch() 
+        // this.$emit('closeTaskEditForm')
+        console.log('somewhere')
       },
     }
   }
