@@ -48,6 +48,7 @@
                 var boardComments = this.$store.state.boardComments
                 return boardComments.filter(comment => comment.taskId === this.task._id)
             }
+
         },
         methods: {
             toggleQuickieEdit() {
@@ -74,89 +75,43 @@
                 // this.getBoardLists(board)
                 // this.activeBoardId = board._id
                 this.showTaskEditForm = false
-            }
+            },
+            dragStart() {
+                this.$store.dispatch("setDraggedTask", this.task)
+                    // console.log("dragStart")
+            },
         }
     }
 </script>
 
 <style scoped>
-.task-card {
+    .task-card {
         position: relative;
     }
-}
-
-}
-,
-computed: {
-    taskComments() {
-        var boardComments=this.$store.state.boardComments return boardComments.filter(comment=> comment.taskId===this.task._id)
+    
+    .task-title {
+        background-color: white;
     }
-}
-,
-methods: {
-    toggleQuickieEdit() {
-        this.showQuickieEdit=this.showQuickieEdit ? false: true
+    
+    .task-title:hover {
+        cursor: pointer;
+        background-color: rgb(240, 240, 240);
     }
-    ,
-    editTaskName() {
-        var task=this.task task.title=this.updatedTask.title //console.log('line 52:', task)
-        this.$store.dispatch('editTask', task) this.showQuickieEdit=false
+    
+    .edit-toggle {
+        background-color: white;
     }
-    ,
-    deleteTask() {
-        this.$store.dispatch('deleteTask', this.task) this.showQuickieEdit=false
+    
+    .edit-toggle:hover {
+        cursor: pointer;
+        background-color: rgb(213, 213, 213);
     }
-    ,
-    openTaskEditForm() {
-        //console.log("hello")
-        // this.getBoardLists(board)
-        // this.activeBoardId = board._id
-        this.showTaskEditForm=true
+    
+    .edit-toggle a {
+        color: rgb(235, 235, 235);
     }
-    ,
-    closeTaskEditForm() {
-        //console.log("hello")
-        // this.getBoardLists(board)
-        // this.activeBoardId = board._id
-        this.showTaskEditForm=false
+    
+    .edit-toggle:hover a {
+        color: rgb(125, 125, 125);
     }
-    ,
-    dragStart() {
-        this.$store.dispatch("setDraggedTask", this.task) // console.log("dragStart")
-    }
-    , // drop() {
-    //     var dropTarget = this.task
-    //     var data = {
-    //         draggedTask: this.$store.state.draggedTask,
-    //         dropListId: dropTarget.listId
-    //     }
-    //     this.$store.dispatch("updateTask", data)
-    // }
-}
-
-}
-</script><style scoped>.task-card {
-    position: relative;
-}
-.task-title {
-    background-color: white;
-}
-.task-title:hover {
-    cursor: pointer;
-    background-color: rgb(240, 240, 240);
-}
-.edit-toggle {
-    background-color: white;
-}
-.edit-toggle:hover {
-    cursor: pointer;
-    background-color: rgb(213, 213, 213);
-}
-.edit-toggle a {
-    color: rgb(235, 235, 235);
-}
-.edit-toggle:hover a {
-    color: rgb(125, 125, 125);
-}
-.quickieEdit {}
 </style>
