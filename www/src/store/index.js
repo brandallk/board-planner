@@ -147,7 +147,7 @@ export default new vuex.Store({
     },
 
     // API
-    getUserBoards({commit, dispatch}) {
+    getUserBoards({ commit, dispatch }) {
       unconventionalRoutes
         .get('myBoards')
         .then(res => {
@@ -156,7 +156,7 @@ export default new vuex.Store({
           commit('setUserBoards', userBoards)
         })
     },
-    getBoardLists({commit, dispatch}, boardId) {
+    getBoardLists({ commit, dispatch }, boardId) {
       api
         .get(`boards/${boardId}/lists`)
         .then(res => {
@@ -168,7 +168,7 @@ export default new vuex.Store({
           console.log(err)
         })
     },
-    getBoardTasks({commit, dispatch}, boardId) {
+    getBoardTasks({ commit, dispatch }, boardId) {
       api
         .get(`boards/${boardId}/tasks`)
         .then(res => {
@@ -180,7 +180,8 @@ export default new vuex.Store({
           console.log(err)
         })
     },
-    getBoardComments({commit, dispatch}, boardId) {
+    getBoardComments({ commit, dispatch }, boardId) {
+      console.log('boardId', boardId)
       api
         .get(`boards/${boardId}/comments`)
         .then(res => {
@@ -192,13 +193,13 @@ export default new vuex.Store({
           console.log(err)
         })
     },
-    sendingActiveBoard({commit, dispatch}, board) {
+    sendingActiveBoard({ commit, dispatch }, board) {
       commit('setActiveBoard', board)
       dispatch('getBoardLists', board._id)
       dispatch('getBoardTasks', board._id)
       dispatch('getBoardComments', board._id)
     },
-    createBoard({commit, dispatch}, board) {
+    createBoard({ commit, dispatch }, board) {
       api
         .post('boards', board)
         .then(res => {
@@ -210,7 +211,7 @@ export default new vuex.Store({
           console.log(err)
         })
     },
-    deleteBoard({commit, dispatch}, board) {
+    deleteBoard({ commit, dispatch }, board) {
       api
         .delete(`boards/${board._id}`)
         .then(res => {
@@ -222,7 +223,7 @@ export default new vuex.Store({
           console.log(err)
         })
     },
-    createTask({commit, dispatch}, task) {
+    createTask({ commit, dispatch }, task) {
       api
         .post('tasks', task)
         .then(res => {
@@ -234,7 +235,7 @@ export default new vuex.Store({
           console.log(err)
         })
     },
-    editTask({commit, dispatch}, task) {
+    editTask({ commit, dispatch }, task) {
       api
         .put(`tasks/${task._id}`, task)
         .then(res => {
@@ -246,7 +247,7 @@ export default new vuex.Store({
           console.log(err)
         })
     },
-    deleteTask({commit, dispatch}, task) {
+    deleteTask({ commit, dispatch }, task) {
       api
         .delete(`tasks/${task._id}`)
         .then(res => {
@@ -257,7 +258,7 @@ export default new vuex.Store({
           console.log(err)
         })
     },
-    createList({commit, dispatch}, list) {
+    createList({ commit, dispatch }, list) {
       api
         .post('lists', list)
         .then(res => {
@@ -269,19 +270,19 @@ export default new vuex.Store({
           console.log(err)
         })
     },
-    createComment({commit, dispatch}, comment) {
+    createComment({ commit, dispatch }, comment) {
       api
-        .post('comment', comment)
+        .post('comments', comment)
         .then(res => {
           var newComment = res.data
           console.log('new comment:', newComment)
-          dispatch('getBoardComments', newComment.commentId)
+          dispatch('getBoardComments', newComment)
         })
         .catch(err => {
           console.log(err)
         })
-      },
-    deleteList({commit, dispatch}, list) {
+    },
+    deleteList({ commit, dispatch }, list) {
       api
         .delete(`lists/${list._id}`)
         .then(res => {
