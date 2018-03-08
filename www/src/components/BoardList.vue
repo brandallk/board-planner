@@ -29,7 +29,7 @@
 
     <addBoardForm v-if="isAddBoardFormVisible" @closeAddBoardForm="closeAddBoardForm"></addBoardForm>
 
-    <taskEditForm></taskEditForm>
+    <!-- <taskEditForm></taskEditForm> -->
 
   </div>
 </template>

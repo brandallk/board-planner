@@ -17,21 +17,17 @@
 
       <div class="row">
         <div class="col">
-
           <taskCard v-for="task in listTasks" :task="task"></taskCard>
-          
           <input type="text" class="form-control mt-3 bg-light border-success" v-model="task.title">
-
-          <button class="btn btn-success px-3 mt-2" @click="addNewTask">Add task</button>
-
+          <button class="btn btn-success px-3 mt-2" @click="addNewTask">Add Task</button>
+          <!-- <input v-if="showQuickieEdit" type="text" class="task-title col-9 d-inline-block rounded-left" v-model="updatedTask.title"> -->
         </div>
       </div>
-
     </div>
   </div>
- </template>
- 
- <script>
+</template>
+
+<script>
   import TaskCard from './TaskCard'
   export default {
     name: 'List',
@@ -78,17 +74,24 @@
       }
     }
   }
- </script>
- 
- <style scoped>
+</script>
+
+<style scoped>
   .listComponent {
-    background-color: rgb(226,228,230);
+    background-color: rgb(226, 228, 230);
   }
-  
+
+  .removeList {
+    display: flex;
+    justify-content: flex-end;
+    align-self: flex-end;
+
+  }
+
   .addTask {
     margin-left: 18px;
     height: 30px;
-     width: 30px
+    width: 30px
   }
 
   .delete-list-toggle:hover {
