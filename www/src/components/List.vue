@@ -11,7 +11,7 @@
         </div>
 
         <div v-if="showDeleteListDropdown" class="delete-list-dropdown d-block mb-3">
-          <button class="btn btn-danger btn-sm btn-block" @click="deleteList">delete list</button>
+          <button class="btn btn-danger btn-sm btn-block" @click="deleteList">delete   list</button>
         </div>
       </div>
 
