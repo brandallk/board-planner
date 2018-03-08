@@ -319,6 +319,17 @@ export default new vuex.Store({
               console.log(err)
             })
         },
+        deleteComment({ commit, dispatch }, comment) {
+          api
+              .delete(`comments/${comment._id}`)
+              .then(res => {
+                  //console.log('deleted task')
+                  dispatch('getBoardComments', comment.boardId)
+              })
+              .catch(err => {
+                  console.log(err)
+              })
+      },
 
     }
 })
