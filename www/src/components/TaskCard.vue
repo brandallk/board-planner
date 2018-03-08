@@ -4,7 +4,7 @@
       <div class="row py-1 px-3 mb-2">
         <div v-if="!showQuickieEdit" class="task-title col-9 d-inline-block rounded-left">{{task.title}}</div>
         <input v-if="showQuickieEdit" type="text" class="task-title col-9 d-inline-block rounded-left" v-model="updatedTask.title">
-        <div class="edit-toggle col-3 d-inline-block d-flex justify-content-center align-items-center rounded-right" @click="showQuickieEdit = true">
+        <div class="edit-toggle col-3 d-inline-block d-flex justify-content-center align-items-center rounded-right" @click="toggleQuickieEdit">
           <a href="#">
             <i class="fas fa-pencil-alt"></i>
           </a>
@@ -46,6 +46,9 @@
       }
     },
     methods: {
+      toggleQuickieEdit() {
+        this.showQuickieEdit = this.showQuickieEdit ? false : true
+      },
       editTaskName() {
         var task = this.task
         task.title = this.updatedTask.title

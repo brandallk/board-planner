@@ -1,5 +1,6 @@
 <template>
-    <div class="listComponent">
+  <div class="spacer px-2">
+    <div class="listComponent rounded p-3">
 
       <span class="d-block mb-2">{{list.title}}</span>
 
@@ -8,7 +9,7 @@
 
           <taskCard v-for="task in listTasks" :task="task"></taskCard>
           
-          <input type="text" class="form-control mt-2" v-model="task.title">
+          <input type="text" class="form-control mt-3 bg-light border-success" v-model="task.title">
 
           <button class="btn btn-success px-3 mt-2" @click="addNewTask">Add</button>
 
@@ -16,6 +17,7 @@
       </div>
 
     </div>
+  </div>
  </template>
  
  <script>

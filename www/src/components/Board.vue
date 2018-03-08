@@ -3,14 +3,14 @@
 
     <topBar></topBar>
 
-    <div class="boardList container p-3">
+    <div class="boardList container-fluid p-3">
 
-      <h5 class="text-white">You are currently on your {{activeBoard.title}} board!</h5>
+      <h5 class="text-white mx-4">You are currently on your {{activeBoard.title}} board!</h5>
 
       <div class="list">
-        <div class="row">
+        <div class="row mx-4">
 
-          <list v-for="list in boardLists" :list="list" class="col-3 rounded p-3 mt-4 mr-3"></list>
+          <list v-for="list in boardLists" :list="list" class="col-3 mt-4"></list>
 
           <div class="col-3 mt-4">
             <button disabled="disabled">add List</button>
