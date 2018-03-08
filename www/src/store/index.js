@@ -268,6 +268,18 @@ export default new vuex.Store({
         .catch(err => {
           console.log(err)
         })
+    },
+    createComment({commit, dispatch}, comment) {
+      api
+        .post('comment', comment)
+        .then(res => {
+          var newComment = res.data
+          console.log('new comment:', newComment)
+          dispatch('getBoardComments', newComment.commentId)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
 
   }

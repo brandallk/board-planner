@@ -1,7 +1,7 @@
 <template>
   <div class="taskEditForm">
     <!-- <button @click="showModal = true">Edit Tasks</button> -->
-    <modal v-if="showModal" @close="showModal = false">
+    <modal v-if="showModal" >
       <transition name="modal">
         <div class="modal-mask">
           <div class="modal-wrapper">
@@ -22,7 +22,10 @@
                 <div class="row">
                   <div class="col-6">
                     <h5>Task Description:</h5>
-                    <textarea form="taskDescription" class="p-1" placeholder="add a description" name="taskDescription"></textarea>
+                    <textarea value="taskDescription" class="p-1" placeholder="add a description" name="taskDescription"></textarea>
+                    
+                        <!-- <b-form-textarea id="textarea1" v-model="taskDescription" placeholder="add a description" :rows="3" :max-rows="6">asdf</b-form-textarea> -->
+                                            
                   </div>
                   <div class="col-6">
                     <h5>Attachments?</h5>
@@ -32,8 +35,14 @@
                 <div class="row mt-4">
                   <div class="col commentBody">
                     <h5>Add Comment</h5>
-                    <textarea form="commentDescription" class="p-1" placeholder="write a comment" name="commentDescription"></textarea>
+                    <textarea @mouseover="showSaveEdit" form="commentDescription" class="p-1" placeholder="write a comment" name="commentDescription"></textarea>
                   </div>
+                </div>
+              </div>
+              <div class="row m-3">
+                <div v-if="showSaveEdit" class="SaveEdit-btns d-flex w-100 mt-1">
+                  <button class="btn btn-sm btn-success" @click="">save</button>
+                  <button class="btn btn-sm btn-danger ml-auto" @click="deleteTask">x</button>
                 </div>
               </div>
               <div class="row">
@@ -41,11 +50,10 @@
               </div>
               <div class="row">
                 <div class="col">
-                  <comment></comment>
-
+                  <comment v-for comment in Comments>Comment Here</comment>
                 </div>
               </div>
-              
+
               <div class="">
 
               </div>
@@ -64,6 +72,7 @@
 
 <script>
   import Comment from './Comment'
+  
   export default {
     name: 'TaskEditForm',
     components: {
@@ -72,17 +81,22 @@
     data() {
       return {
         showModal: true,
+        showSaveEdit: true,
         taskDescription: '',
-        commentDescription: '' 
+      commentDescription: ''
       }
     },
     methods: {
       close() {
-        this.showModal = false
-        // this.taskDescription.dispatch()
-        // this.commentDescription.dispatch() 
-        // this.$emit('closeTaskEditForm')
-        console.log('somewhere')
+        // this.showModal = false
+        // console.log('task description', taskDescription)
+
+        // this.taskDescription.dispatch('editTask')
+        // console.log('comment', commentDescription)
+
+        // this.commentDescription.dispatch('createComment')
+        this.$emit('closeTaskEditForm')
+        // console.log('somewhere')
       },
     }
   }
