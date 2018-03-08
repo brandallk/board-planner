@@ -5,8 +5,16 @@ var schemaName = "List"
 
 var schema = new Schema({
     title: {
-        type: String
-            // required: true
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    createdAt: {
+        type: Number,
+        default: Date.now()
     },
     userId: {
         type: ObjectId,
@@ -17,18 +25,7 @@ var schema = new Schema({
         type: ObjectId,
         ref: "Board",
         required: true
-    },
-    createdAt: {
-        type: Number
-    },
-    cardsIds: {
-        type: Array
-            // required: true
-    },
-    description: {
-        type: String
-            // required: true
-    },
+    }
 })
 
 module.exports = mongoose.model(schemaName, schema)

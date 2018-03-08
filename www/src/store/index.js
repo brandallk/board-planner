@@ -256,6 +256,18 @@ export default new vuex.Store({
         .catch(err => {
           console.log(err)
         })
+    },
+    createList({commit, dispatch}, list) {
+      api
+        .post('lists', list)
+        .then(res => {
+          var newList = res.data
+          console.log('new list:', newList)
+          dispatch('getBoardLists', newList.boardId)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
 
   }
