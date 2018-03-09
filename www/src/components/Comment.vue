@@ -1,7 +1,7 @@
 <template>
   <div class="comments">
     <div class="row">
-      <div class="col-1 commentTools">
+      <div class="col-1 txt-color commentTools">
         <a href="#" @click.prevent='deleteComment' class="text-danger">
           <span class="fas fa-trash"></span>
         </a>
@@ -14,7 +14,7 @@
           </div>
         </div>
       </div>
-      <div class="col comment-body">
+      <div class="col comment-body txt-color">
         <span v-if="!showCommentEdit" class="d-block mb-2 pr-4 pb-2 rounded" @click="showCommentEdit = true">{{comment.body}}</span>
         <input v-if="showCommentEdit" type="text" class="form-content d-block rounded pl-3" v-model="updatedComment.body">
         <button v-if="showCommentEdit" class="btn btn-success btn-sm mb-2" @click="editComment">save</button>
@@ -84,5 +84,9 @@
 
   .comment-body-toggle:hover {
     background-color: rgb(213, 213, 213);
+  }
+
+  .txt-color {
+    color: black;
   }
 </style>
