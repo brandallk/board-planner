@@ -5,7 +5,7 @@
         <a href="#" @click.prevent='deleteComment' class="text-danger">
           <span class="fas fa-trash"></span>
         </a>
-        <p class="ml-4">{{taskCommentOwners.name}}</p>
+        <p class="ml-4">{{userInfo.name}}{{comment.date}}</p>
         <!-- <a href="#" @click.prevent='editComment = true' class="text-dark">
           <span class="fas fa-edit"></span>
         </a> -->
@@ -31,15 +31,20 @@
         showCommentEdit: false,
         updatedComment: {
           body: this.comment.body,
-          taskCommentOwners: {}
+          // taskCommentOwners: {}
         },
       }
     },
     computed: {
       userInfo() {
-        console.log('start of taskCommentOwners',taskCommentOwners)
-        return this.$store.state.taskCommentOwners
+        // console.log('start of taskCommentOwners',taskCommentOwners)
+        var allUserInfo = this.$store.state.taskCommentOwners
+        var commentCreator = allUserInfo.find(user => {
+          return user.userId === this.comment.userId
+        })
+        return commentCreator
       }
+
     },
 
     mounted() {

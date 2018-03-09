@@ -42,7 +42,7 @@
                 </div>
                 <div class="row">
                   <div class="col">
-                    <comment v-for="comment in taskComments" :comment='comment'></comment>
+                    <comment class:="commentColor" v-for="comment in taskComments" :comment='comment'></comment>
                   </div>
                 </div>
               </div>
@@ -202,4 +202,8 @@
   .existing {
     margin-top: 80px;
   }
+  /* .commentColor {
+    color: red
+  } */
+
 </style>
