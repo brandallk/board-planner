@@ -5,7 +5,7 @@
       <div class="list-heading">
         <div class="d-flex">
           <div class="list-title">
-            <span v-if="!showListTitleEdit" class="d-block mb-2 pr-4 pb-2 rounded" @click="showListTitleEdit = true">{{list.title}}</span>
+            <span v-if="!showListTitleEdit" class="d-block mb-2 pr-4 pb-2 rounded" @click="showListTitleEdit = true">List title: {{list.title}}</span>
             <input v-if="showListTitleEdit" type="text" class="form-content d-block rounded pl-3" v-model="updatedList.title">
             <button v-if="showListTitleEdit" class="btn btn-success btn-sm mb-2" @click="editListTitle">save</button>
             <button v-if="showListTitleEdit" class="btn btn-danger btn-sm mb-2" @click="showListTitleEdit = false">cancel</button>
