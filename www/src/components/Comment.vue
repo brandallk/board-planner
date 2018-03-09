@@ -5,7 +5,8 @@
         <a href="#" @click.prevent='deleteComment' class="text-danger">
           <span class="fas fa-trash"></span>
         </a>
-        <p class="ml-4">{{userInfo.name}}{{comment.date}}</p>
+        <h6 class="ml-4">{{userInfo.name}},</h6>
+        <p>{{comment.created}}</p>
         <!-- <a href="#" @click.prevent='editComment = true' class="text-dark">
           <span class="fas fa-edit"></span>
         </a> -->
