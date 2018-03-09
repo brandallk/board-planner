@@ -21,45 +21,45 @@
 </template>
 
 <script>
-  export default {
-    name: 'AddBoardForm',
-    data() {
-      return {
-        board: {
-          title: "",
-          description: ""
+    export default {
+        name: 'AddBoardForm',
+        data() {
+            return {
+                board: {
+                    title: "",
+                    description: ""
+                }
+            }
+        },
+        methods: {
+            submit() {
+                this.$store.dispatch('createBoard', this.board)
+                this.close()
+            },
+            close() {
+                this.$emit('closeAddBoardForm')
+            }
         }
-      }
-    },
-    methods: {
-      submit() {
-        this.$store.dispatch('createBoard', this.board)
-        this.close()
-      },
-      close() {
-        this.$emit('closeAddBoardForm')
-      }
     }
-  }
-
-
 </script>
 
 <style scoped>
-  div.background {
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  form {
-    width: 95%;
-  }
-  @media (min-width: 576px) {
-    form {
-      width: 50%;
+    div.background {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        background-color: #015249
     }
-  }
+    
+    form {
+        width: 95%;
+    }
+    
+    @media (min-width: 576px) {
+        form {
+            width: 50%;
+        }
+    }
 </style>

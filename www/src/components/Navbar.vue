@@ -68,13 +68,14 @@
 </script>
 
 <style scoped>
-  .navbar {
-    width: 100%;
-    padding: 0;
-    margin: 0;
-  }
-  .navlink:hover {
-    cursor: pointer;
-    background-color: #138091;
-  }
+    .navbar {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .navlink:hover {
+        cursor: pointer;
+        background-color: #015249;
+    }
 </style>

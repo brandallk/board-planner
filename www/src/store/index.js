@@ -39,7 +39,8 @@ export default new vuex.Store({
         boardLists: [],
         boardTasks: [],
         boardComments: [],
-        draggedTask: {}
+        draggedTask: {},
+        taskCommentOwners: []
     },
 
     mutations: {
@@ -75,6 +76,9 @@ export default new vuex.Store({
         },
         setSharedBoards(state, boards) {
             state.sharedBoards = boards
+        },
+        setUserInfo(state,data) {
+            state.taskCommentOwners = userInfo
         }
     },
 
@@ -89,11 +93,11 @@ export default new vuex.Store({
                     commit('setAuthError', { error: false, message: '' })
 
                     var defaultBoard = {
-                            title: 'Untitled Board',
-                            desctiption: 'Your first board! Click here to customize and start planning you project!',
-                            userId: newUser._id
-                        }
-                        // commit('setActiveBoard', defaultBoard)
+                        title: 'Untitled Board',
+                        desctiption: 'Your first board! Click here to customize and start planning you project!',
+                        userId: newUser._id
+                    }
+                    // commit('setActiveBoard', defaultBoard)
                     commit('setUserBoards', [defaultBoard])
 
                     router.push({
@@ -164,7 +168,7 @@ export default new vuex.Store({
                 .get('myBoards')
                 .then(res => {
                     var userBoards = res.data
-                        //console.log('user boards:', userBoards)
+                    //console.log('user boards:', userBoards)
                     commit('setUserBoards', userBoards)
                 })
         },
@@ -173,7 +177,7 @@ export default new vuex.Store({
                 .get(`boards/${boardId}/lists`)
                 .then(res => {
                     var lists = res.data
-                        // console.log('User Board Lists', lists)
+                    // console.log('User Board Lists', lists)
                     commit('setBoardLists', lists)
                 })
                 .catch(err => {
@@ -185,7 +189,7 @@ export default new vuex.Store({
                 .get(`boards/${boardId}/tasks`)
                 .then(res => {
                     var tasks = res.data
-                        // console.log('User Board Tasks', tasks)
+                    // console.log('User Board Tasks', tasks)
                     commit('setBoardTasks', tasks)
                 })
                 .catch(err => {
@@ -198,7 +202,7 @@ export default new vuex.Store({
                 .get(`boards/${boardId}/comments`)
                 .then(res => {
                     var comments = res.data
-                        // console.log('User Board Comments', comments)
+                    // console.log('User Board Comments', comments)
                     commit('setBoardComments', comments)
                 })
                 .catch(err => {
@@ -216,7 +220,7 @@ export default new vuex.Store({
                 .post('boards', board)
                 .then(res => {
                     var newBoard = res.data
-                        // console.log('new board:', newBoard)
+                    // console.log('new board:', newBoard)
                     dispatch('getUserBoards')
                 })
                 .catch(err => {
@@ -228,7 +232,7 @@ export default new vuex.Store({
                 .delete(`boards/${board._id}`)
                 .then(res => {
                     var deletedBoard = board
-                        //console.log('deleted board:', deletedBoard)
+                    //console.log('deleted board:', deletedBoard)
                     dispatch('getUserBoards')
                 })
                 .catch(err => {
@@ -242,7 +246,7 @@ export default new vuex.Store({
                     var updatedBoard = res.data.data
                     console.log('updated board:', updatedBoard)
                     dispatch('sendingActiveBoard', updatedBoard)
-                        // dispatch('getBoardLists', updatedBoard.boardId)
+                    // dispatch('getBoardLists', updatedBoard.boardId)
                 })
                 .catch(err => {
                     console.log(err)
@@ -253,7 +257,7 @@ export default new vuex.Store({
                 .post('tasks', task)
                 .then(res => {
                     var newTask = res.data
-                        //console.log('new task:', newTask)
+                    //console.log('new task:', newTask)
                     dispatch('getBoardTasks', newTask.boardId)
                 })
                 .catch(err => {
@@ -265,7 +269,7 @@ export default new vuex.Store({
                 .put(`tasks/${task._id}`, task)
                 .then(res => {
                     var updatedTask = res.data.data
-                        //console.log('updated task:', updatedTask)
+                    //console.log('updated task:', updatedTask)
                     dispatch('getBoardTasks', updatedTask.boardId)
                 })
                 .catch(err => {
@@ -288,7 +292,7 @@ export default new vuex.Store({
                 .post('lists', list)
                 .then(res => {
                     var newList = res.data
-                        //console.log('new list:', newList)
+                    //console.log('new list:', newList)
                     dispatch('getBoardLists', newList.boardId)
                 })
                 .catch(err => {
@@ -312,7 +316,7 @@ export default new vuex.Store({
                 .delete(`lists/${list._id}`)
                 .then(res => {
                     var deletedList = list
-                        //console.log('deleted list:', deletedList)
+                    //console.log('deleted list:', deletedList)
                     dispatch('getBoardLists', deletedList.boardId)
                 })
                 .catch(err => {
@@ -332,7 +336,7 @@ export default new vuex.Store({
                 .put(`tasks/${taskId}`, task)
                 .then(res => {
                     var updatedTask = res.data.data
-                        // console.log("updatedTask", updatedTask)
+                    // console.log("updatedTask", updatedTask)
                     dispatch('getBoardLists', boardId)
                     dispatch('getBoardTasks', boardId)
                 })
@@ -374,6 +378,17 @@ export default new vuex.Store({
                     console.log(err)
                 })
         },
+        getCommentByUser({ commit, dispatch }, userInfo) {
+            console.log(userInfo)
+            api
+                .get(`users/${userInfo.userId}`, userInfo)
+                .then(res => {
+                    dispatch('setUserInfo', userInfo)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
 
         updateBoardCollaborators({ commit, dispatch }, board) {
             api
@@ -387,7 +402,7 @@ export default new vuex.Store({
                     console.log(err)
                 })
         },
-        addBoardCollaborator({ commit, dispatch}, data) {
+        addBoardCollaborator({ commit, dispatch }, data) {
             api
                 .get(`users/email/${data.collaboratorEmail}`)
                 .then(res => {
@@ -397,7 +412,7 @@ export default new vuex.Store({
 
                     var board = data.board
                     board.collaborators.push(collaborator)
-                    
+
                     dispatch('updateBoardCollaborators', board)
                 })
                 .catch(err => {

@@ -1,5 +1,5 @@
 <template>
-  <div class="topbar bg-dark row">
+  <div class="topbar bgcolor row">
     
     <div class="col-sm-4 menu p-4" v-if="user._id">
       <a href="#" class="btn btn-info text-light" @click.prevent="showBoardsList">Home</a>
@@ -15,39 +15,43 @@
 </template>
 
 <script>
-  export default {
-    name: 'TopBar',
-    data() {
-      return {
+    export default {
+        name: 'TopBar',
+        data() {
+            return {
 
-      }
-    },
-    computed: {
-      user() {
-        return this.$store.state.user
-      }
-    },
-    methods: {
-      showBoardsList() {
-        this.$router.push('Home')
-      },
-      logout() {
-        this.$store.dispatch('logoutUser')
-      }
+            }
+        },
+        computed: {
+            user() {
+                return this.$store.state.user
+            }
+        },
+        methods: {
+            showBoardsList() {
+                this.$router.push('Home')
+            },
+            logout() {
+                this.$store.dispatch('logoutUser')
+            }
+        }
     }
-  }
 </script>
 
 <style scoped>
-  .logout {
-    flex-direction: row-reverse;
-    align-self: center;
-    display: flex
-  }
-
-  .menu {
-    flex-direction: row;
-    align-self: center;
-    display: flex
-  }
+    .logout {
+        flex-direction: row-reverse;
+        align-self: center;
+        display: flex
+    }
+    
+    .menu {
+        flex-direction: row;
+        align-self: center;
+        display: flex
+    }
+    
+    .bgcolor {
+        background-color: #015249;
+    }
 </style>
