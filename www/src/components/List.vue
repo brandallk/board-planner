@@ -22,7 +22,7 @@
 
       <div class="row">
         <div class="col">
-          <taskCard v-for="task in listTasks" :task="task"></taskCard>
+          <taskCard v-for="task in listTasks" :board="board" :list="list" :task="task"></taskCard>
           <input type="text" class="form-control mt-3 bg-light border-success" v-model="task.title">
           <button class="btn btn-success px-3 mt-2" @click="addNewTask">Add Task</button>
           <!-- <input v-if="showQuickieEdit" type="text" class="task-title col-9 d-inline-block rounded-left" v-model="updatedTask.title"> -->
@@ -40,7 +40,8 @@
             taskCard: TaskCard
         },
         props: [
-            'list'
+            'list',
+            'board'
         ],
         data() {
             return {
