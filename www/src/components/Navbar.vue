@@ -23,39 +23,40 @@
 </template>
 
 <script>
-  import CollabPanel from './CollabPanel'
-  export default {
-    name: 'Navbar',
-    components: {
-      collabPanel: CollabPanel
-    },
-    data() {
-      return {
-        showCollabPanel: false
-      }
-    },
-    methods: {
-      showBoardsList() {
-        this.$router.push('Home')
-      },
-      toggleCollabPanel() {
-        this.showCollabPanel = this.showCollabPanel ? false : true
-      },
-      logout() {
-        this.$store.dispatch('logoutUser')
-      }
+    import CollabPanel from './CollabPanel'
+    export default {
+        name: 'Navbar',
+        components: {
+            collabPanel: CollabPanel
+        },
+        data() {
+            return {
+                showCollabPanel: false
+            }
+        },
+        methods: {
+            showBoardsList() {
+                this.$router.push('Home')
+            },
+            toggleCollabPanel() {
+                this.showCollabPanel = this.showCollabPanel ? false : true
+            },
+            logout() {
+                this.$store.dispatch('logoutUser')
+            }
+        }
     }
-  }
 </script>
 
 <style scoped>
-  .navbar {
-    width: 100%;
-    padding: 0;
-    margin: 0;
-  }
-  .navlink:hover {
-    cursor: pointer;
-    background-color: #138091;
-  }
+    .navbar {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .navlink:hover {
+        cursor: pointer;
+        background-color: #015249;
+    }
 </style>

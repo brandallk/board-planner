@@ -1,5 +1,5 @@
 <template>
-  <div class="board bg-info">
+  <div class="board bg-color">
 
     <topBar></topBar>
     <navbar></navbar>
@@ -125,7 +125,7 @@
                 this.showBoardTitleEdit = false
             },
             editBoardDesc() {
-                debugger
+
                 var updatedBoard = this.activeBoard
                 updatedBoard.description = this.updatedBoard.description
                 updatedBoard.title = this.updatedBoard.title
@@ -142,11 +142,11 @@
     }
     
     .add-list-dropdown {
-        background-color: rgb(226, 228, 230);
+        background-color: #57BC90;
     }
     
     .delete-list-toggle:hover {
-        background-color: rgb(213, 213, 213);
+        background-color: #57BC90;
     }
     
     .board-title {
@@ -167,6 +167,10 @@
     
     .board-title:hover span {
         cursor: pointer;
-        background-color: rgb(213, 213, 213);
+        background-color: #57BC90;
+    }
+    
+    .bg-color {
+        background-color: #57BC90;
     }
 </style>
