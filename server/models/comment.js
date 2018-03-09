@@ -27,6 +27,11 @@ var schema = new Schema({
         type: ObjectId,
         ref: "Task",
         required: true
+    },
+    created: {
+        type: Date,
+        required: true,
+        default: Date.now()
     }
 })
 
