@@ -49,11 +49,11 @@
                 },
                 showDeleteListDropdown: false,
                 updatedList: {
-                  title: this.list.title
+                    title: this.list.title
                 },
                 showDeleteListDropdown: false,
                 showListTitleEdit: false
-          }
+            }
         },
         computed: {
             board() {
@@ -79,10 +79,11 @@
                 this.showDeleteListDropdown = this.showDeleteListDropdown ? false : true
             },
             editListTitle() {
-              var updatedList = this.list
-              updatedList.title = this.updatedList.title
-              this.$store.dispatch('updateList', updatedList)
-              this.showListTitleEdit = false
+                debugger
+                var updatedList = this.list
+                updatedList.title = this.updatedList.title
+                this.$store.dispatch('updateList', updatedList)
+                this.showListTitleEdit = false
             },
             deleteList() {
                 this.showDeleteListDropdown = false
@@ -105,33 +106,32 @@
 </script>
 
 <style scoped>
-  .listComponent {
-    background-color: rgb(226, 228, 230);
-  }
-
-  .removeList {
-    display: flex;
-    justify-content: flex-end;
-    align-self: flex-end;
-
-  }
-
-  .addTask {
-    margin-left: 18px;
-    height: 30px;
-    width: 30px
-  }
-
-  .list-title input {
-    width: 95%;
-  }
-
-  .list-title:hover span {
-    cursor: pointer;
-    background-color: rgb(213, 213, 213);
-  }
-
-  .delete-list-toggle:hover {
-    background-color: rgb(213, 213, 213);
-  }
- </style>
+    .listComponent {
+        background-color: rgb(226, 228, 230);
+    }
+    
+    .removeList {
+        display: flex;
+        justify-content: flex-end;
+        align-self: flex-end;
+    }
+    
+    .addTask {
+        margin-left: 18px;
+        height: 30px;
+        width: 30px
+    }
+    
+    .list-title input {
+        width: 95%;
+    }
+    
+    .list-title:hover span {
+        cursor: pointer;
+        background-color: rgb(213, 213, 213);
+    }
+    
+    .delete-list-toggle:hover {
+        background-color: rgb(213, 213, 213);
+    }
+</style>
