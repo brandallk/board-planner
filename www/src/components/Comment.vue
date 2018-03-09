@@ -5,16 +5,16 @@
         <a href="#" @click.prevent='deleteComment' class="text-danger">
           <span class="fas fa-trash"></span>
         </a>
-        <h6 class="ml-4">{{userInfo.name}},</h6>
-        <p>{{comment.created}}</p>
-        <!-- <a href="#" @click.prevent='editComment = true' class="text-dark">
-          <span class="fas fa-edit"></span>
-        </a> -->
       </div>
-      <!-- <div class="col-10">
-        {{comment.body}}
-      </div> -->
-      <div class=".col comment-body">
+      <div class="row">
+        <div class="col">
+          <h6 class="ml-4">{{userInfo.name}},</h6>
+          <div class="col">
+            <p>{{comment.created}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col comment-body">
         <span v-if="!showCommentEdit" class="d-block mb-2 pr-4 pb-2 rounded" @click="showCommentEdit = true">{{comment.body}}</span>
         <input v-if="showCommentEdit" type="text" class="form-content d-block rounded pl-3" v-model="updatedComment.body">
         <button v-if="showCommentEdit" class="btn btn-success btn-sm mb-2" @click="editComment">save</button>
@@ -32,13 +32,13 @@
         showCommentEdit: false,
         updatedComment: {
           body: this.comment.body,
-          // taskCommentOwners: {}
+
         },
       }
     },
     computed: {
       userInfo() {
-        // console.log('start of taskCommentOwners',taskCommentOwners)
+
         var allUserInfo = this.$store.state.taskCommentOwners
         var commentCreator = allUserInfo.find(user => {
           return user.userId === this.comment.userId
@@ -56,7 +56,7 @@
     ],
     methods: {
       deleteComment() {
-        console.log('delete comment')
+
         this.$store.dispatch('deleteComment', this.comment)
       },
       editComment() {
@@ -66,7 +66,6 @@
         this.showCommentEdit = false
       },
       getUserId() {
-        console.log('comment Info from comment', this.comment.userId)
         this.$store.dispatch('getCommentByUser', this.comment.userId)
       },
     }
