@@ -355,6 +355,17 @@ export default new vuex.Store({
                     console.log(err)
                 })
         },
+        updateComment({ commit, dispatch }, comment) {
+            api
+                .put(`comments/${comment._id}`, comment)
+                .then(res => {
+                    var updatedComment = res.data.data
+                    dispatch('getBoardComments', updatedComment.boardId)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
 
     }
 })

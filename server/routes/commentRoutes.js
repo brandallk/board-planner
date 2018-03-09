@@ -23,9 +23,9 @@ router.delete("/api/comments/:commentId", (req, res, next) => {
 
 // updateComment (put)
 router.put("/api/comments/:commentId", (req, res, next) => {
-    Comments.findByIdAndUpdate(req.params.commentId, req.body, ({ new: true }))
-        .then(commt => {
-            res.send({ message: "Successfully updated list", data: commt })
+    Comments.findByIdAndUpdate(req.params.commentId, req.body, { new: true })
+        .then(comment => {
+            res.send({ message: "Successfully updated Comment", data: comment })
         })
         .catch(next)
 })
