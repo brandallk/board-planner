@@ -4,7 +4,7 @@ var cors = require('cors')
 var server = express();
 require('./db/mlab-config')
 
-var port = 3000
+var port = process.env.PORT || 3000
 var session = require("./auth/session")
 var authRoutes = require("./auth/authRoutes")
 var userRoutes = require("./routes/userRoutes")
@@ -13,7 +13,7 @@ var listRoutes = require("./routes/listRoutes")
 var taskRoutes = require("./routes/taskRoutes")
 var commentRoutes = require("./routes/commentRoutes")
 
-var whitelist = ['http://localhost:8080'];
+var whitelist = ['http://localhost:8080', 'https://board-planner.herokuapp.com'];
 var corsOptions = {
     origin: function(origin, callback) {
         var originIsWhiteListed = whitelist.indexOf(origin) !== -1;
@@ -26,6 +26,8 @@ server.use(cors(corsOptions));
 server.use(session);
 server.use(bp.json());
 server.use(bp.urlencoded({ extended: true }));
+
+server.use(express.static(__dirname + "/../www/dist"))
 
 server.use(authRoutes);
 
