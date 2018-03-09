@@ -22,7 +22,7 @@
 
       <div class="row">
         <div class="col">
-          <taskCard v-for="task in listTasks" :task="task"></taskCard>
+          <taskCard v-for="task in listTasks" :board="board" :list="list" :task="task"></taskCard>
           <input type="text" class="form-control mt-3 bg-light border-success" v-model="task.title">
           <button class="btn btn-success px-3 mt-2" @click="addNewTask">Add Task</button>
           <!-- <input v-if="showQuickieEdit" type="text" class="task-title col-9 d-inline-block rounded-left" v-model="updatedTask.title"> -->
@@ -40,7 +40,8 @@
             taskCard: TaskCard
         },
         props: [
-            'list'
+            'list',
+            'board'
         ],
         data() {
             return {
@@ -49,11 +50,11 @@
                 },
                 showDeleteListDropdown: false,
                 updatedList: {
-                  title: this.list.title
+                    title: this.list.title
                 },
                 showDeleteListDropdown: false,
                 showListTitleEdit: false
-          }
+            }
         },
         computed: {
             board() {
@@ -79,10 +80,11 @@
                 this.showDeleteListDropdown = this.showDeleteListDropdown ? false : true
             },
             editListTitle() {
-              var updatedList = this.list
-              updatedList.title = this.updatedList.title
-              this.$store.dispatch('updateList', updatedList)
-              this.showListTitleEdit = false
+                debugger
+                var updatedList = this.list
+                updatedList.title = this.updatedList.title
+                this.$store.dispatch('updateList', updatedList)
+                this.showListTitleEdit = false
             },
             deleteList() {
                 this.showDeleteListDropdown = false
@@ -105,33 +107,32 @@
 </script>
 
 <style scoped>
-  .listComponent {
-    background-color: rgb(226, 228, 230);
-  }
-
-  .removeList {
-    display: flex;
-    justify-content: flex-end;
-    align-self: flex-end;
-
-  }
-
-  .addTask {
-    margin-left: 18px;
-    height: 30px;
-    width: 30px
-  }
-
-  .list-title input {
-    width: 95%;
-  }
-
-  .list-title:hover span {
-    cursor: pointer;
-    background-color: rgb(213, 213, 213);
-  }
-
-  .delete-list-toggle:hover {
-    background-color: rgb(213, 213, 213);
-  }
- </style>
+    .listComponent {
+        background-color: rgb(226, 228, 230);
+    }
+    
+    .removeList {
+        display: flex;
+        justify-content: flex-end;
+        align-self: flex-end;
+    }
+    
+    .addTask {
+        margin-left: 18px;
+        height: 30px;
+        width: 30px
+    }
+    
+    .list-title input {
+        width: 95%;
+    }
+    
+    .list-title:hover span {
+        cursor: pointer;
+        background-color: rgb(213, 213, 213);
+    }
+    
+    .delete-list-toggle:hover {
+        background-color: rgb(213, 213, 213);
+    }
+</style>

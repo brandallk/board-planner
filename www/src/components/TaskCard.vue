@@ -18,7 +18,7 @@
         <button class="btn btn-sm btn-danger ml-auto" @click="deleteTask">delete task</button>
       </div>
     </div>
-    <taskEditForm :task="task" v-if="showTaskEditForm" @closeTaskEditForm='closeTaskEditForm'></taskEditForm>
+    <taskEditForm :board="board" :list="list" :task="task" v-if="showTaskEditForm" @closeTaskEditForm='closeTaskEditForm'></taskEditForm>
     <!-- <comment v-for="comment in taskComments"></comment> -->
 
   </div>
@@ -32,7 +32,9 @@
             taskEditForm: TaskEditForm,
         },
         props: [
-            'task'
+            'task',
+            'list',
+            'board'
         ],
         data() {
             return {

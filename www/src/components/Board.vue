@@ -5,26 +5,38 @@
     <navbar></navbar>
 
     <div class="boardList container-fluid p-3">
-<div class="container-flex">
-  <div class="row">
-    <div class="col-med-5">  
-      <h5 class="text-white mx-4">You are currently on your {{activeBoard.title}} board!</h5>
-      
-      <h6 class="text-white mx-4">Description: ((activeBoard.description}}</h6>
-    </div>
-    <div class="col-med-2">
-        <a href="#" class="delete-list-toggle ml-auto px-2 rounded text-muted" @click.prevent="toggleBoardEdit">
-            <i class="fas fa-ellipsis-h"></i>
-          </a>
-    </div>
-  </div>
-  <div class="row">
-      <div v-if="toggleBoardEdit" class="board-edit d-block mb-3">
-          <button class="btn btn-danger btn-sm btn-block" @click="editBoardTitle">delete   list</button>
-        </div>
-  </div>
-</div>
+          
+            <div class="d-flex" >
+               <div class="board-title">
+                <h5 v-if="!showBoardTitleEdit" class="text-white mx-4">You are currently on your {{activeBoard.title}} board!</h5>
+                <input v-if="showBoardTitleEdit" type="text" class="board-title-input" v-model="updatedBoard.title">
+                <button v-if="showBoardTitleEdit" class="btn btn-success btn-sm mb-2" @click="editBoardTitle">save</button>
+                <button v-if="showBoardTitleEdit" class="btn btn-danger btn-sm mb-2" @click="showBoardTitleEdit = false">cancel</button>      
+              </div>
+              <div class="">
+                <a href="#" class="ml-auto px-2 rounded text-white" @click.prevent="toggleBoardEdit">
+                <i class="fas fa-ellipsis-h"></i>
+              </a>
+              </div>
+            </div>
 
+            <div class="d-flex">
+                <div class="board-desc">
+                    <h6 v-if="!showBoardDescEdit" class="text-white mx-4">Description: {{activeBoard.description}}</h6>
+                    <input v-if="showBoardDescEdit" type="text" class="board-desc" v-model="updatedBoard.description">
+                    <button v-if="showBoardDescEdit" class="btn btn-success btn-sm mb-2" @click="editBoardDesc">save</button>
+                    <button v-if="showBoardDescEdit" class="btn btn-danger btn-sm mb-2" @click="showBoardDescEdit = false">cancel</button>      
+                        
+                </div>
+                <div class="">
+                  <a href="#" class="ml-auto px-2 rounded text-white" @click.prevent="toggleBoardDescEdit">
+                  <i class="fas fa-ellipsis-h"></i>
+                </a>
+                </div>
+            </div> 
+    </div>   
+    
+ 
       <div class="list">
         <div class="row mx-4">
 
@@ -40,13 +52,12 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
       
     </div>
 
-  </div>
+  
  </template>
 
 <script>
@@ -60,12 +71,23 @@
             topBar: TopBar,
             navbar: Navbar
         },
+
         data() {
             return {
                 showAddListDropdown: false,
                 newList: {
                     title: ""
-                }
+                },
+                showBoardTitleEdit: false,
+                showBoardDescEdit: false,
+                updatedBoard: {
+                    title: "",
+                    description: ""
+                        // title: this.board.title,
+                        // description: this.board.description
+                },
+                board: this.activeBoard
+
             }
         },
         computed: {
@@ -88,6 +110,27 @@
                 }
                 this.$store.dispatch('createList', list)
                 this.showAddListDropdown = false
+            },
+            toggleBoardEdit() {
+                this.showBoardTitleEdit = this.showBoardTitleEdit ? false : true
+
+            },
+            toggleBoardDescEdit() {
+                this.showBoardDescEdit = this.showBoardDescEdit ? false : true
+
+            },
+            editBoardTitle() {
+
+                var updatedBoard = this.activeBoard
+                updatedBoard.title = this.updatedBoard.title
+                this.$store.dispatch('updateBoard', updatedBoard)
+                this.showBoardTitleEdit = false
+            },
+            editBoardDesc() {
+                var updatedBoard = this.activeBoard
+                updatedBoard.description = this.updatedBoard.description
+                this.$store.dispatch('updateBoard', updatedBoard)
+                this.showBoardDescEdit = false
             }
         }
     }
@@ -103,6 +146,27 @@
     }
     
     .delete-list-toggle:hover {
+        background-color: rgb(213, 213, 213);
+    }
+    
+    .board-title {
+        width: 40%;
+    }
+    
+    .board-title input {
+        width: 100%;
+    }
+    
+    .board-desc {
+        width: 40%;
+    }
+    
+    .board-desc input {
+        width: 100%
+    }
+    
+    .board-title:hover span {
+        cursor: pointer;
         background-color: rgb(213, 213, 213);
     }
 </style>

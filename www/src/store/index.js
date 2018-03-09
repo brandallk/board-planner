@@ -185,8 +185,8 @@ export default new vuex.Store({
                 })
         },
         getBoardComments({ commit, dispatch }, boardId) {
-          console.log('boardID',boardId)  
-          api
+            console.log('boardID', boardId)
+            api
                 .get(`boards/${boardId}/comments`)
                 .then(res => {
                     var comments = res.data
@@ -222,6 +222,19 @@ export default new vuex.Store({
                     var deletedBoard = board
                         //console.log('deleted board:', deletedBoard)
                     dispatch('getUserBoards')
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
+        updateBoard({ commit, dispatch }, board) {
+            api
+                .put(`board/${board._id}`, board)
+                .then(res => {
+                    var updatedBoard = res.data.data
+                    console.log('updated board:', updatedBoard)
+                    dispatch('sendingActiveBoard')
+                        // dispatch('getBoardLists', updatedBoard.boardId)
                 })
                 .catch(err => {
                     console.log(err)
@@ -274,17 +287,17 @@ export default new vuex.Store({
                     console.log(err)
                 })
         },
-        updateList({ commit, dispatch}, list) {
-          api
-            .put(`lists/${list._id}`, list)
-            .then(res => {
-              var updatedList = res.data.data
-              console.log('updated list:', updatedList)
-              dispatch('getBoardLists', updatedList.boardId)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        updateList({ commit, dispatch }, list) {
+            api
+                .put(`lists/${list._id}`, list)
+                .then(res => {
+                    var updatedList = res.data.data
+                    console.log('updated list:', updatedList)
+                    dispatch('getBoardLists', updatedList.boardId)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         },
         deleteList({ commit, dispatch }, list) {
             api
@@ -320,16 +333,38 @@ export default new vuex.Store({
                 })
         },
         createComment({ commit, dispatch }, comment) {
-          api
-            .post('comments', comment)
-            .then(res => {
-              var newComment = res.data
-              console.log('new comment:', newComment)
-              dispatch('getBoardComments', newComment.boardId)
-            })
-            .catch(err => {
-              console.log(err)
-            })
+            api
+                .post('comments', comment)
+                .then(res => {
+                    var newComment = res.data
+                    console.log('new comment:', newComment)
+                    dispatch('getBoardComments', newComment.boardId)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
+        deleteComment({ commit, dispatch }, comment) {
+            api
+                .delete(`comments/${comment._id}`)
+                .then(res => {
+                    //console.log('deleted task')
+                    dispatch('getBoardComments', comment.boardId)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
+        updateComment({ commit, dispatch }, comment) {
+            api
+                .put(`comments/${comment._id}`, comment)
+                .then(res => {
+                    var updatedComment = res.data.data
+                    dispatch('getBoardComments', updatedComment.boardId)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         },
 
     }

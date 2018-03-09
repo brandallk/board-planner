@@ -10,12 +10,12 @@
               <div class="modal-header">
                 <div class="col">
                   <h3>Edit Form</h3>
-                  <p class="px-4">{task.Name}</p>
 
                 </div>
                 <div class="div">
-                  <p>{Board Name}</p>
-                  <p>{List Name}</p>
+                  <p class:="text-wrap">Board Name: {{board.title}}</p>
+                  <p class:="text-wrap"> List:{{list.title}}</p>
+                  <p class:="text-wrap"> Task Name:{{task.title}}</p>
                 </div>
               </div>
               <div class="modal-body">
@@ -42,7 +42,7 @@
                 </div>
                 <div class="row">
                   <div class="col">
-                    <comment  v-for="comment in taskComments" :comment='comment'>Comment Here</comment>
+                    <comment v-for="comment in taskComments" :comment='comment'>Comment Here</comment>
                   </div>
                 </div>
               </div>
@@ -77,45 +77,52 @@
       }
     },
     props: [
-      "task"
+      "task",
+      "list",
+      "board"
     ],
     computed: {
-       taskComments() {
-                var boardComments = this.$store.state.boardComments
-                return boardComments.filter(comment => comment.taskId === this.task._id)
-            }
-    },
-      methods: {
-        close() {
-          this.$emit('closeTaskEditForm')
-        },
-        saveTaskDescription() {
-          console.log('task description', this.taskDescription)
-          var updatetask = this.task
-          updatetask.description = this.taskDescription
-          this.$store.dispatch('editTask', updatetask)
-        },
-        saveCommentDescription() {
-          var comment = {
-            body: this.commentDescription,
-            listId: this.task.listId,
-            taskId: this.task._id,
-            boardId: this.$store.state.activeBoard._id
-          }
-
-          // updatetask.description = this.taskDescription
-          // this.$store.dispatch('editTask', updatetask)
-          console.log('comment', comment)
-
-          this.$store.dispatch('createComment', comment)
-          this.commentDescription = ''
-        },
+      taskComments() {
+        var boardComments = this.$store.state.boardComments
+        return boardComments.filter(comment => comment.taskId === this.task._id)
       }
+    },
+    methods: {
+      close() {
+        this.$emit('closeTaskEditForm')
+      },
+      saveTaskDescription() {
+        console.log('task description', this.taskDescription)
+        var updatetask = this.task
+        updatetask.description = this.taskDescription
+        this.$store.dispatch('editTask', updatetask)
+      },
+      saveCommentDescription() {
+        var comment = {
+          body: this.commentDescription,
+          listId: this.task.listId,
+          taskId: this.task._id,
+          boardId: this.$store.state.activeBoard._id
+        }
+
+        // updatetask.description = this.taskDescription
+        // this.$store.dispatch('editTask', updatetask)
+        console.log('comment', comment)
+
+        this.$store.dispatch('createComment', comment)
+        this.commentDescription = ''
+      },
     }
+  }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .text-wrap {
+    word-wrap: break-word;
+    width: 11em;
+  }
+
   .modal-mask {
     position: fixed;
     z-index: 9998;
@@ -124,8 +131,10 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, .5);
-    display: table;
+    display: flex;
+    flex-direction: column;
     transition: opacity .3s ease;
+    overflow: scroll
   }
 
   .modal-wrapper {
