@@ -3,7 +3,7 @@
     <div class="row py-1 px-3 mb-2">
       <!-- <div v-if="!showQuickieEdit" @click='openTaskEditForm' @closeTaskCard='closeTaskEditForm' draggable="true" @dragover.prevent="dragover" @dragstart="dragStart" @drop="drop" class="task-title col-9 d-inline-block rounded-left">{{task.title}}</div> -->
       <div v-if="!showQuickieEdit" @click='openTaskEditForm' @closeTaskCard='closeTaskEditForm' draggable="true" 
-      @dragstart="dragStart" class="task-title col-9 d-inline-block rounded-left">{{task.title}}</div>
+      @dragstart="dragStart" class="task-title col-9 d-inline-block task-txt rounded-left">{{task.title}}</div>
 
 
       <input v-if="showQuickieEdit" type="text"  class="task-title col-9 d-inline-block rounded-left" v-model="updatedTask.title">
@@ -115,5 +115,9 @@
     
     .edit-toggle:hover a {
         color: rgb(125, 125, 125);
+    }
+    
+    .task-txt {
+        color: #015249;
     }
 </style>

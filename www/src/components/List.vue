@@ -1,6 +1,6 @@
 <template>
   <div class="spacer px-2">
-    <div class="listComponent rounded p-3" @drop="taskDrop"  @dragover.prevent="dragover">
+    <div class="list-bg listComponent rounded p-3" @drop="taskDrop"  @dragover.prevent="dragover">
 
       <div class="list-heading">
         <div class="d-flex">
@@ -10,7 +10,7 @@
             <button v-if="showListTitleEdit" class="btn btn-success btn-sm mb-2" @click="editListTitle">save</button>
             <button v-if="showListTitleEdit" class="btn btn-danger btn-sm mb-2" @click="showListTitleEdit = false">cancel</button>
           </div>
-          <a href="#" class="delete-list-toggle ml-auto px-2 rounded text-muted" @click.prevent="toggleDeleteListDropdown">
+          <a href="#" class="delete-list-toggle ml-auto px-2 rounded elipse-color text-muted" @click.prevent="toggleDeleteListDropdown">
             <i class="fas fa-ellipsis-h"></i>
           </a>
         </div>
@@ -20,10 +20,10 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row"> 
         <div class="col">
           <taskCard v-for="task in listTasks" :board="board" :list="list" :task="task"></taskCard>
-          <input type="text" class="form-control mt-3 bg-light border-success" v-model="task.title">
+          <input type="text" class="form-control mt-3 task-txt border-success" v-model="task.title">
           <button class="btn btn-success px-3 mt-2" @click="addNewTask">Add Task</button>
           <!-- <input v-if="showQuickieEdit" type="text" class="task-title col-9 d-inline-block rounded-left" v-model="updatedTask.title"> -->
         </div>
@@ -128,10 +128,24 @@
     
     .list-title:hover span {
         cursor: pointer;
-        background-color: rgb(213, 213, 213);
+        background-color: #57BC90;
     }
     
     .delete-list-toggle:hover {
         background-color: rgb(213, 213, 213);
+    }
+    
+    .list-bg {
+        background-color: #015249;
+        color: white
+    }
+    
+    .elipse-color {
+        background-color: #57BC90;
+        height: 25px;
+    }
+    
+    .task-txt {
+        color: #015249;
     }
 </style>
