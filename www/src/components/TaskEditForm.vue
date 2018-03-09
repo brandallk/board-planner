@@ -1,7 +1,7 @@
 <template>
   <div class="taskEditForm">
     <!-- <button @click="showModal = true">Edit Tasks</button> -->
-    <div class="modalLong" v-if="showModal">
+    <div v-if="showModal">
       <transition name="modal">
         <div class="modal-mask">
           <div class="modal-wrapper">
@@ -116,17 +116,6 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
- .modal {
-  position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1050;
-    display: none;
-    overflow: hidden;
-    /* outline: 0; */
- }
   .modal-mask {
     position: fixed;
     z-index: 9998;
@@ -135,8 +124,10 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, .5);
-    display: table;
+    display: flex;
+    flex-direction: column;
     transition: opacity .3s ease;
+    overflow: scroll
   }
 
   .modal-wrapper {
@@ -176,9 +167,7 @@
  * You can easily play with the modal transition by editing
  * these styles.
  */
-.modalLong {
-  overflow-y: auto;
-}
+
   .modal-enter {
     opacity: 0;
   }
