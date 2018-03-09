@@ -5,6 +5,7 @@
         <a href="#" @click.prevent='deleteComment' class="text-danger">
           <span class="fas fa-trash"></span>
         </a>
+        <p class="ml-4">{User.id}</p>
         <!-- <a href="#" @click.prevent='editComment = true' class="text-dark">
           <span class="fas fa-edit"></span>
         </a> -->
@@ -29,26 +30,33 @@
       return {
         showCommentEdit: false,
         updatedComment: {
-          body: this.comment.body
+          body: this.comment.body,
+          taskCommentOwners: {}
         },
       }
     },
-        props: [
-          'comment'
-        ],
-          methods: {
-        deleteComment() {
-          console.log('delete comment')
-          this.$store.dispatch('deleteComment', this.comment)
-        },
-        editComment() {
-          var updatedComment = this.comment
-          updatedComment.body = this.updatedComment.body
-          this.$store.dispatch('updateComment', updatedComment)
-          this.showCommentEdit = false
-        },
+    computed: {
+      getUserId(comment) {
+        this.$store.dispatch('getCommentByUser', comment)
+        return this.$store.state.taskCommentOwners
       }
+    },
+    props: [
+      'comment'
+    ],
+    methods: {
+      deleteComment() {
+        console.log('delete comment')
+        this.$store.dispatch('deleteComment', this.comment)
+      },
+      editComment() {
+        var updatedComment = this.comment
+        updatedComment.body = this.updatedComment.body
+        this.$store.dispatch('updateComment', updatedComment)
+        this.showCommentEdit = false
+      },
     }
+  }
 </script>
 
 <style scoped>
@@ -64,5 +72,4 @@
   .comment-body-toggle:hover {
     background-color: rgb(213, 213, 213);
   }
-
 </style>
