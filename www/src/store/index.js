@@ -37,7 +37,8 @@ export default new vuex.Store({
         boardLists: [],
         boardTasks: [],
         boardComments: [],
-        draggedTask: {}
+        draggedTask: {},
+        taskCommentOwners: []
     },
 
     mutations: {

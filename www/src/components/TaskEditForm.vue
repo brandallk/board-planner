@@ -42,7 +42,7 @@
                 </div>
                 <div class="row">
                   <div class="col">
-                    <comment v-for="comment in taskComments" :comment='comment'>Comment Here</comment>
+                    <comment v-for="comment in taskComments" :comment='comment'></comment>
                   </div>
                 </div>
               </div>

@@ -5,6 +5,7 @@
         <a href="#" @click.prevent='deleteComment' class="text-danger">
           <span class="fas fa-trash"></span>
         </a>
+        <p class="ml-4">{User.id}</p>
         <!-- <a href="#" @click.prevent='editComment = true' class="text-dark">
           <span class="fas fa-edit"></span>
         </a> -->
@@ -33,22 +34,28 @@
         },
       }
     },
-        props: [
-          'comment'
-        ],
-          methods: {
-        deleteComment() {
-          console.log('delete comment')
-          this.$store.dispatch('deleteComment', this.comment)
-        },
-        editComment() {
-          var updatedComment = this.comment
-          updatedComment.body = this.updatedComment.body
-          this.$store.dispatch('updateComment', updatedComment)
-          this.showCommentEdit = false
-        },
+    computed: {
+      getUserId(comment){
+        this.$store.dispatch('getUserName',comment)
+        return this.$store.state.user.name
       }
+    },
+    props: [
+      'comment'
+    ],
+    methods: {
+      deleteComment() {
+        console.log('delete comment')
+        this.$store.dispatch('deleteComment', this.comment)
+      },
+      editComment() {
+        var updatedComment = this.comment
+        updatedComment.body = this.updatedComment.body
+        this.$store.dispatch('updateComment', updatedComment)
+        this.showCommentEdit = false
+      },
     }
+  }
 </script>
 
 <style scoped>
@@ -64,5 +71,4 @@
   .comment-body-toggle:hover {
     background-color: rgb(213, 213, 213);
   }
-
 </style>
