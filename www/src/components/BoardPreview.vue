@@ -33,10 +33,10 @@
           </div>
           <footer class="modal-footer">
             <div class="col">
-              <button type="button" class="btn btn-alert btnDelete" @click="deleteBoard(board)">Delete!</button>
+              <button type="button" class="btn btn-alert btnDelete" @click="deleteBoard(board)">Delete Board!</button>
             </div>
-            <button type="button" class="btn" @click="close">Close me!</button>
-            <button type="button" class="btn" @click="gotoBoard(board)">Edit Board</button>
+            <button type="button" class="btn" @click="close">Close!</button>
+            <button type="button" class="btn" @click="gotoBoard(board)">Go to Board</button>
           </footer>
         </div>
       </div>
@@ -107,7 +107,7 @@
     }
     
     .modal {
-        background: #57BC90;
+        background: white;
         box-shadow: 2px 2px 20px 1px;
         overflow: hidden;
         display: flex;
