@@ -9,6 +9,8 @@
                <div class="board-title">
                 <h5 v-if="!showBoardTitleEdit" class="text-white mx-4">You are currently on your {{activeBoard.title}} board!</h5>
                 <input v-if="showBoardTitleEdit" type="text" class="board-title-input" v-model="updatedBoard.title">
+                <button v-if="showBoardTitleEdit" class="btn btn-success btn-sm mb-2" @click="editBoardTitle">save</button>
+                <button v-if="showBoardTitleEdit" class="btn btn-danger btn-sm mb-2" @click="showBoardTitleEdit = false">cancel</button>      
               </div>
               <div class="">
                 <a href="#" class="ml-auto px-2 rounded text-white" @click.prevent="toggleBoardEdit">
@@ -16,11 +18,14 @@
               </a>
               </div>
             </div>
-            
+
             <div class="d-flex">
                 <div class="board-desc">
                     <h6 v-if="!showBoardDescEdit" class="text-white mx-4">Description: {{activeBoard.description}}</h6>
                     <input v-if="showBoardDescEdit" type="text" class="board-desc" v-model="updatedBoard.description">
+                    <button v-if="showBoardDescEdit" class="btn btn-success btn-sm mb-2" @click="editBoardDesc">save</button>
+                    <button v-if="showBoardDescEdit" class="btn btn-danger btn-sm mb-2" @click="showBoardDescEdit = false">cancel</button>      
+                        
                 </div>
                 <div class="">
                   <a href="#" class="ml-auto px-2 rounded text-white" @click.prevent="toggleBoardDescEdit">
@@ -46,7 +51,6 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
       
@@ -64,6 +68,7 @@
             list: List,
             topBar: TopBar
         },
+
         data() {
             return {
                 showAddListDropdown: false,
@@ -75,8 +80,10 @@
                 updatedBoard: {
                     title: "",
                     description: ""
-
-                }
+                        // title: this.board.title,
+                        // description: this.board.description
+                },
+                board: this.activeBoard
 
             }
         },
@@ -108,6 +115,19 @@
             toggleBoardDescEdit() {
                 this.showBoardDescEdit = this.showBoardDescEdit ? false : true
 
+            },
+            editBoardTitle() {
+
+                var updatedBoard = this.activeBoard
+                updatedBoard.title = this.updatedBoard.title
+                this.$store.dispatch('updateBoard', updatedBoard)
+                this.showBoardTitleEdit = false
+            },
+            editBoardDesc() {
+                var updatedBoard = this.activeBoard
+                updatedBoard.description = this.updatedBoard.description
+                this.$store.dispatch('updateBoard', updatedBoard)
+                this.showBoardDescEdit = false
             }
         }
     }
