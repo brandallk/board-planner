@@ -1,24 +1,18 @@
 <template>
-  <div class="comments">
-    <div class="row">
-      <div class="col-1 txt-color commentTools">
-        <a href="#" @click.prevent='deleteComment' class="text-danger">
-          <span class="fas fa-trash"></span>
-        </a>
-      </div>
-      <div class="row">
-        <div class="col">
-          <h6 class="ml-4">{{userInfo.name}},</h6>
-          <div class="col">
-            <p>{{comment.created}}</p>
-          </div>
-        </div>
-      </div>
-      <div class="col comment-body txt-color">
-        <span v-if="!showCommentEdit" class="d-block mb-2 pr-4 pb-2 rounded" @click="showCommentEdit = true">{{comment.body}}</span>
-        <input v-if="showCommentEdit" type="text" class="form-content d-block rounded pl-3" v-model="updatedComment.body">
-        <button v-if="showCommentEdit" class="btn btn-success btn-sm mb-2" @click="editComment">save</button>
-        <button v-if="showCommentEdit" class="btn btn-danger btn-sm mb-2" @click="showCommentEdit = false">cancel</button>
+  <div class="row comments">
+    <div class="col-1 txt-color commentTools">
+      <a href="#" @click.prevent='deleteComment' class="text-danger">
+        <span class="fas fa-trash"></span>
+      </a>
+    </div>
+    <div class="col comment-body txt-color">
+      <span v-if="!showCommentEdit" class="d-block mb-2 pr-4 pb-2 rounded" @click="showCommentEdit = true">{{comment.body}}</span>
+      <input v-if="showCommentEdit" type="text" class="form-content d-block rounded pl-3" v-model="updatedComment.body">
+      <button v-if="showCommentEdit" class="btn btn-success btn-sm mb-2" @click="editComment">save</button>
+      <button v-if="showCommentEdit" class="btn btn-danger btn-sm mb-2" @click="showCommentEdit = false">cancel</button>
+      <div class="div">
+        <h6 class="ml-2 txt-color2">{{userInfo.name}},</h6>
+        <p class="ml-4 txt-color2">{{comment.created}}</p>
       </div>
     </div>
   </div>
@@ -74,7 +68,7 @@
 
 <style scoped>
   .comment-body input {
-    width: 95%;
+    width: 100%;
   }
 
   .comment-body:hover span {
@@ -88,5 +82,9 @@
 
   .txt-color {
     color: black;
+  }
+  .txt-color2 {
+    font-style: italic;
+    color: grey;
   }
 </style>

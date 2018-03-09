@@ -40,11 +40,11 @@
                 <div class="row existing">
                   <h6>Existing Comments:</h6>
                 </div>
-                <div class="row">
-                  <div class="col">
-                    <comment class:="commentColor" v-for="comment in taskComments" :comment='comment'></comment>
-                  </div>
-                </div>
+                <!-- <div class="row">
+                  <div class="col"> -->
+                    <comment class="commentColor" v-for="comment in taskComments" :comment='comment'></comment>
+                  <!-- </div> -->
+                <!-- </div> -->
               </div>
               <div class="">
               </div>
