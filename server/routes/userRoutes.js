@@ -22,8 +22,7 @@ router.get('/api/users/email/:userEmail', (req, res, next) => {
 
 // Get user info by Id
 router.get('/api/users/:userId/info', (req, res, next) => {
- console.log('in database',res)
-  User.findById(req.params.userId)
+   User.findById(req.params.userId)
     .then(user => {
       var userInfo = {
         userId: user._id,
