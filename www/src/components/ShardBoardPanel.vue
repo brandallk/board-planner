@@ -1,7 +1,7 @@
 <template>
     <div class="shared-board-panel container-fluid bg-dark text-light">
   
-      <p v-for="board in sharedBoards">{{board.title}}</p>
+      <a href="#" v-for="board in sharedBoards" @click.prevent="">{{board.title}}</a>
   
     </div>
   </template>
