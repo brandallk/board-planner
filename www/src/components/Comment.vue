@@ -30,14 +30,15 @@
       return {
         showCommentEdit: false,
         updatedComment: {
-          body: this.comment.body
+          body: this.comment.body,
+          taskCommentOwners: {}
         },
       }
     },
     computed: {
-      getUserId(comment){
-        this.$store.dispatch('getUserName',comment)
-        return this.$store.state.user.name
+      getUserId(comment) {
+        this.$store.dispatch('getCommentByUser', comment)
+        return this.$store.state.taskCommentOwners
       }
     },
     props: [

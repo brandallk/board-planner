@@ -25,7 +25,7 @@ router.get('/api/users/:userId/info', (req, res, next) => {
   User.findById(req.params.userId)
     .then(user => {
       var userInfo = {
-        userId: user._id,
+        // userId: user._id,
         name: user.name,
         email: user.email
       }
