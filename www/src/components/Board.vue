@@ -2,6 +2,7 @@
   <div class="board bg-info">
 
     <topBar></topBar>
+    <navbar></navbar>
 
     <div class="boardList container-fluid p-3">
 <div class="container-flex">
@@ -51,11 +52,13 @@
 <script>
     import List from './List'
     import TopBar from './TopBar'
+    import Navbar from './Navbar'
     export default {
         name: 'Board',
         components: {
             list: List,
-            topBar: TopBar
+            topBar: TopBar,
+            navbar: Navbar
         },
         data() {
             return {
