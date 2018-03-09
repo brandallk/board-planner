@@ -2,6 +2,7 @@
   <div class="board bg-info">
 
     <topBar></topBar>
+    <navbar></navbar>
 
     <div class="boardList container-fluid p-3">
           
@@ -62,11 +63,13 @@
 <script>
     import List from './List'
     import TopBar from './TopBar'
+    import Navbar from './Navbar'
     export default {
         name: 'Board',
         components: {
             list: List,
-            topBar: TopBar
+            topBar: TopBar,
+            navbar: Navbar
         },
 
         data() {
@@ -82,9 +85,7 @@
                     description: ""
                         // title: this.board.title,
                         // description: this.board.description
-                },
-                board: this.activeBoard
-
+                }
             }
         },
         computed: {
@@ -117,15 +118,17 @@
 
             },
             editBoardTitle() {
-
                 var updatedBoard = this.activeBoard
                 updatedBoard.title = this.updatedBoard.title
+                updatedBoard.description = this.updatedBoard.description
                 this.$store.dispatch('updateBoard', updatedBoard)
                 this.showBoardTitleEdit = false
             },
             editBoardDesc() {
+                debugger
                 var updatedBoard = this.activeBoard
                 updatedBoard.description = this.updatedBoard.description
+                updatedBoard.title = this.updatedBoard.title
                 this.$store.dispatch('updateBoard', updatedBoard)
                 this.showBoardDescEdit = false
             }

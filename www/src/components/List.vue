@@ -57,9 +57,9 @@
             }
         },
         computed: {
-            board() {
-                return this.$store.state.activeBoard
-            },
+            // board() {
+            //     return this.$store.state.activeBoard
+            // },
             listTasks() {
                 var boardTasks = this.$store.state.boardTasks
                 return boardTasks.filter(task => task.listId === this.list._id)

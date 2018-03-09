@@ -6,6 +6,34 @@ var Comment = require('../models/comment')
 
 var router = require('express').Router()
 
+// Get user info by email
+router.get('/api/users/email/:userEmail', (req, res, next) => {
+  User.findOne({ email: req.params.userEmail })
+    .then(user => {
+      var userInfo = {
+        userId: user._id,
+        name: user.name,
+        email: user.email
+      }
+      return res.send(userInfo)
+    })
+    .catch(next)
+})
+
+// Get user info by Id
+router.get('/api/users/:userId/info', (req, res, next) => {
+  User.findById(req.params.userId)
+    .then(user => {
+      var userInfo = {
+        userId: user._id,
+        name: user.name,
+        email: user.email
+      }
+      return res.send(userInfo)
+    })
+    .catch(next)
+})
+
 // Get boards by user
 router.get('/api/users/:userId/boards', (req, res, next) => {
   Board.find({
