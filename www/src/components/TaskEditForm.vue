@@ -92,13 +92,16 @@
         this.$emit('closeTaskEditForm')
       },
       saveTaskDescription() {
+        if (!this.taskDescription.trim() == "") {
         console.log('task description', this.taskDescription)
         var updatetask = this.task
         updatetask.description = this.taskDescription
         this.$store.dispatch('editTask', updatetask)
+        }
       },
       saveCommentDescription() {
-        var comment = {
+        if (!this.commentDescription.trim() == "") {
+          var comment = {
           body: this.commentDescription,
           listId: this.task.listId,
           taskId: this.task._id,
@@ -111,6 +114,7 @@
 
         this.$store.dispatch('createComment', comment)
         this.commentDescription = ''
+      }
       },
     }
   }

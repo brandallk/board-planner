@@ -5,7 +5,7 @@
         <a href="#" @click.prevent='deleteComment' class="text-danger">
           <span class="fas fa-trash"></span>
         </a>
-        <p class="ml-4">{User.id}</p>
+        <p class="ml-4">{{taskCommentOwners.name}}</p>
         <!-- <a href="#" @click.prevent='editComment = true' class="text-dark">
           <span class="fas fa-edit"></span>
         </a> -->
@@ -36,10 +36,14 @@
       }
     },
     computed: {
-      getUserId(comment) {
-        this.$store.dispatch('getCommentByUser', comment)
+      userInfo() {
+        console.log('start of taskCommentOwners',taskCommentOwners)
         return this.$store.state.taskCommentOwners
       }
+    },
+
+    mounted() {
+      this.getUserId()
     },
     props: [
       'comment'
@@ -54,6 +58,10 @@
         updatedComment.body = this.updatedComment.body
         this.$store.dispatch('updateComment', updatedComment)
         this.showCommentEdit = false
+      },
+      getUserId() {
+        console.log('comment Info from comment', this.comment.userId)
+        this.$store.dispatch('getCommentByUser', this.comment.userId)
       },
     }
   }
