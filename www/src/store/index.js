@@ -229,11 +229,11 @@ export default new vuex.Store({
         },
         updateBoard({ commit, dispatch }, board) {
             api
-                .put(`board/${board._id}`, board)
+                .put(`boards/${board._id}`, board)
                 .then(res => {
                     var updatedBoard = res.data.data
                     console.log('updated board:', updatedBoard)
-                    dispatch('sendingActiveBoard')
+                        //dispatch('sendingActiveBoard')
                         // dispatch('getBoardLists', updatedBoard.boardId)
                 })
                 .catch(err => {

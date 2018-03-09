@@ -82,9 +82,7 @@
                     description: ""
                         // title: this.board.title,
                         // description: this.board.description
-                },
-                board: this.activeBoard
-
+                }
             }
         },
         computed: {
@@ -117,15 +115,17 @@
 
             },
             editBoardTitle() {
-
                 var updatedBoard = this.activeBoard
                 updatedBoard.title = this.updatedBoard.title
+                updatedBoard.description = this.updatedBoard.description
                 this.$store.dispatch('updateBoard', updatedBoard)
                 this.showBoardTitleEdit = false
             },
             editBoardDesc() {
+                debugger
                 var updatedBoard = this.activeBoard
                 updatedBoard.description = this.updatedBoard.description
+                updatedBoard.title = this.updatedBoard.title
                 this.$store.dispatch('updateBoard', updatedBoard)
                 this.showBoardDescEdit = false
             }
