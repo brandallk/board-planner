@@ -3,11 +3,11 @@
     <div class="row py-1 px-3 mb-2">
       <!-- <div v-if="!showQuickieEdit" @click='openTaskEditForm' @closeTaskCard='closeTaskEditForm' draggable="true" @dragover.prevent="dragover" @dragstart="dragStart" @drop="drop" class="task-title col-9 d-inline-block rounded-left">{{task.title}}</div> -->
       <div v-if="!showQuickieEdit" @click='openTaskEditForm' @closeTaskCard='closeTaskEditForm' draggable="true" 
-      @dragstart="dragStart" class="task-title col-9 d-inline-block task-txt rounded-left">{{task.title}}</div>
+      @dragstart="dragStart" class="task-title col-9 task-txt d-inline-blockrounded-left">{{task.title}}</div>
 
 
-      <input v-if="showQuickieEdit" type="text"  class="task-title col-9 d-inline-block rounded-left" v-model="updatedTask.title">
-      <div class="edit-toggle col-3 d-inline-block d-flex justify-content-center align-items-center rounded-right" @click="toggleQuickieEdit">
+      <input v-if="showQuickieEdit" type="text"  class="task-title col-9 task-txt d-inline-block rounded-left" v-model="updatedTask.title">
+      <div class="edit-toggle col-3 d-inline-block d-flex task-txt justify-content-center align-items-center rounded-right" @click="toggleQuickieEdit">
         <a href="#">
           <i class="fas fa-pencil-alt"></i>
         </a>
@@ -118,6 +118,6 @@
     }
     
     .task-txt {
-        color: #015249;
+        color: black;
     }
 </style>
