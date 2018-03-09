@@ -43,7 +43,7 @@
           <list v-for="list in boardLists" :list="list" class="col-3 mt-4"></list>
 
           <div class="col-3 mt-4">
-            <button v-if="!showAddListDropdown" class="add-list-toggle btn btn-block" @click="showAddListDropdown = true">Add a list...</button>
+            <button v-if="!showAddListDropdown" class="add-list-toggle add-list btn btn-block" @click="showAddListDropdown = true">Add a list...</button>
             <div v-if="showAddListDropdown" class="add-list-dropdown p-2 rounded">
               <input type="text" class="list-title form-control" v-model="newList.title">
               <div class="add-list-btns d-flex w-100 mt-1">
@@ -172,5 +172,10 @@
     
     .bg-color {
         background-color: #57BC90;
+    }
+    
+    .add-list {
+        background-color: #015249;
+        color: white;
     }
 </style>

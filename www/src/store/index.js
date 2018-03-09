@@ -33,6 +33,7 @@ export default new vuex.Store({
             message: ""
         },
         userBoards: [],
+        sharedBoards: [],
         activeBoard: {},
         boardOwner: {},
         boardLists: [],
@@ -72,6 +73,9 @@ export default new vuex.Store({
         },
         setBoardOwner(state, owner) {
             state.boardOwner = owner
+        },
+        setSharedBoards(state, boards) {
+            state.sharedBoards = boards
         },
         setUserInfo(state, commentOwners) {
             console.log('at User Info',commentOwners)
@@ -413,8 +417,6 @@ export default new vuex.Store({
                     board.collaborators.push(collaborator)
 
                     dispatch('updateBoardCollaborators', board)
-                    // (use state.boardCollaborators in CollabPanel to display collaborators)
-                    // (getting an activeBoard should ALSO dispatch the method that gets and sets boardCollaborators in state)
                 })
                 .catch(err => {
                     console.log(err)
@@ -427,6 +429,18 @@ export default new vuex.Store({
                     var boardOwner = res.data
                     console.log('board owner:', boardOwner)
                     commit('setBoardOwner', boardOwner)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
+        getSharedBoards({ commit, dispatch }, userId) {
+            api
+                .get(`user/${userId}/shared`)
+                .then(res => {
+                    var sharedBoards = res.data
+                    console.log('shared boards:', sharedBoards)
+                    commit('setSharedBoards', sharedBoards)
                 })
                 .catch(err => {
                     console.log(err)
