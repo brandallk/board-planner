@@ -34,11 +34,18 @@ router.get('/api/users/:userId/info', (req, res, next) => {
     .catch(next)
 })
 
-// Get boards by user
+// Get (owned) boards by user
 router.get('/api/users/:userId/boards', (req, res, next) => {
-  Board.find({
-      userId: req.params.userId
+  Board.find({userId: req.params.userId})
+    .then(boards => {
+      return res.send(boards)
     })
+    .catch(next)
+})
+
+// Get shared boards by userId
+router.get('/api/user/:userId/shared', (req, res, next) => {
+  Board.find({ 'collaborators.userId': req.params.userId })
     .then(boards => {
       return res.send(boards)
     })

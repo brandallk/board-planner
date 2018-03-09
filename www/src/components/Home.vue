@@ -1,21 +1,21 @@
 <template>
   <div class="home">
     <topBar v-on:showBoardsList="showBoardsList = true"></topBar>
+    <navbar></navbar>
     <boardList v-if="showBoardsList"></boardList>
-    <!-- <board v-if="!showBoardsList"></board> -->
   </div>
 </template>
 
 <script>
   import TopBar from './TopBar'
   import BoardList from './BoardList'
-  import Board from './Board'
+  import Navbar from './Navbar'
   export default {
     name: 'Home',
     components: {
       topBar: TopBar,
       boardList: BoardList,
-      board: Board
+      navbar: Navbar
     },
     data() {
       return {
