@@ -32,8 +32,9 @@ export default new vuex.Store({
             error: false,
             message: ""
         },
-        activeBoard: {},
         userBoards: [],
+        activeBoard: {},
+        boardOwner: {},
         boardLists: [],
         boardTasks: [],
         boardComments: [],
@@ -67,7 +68,10 @@ export default new vuex.Store({
         },
         setDraggedTask(state, task) {
             state.draggedTask = task
-        }
+        },
+        setBoardOwner(state, owner) {
+            state.boardOwner = owner
+        },
     },
 
     actions: {
@@ -229,11 +233,11 @@ export default new vuex.Store({
         },
         updateBoard({ commit, dispatch }, board) {
             api
-                .put(`board/${board._id}`, board)
+                .put(`boards/${board._id}`, board)
                 .then(res => {
                     var updatedBoard = res.data.data
                     console.log('updated board:', updatedBoard)
-                    dispatch('sendingActiveBoard')
+                    dispatch('sendingActiveBoard', updatedBoard)
                         // dispatch('getBoardLists', updatedBoard.boardId)
                 })
                 .catch(err => {
@@ -366,6 +370,50 @@ export default new vuex.Store({
                     console.log(err)
                 })
         },
+
+        updateBoardCollaborators({ commit, dispatch }, board) {
+            api
+                .put(`boards/${board._id}`, board)
+                .then(res => {
+                    var updatedBoard = res.data.data
+                    console.log('updated board:', updatedBoard)
+                    commit('setActiveBoard', board)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
+        addBoardCollaborator({ commit, dispatch}, data) {
+            api
+                .get(`users/email/${data.collaboratorEmail}`)
+                .then(res => {
+                    var collaborator = res.data
+                    console.log('board:', board)
+                    console.log('collaborator:', collaborator)
+
+                    var board = data.board
+                    board.collaborators.push(collaborator)
+                    
+                    dispatch('updateBoardCollaborators', board)
+                    // (use state.boardCollaborators in CollabPanel to display collaborators)
+                    // (getting an activeBoard should ALSO dispatch the method that gets and sets boardCollaborators in state)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
+        getBoardOwner({ commit, dispatch }, board) {
+            api
+                .get(`users/${board.userId}/info`)
+                .then(res => {
+                    var boardOwner = res.data
+                    console.log('board owner:', boardOwner)
+                    commit('setBoardOwner', boardOwner)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
 
     }
 })

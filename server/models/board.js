@@ -7,7 +7,7 @@ var schema = new Schema({
     type: String,
     required: true
   },
-  userId: {
+  description: {
     type: String,
     required: true
   },
@@ -15,18 +15,21 @@ var schema = new Schema({
     type: Number,
     default: Date.now()
   },
-  description: {
-    type: String,
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
     required: true
   },
-  // lastModified: {
-  //   type: Number,
-    // required: true
-  // },
-  // listIds: {
-  //   type: Array,
-  //   required: true
-  // },
+  collaborators: [
+    {
+      userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+      },
+      name: { type: String },
+      email: { type: String }
+    }
+  ]
 })
 
 module.exports = mongoose.model(schemaName, schema)
