@@ -12,13 +12,20 @@ router.post("/api/comments", (req, res, next) => {
         .catch(next)
 })
 
-// deleteComment
+// Delete a comment by ID (but only if the requesting user is the comment creator)
 router.delete("/api/comments/:commentId", (req, res, next) => {
-    Comments.findByIdAndRemove(req.params.commentId)
-        .then(commt => {
-            res.send({ message: "Successfully deleted comment" })
+    Comments.findById(req.params.commentId)
+        .then(comment => {
+            var requestingUserId = req.session.uid
+            var creatorId = comment.userId
+            if (requestingUserId.toString() !== creatorId.toString()) { // Note: These IDs are actually objects, so the .toString() must be used to compare them
+                return res.send({error: "Cannot delete another user's comment"})
+            }
+            comment.remove() // Delete the comment
+            .then(task => {res.send({ message: 'Successfully deleted comment' })
+            })
+            .catch(next)
         })
-        .catch(next)
 })
 
 // updateComment (put)

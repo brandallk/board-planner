@@ -14,20 +14,43 @@ router.post("/api/lists", (req, res, next) => {
 })
 
 // deleteList
+// router.delete("/api/lists/:listId", (req, res, next) => {
+//     Lists.findByIdAndRemove(req.params.listId)
+//         .then(comment => {
+//             res.send({ message: "Successfully deleted list" })
+//         })
+//         .catch(next)
+//     Tasks.deleteMany({listId: req.params.listId})
+//         .then(() => {
+//         console.log('Deleted list tasks')
+//         })
+//         .catch(next)
+//     Comments.deleteMany({listId: req.params.listId})
+//         .then(() => {
+//         console.log('Deleted list comments')
+//         })
+//         .catch(next)
+// })
+
+// Delete a list by ID (but only if the requesting user is the list creator)
 router.delete("/api/lists/:listId", (req, res, next) => {
-    Lists.findByIdAndRemove(req.params.listId)
-        .then(comment => {
-            res.send({ message: "Successfully deleted list" })
-        })
-        .catch(next)
-    Tasks.deleteMany({listId: req.params.listId})
-        .then(() => {
-        console.log('Deleted list tasks')
-        })
-        .catch(next)
-    Comments.deleteMany({listId: req.params.listId})
-        .then(() => {
-        console.log('Deleted list comments')
+    Lists.findById(req.params.listId)
+        .then(list => {
+            var requestingUserId = req.session.uid
+            var creatorId = list.userId
+            if (requestingUserId.toString() !== creatorId.toString()) { // Note: These IDs are actually objects, so the .toString() must be used to compare them
+                return res.send({error: "Cannot delete another user's list"})
+            }
+            list.remove() // Delete the list
+            .then(list => {res.send({ message: 'Successfully deleted list' })
+            })
+            .then(() => { // Also delete any tasks that belong to this list
+                Tasks.deleteMany({listId: req.params.listId}).then(() => {console.log('Deleted list tasks')})
+            })
+            .then(() => { // Also delete any comments that belong to this list
+                Comments.deleteMany({listId: req.params.listId}).then(() => {console.log('Deleted list comments')})
+            })
+            .catch(next)
         })
         .catch(next)
 })

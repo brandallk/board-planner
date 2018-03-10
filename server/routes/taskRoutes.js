@@ -22,18 +22,14 @@ router.delete("/api/tasks/:taskId", (req, res, next) => {
             if (requestingUserId.toString() !== creatorId.toString()) { // Note: These IDs are actually objects, so the .toString() must be used to compare them
                 return res.send({error: "Cannot delete another user's task"})
             }
-            task.remove()
-            .then(task => {
-                res.send({ message: 'Successfully deleted task' })
+            task.remove() // Delete the task
+            .then(task => {res.send({ message: 'Successfully deleted task' })
+            })
+            .then(() => { // Also delete any comments that belong to this task
+                Comments.deleteMany({taskId: req.params.taskId}).then(() => {console.log('Deleted task comments')})
             })
             .catch(next)
         })
-        .catch(next)
-    Comments.deleteMany({taskId: req.params.taskId})
-        .then(() => {
-            // console.log('Deleted task comments')
-        })
-        .catch(next)
 })
 
 // updateTask (put)
