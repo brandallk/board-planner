@@ -22,7 +22,7 @@
 
       <div class="row"> 
         <div class="col">
-          <taskCard v-for="task in listTasks" :board="board" :list="list" :task="task"></taskCard>
+          <taskCard v-for="listTask in listTasks" :board="board" :list="list" :task="listTask"></taskCard>
           <input type="text" class="form-control mt-3 task-txt border-success" v-model="task.title">
           <button class="btn btn-success px-3 mt-2" @click="addNewTask">Add Task</button>
           <!-- <input v-if="showQuickieEdit" type="text" class="task-title col-9 d-inline-block rounded-left" v-model="updatedTask.title"> -->
@@ -47,7 +47,6 @@
                 task: {
                     title: ""
                 },
-                showDeleteListDropdown: false,
                 updatedList: {
                     title: this.list.title
                 },
@@ -60,10 +59,37 @@
                 return this.$store.state.activeBoard
             },
             listTasks() {
+                // General-purpose function that sorts one array of items containing ID's according to the order of ID items in a second array
+                function parallelSort(unsortedArr, sortedIdsArr) {
+                    return sortedIdsArr.map(id => unsortedArr.find(elt => elt._id === id))
+                }
+
+                // Get all the tasks that belong to the active Board
                 var boardTasks = this.$store.state.boardTasks
-                return boardTasks.filter(task => task.listId === this.list._id)
+                // Get a subset of tasks that belong to just the current List
+                var tasksInList = boardTasks.filter(task => task.listId === this.list._id)
+
+                var currentList = this.$store.state.boardLists.find(list => list._id === this.list._id)
+
+                // The taskIDs array from the current List (which contains taskIds in the order in which Tasks should be displayed)
+                var listTasksIdsArr = currentList.taskIds
+                // Ensure that Tasks will be displayed in the order prescribed by the List's taskIds array
+                var orderedTasks = parallelSort(tasksInList, listTasksIdsArr)
+                return orderedTasks
             }
         },
+        // mounted() {
+        //     this.listTasks = function() {
+        //         function parallelSort(unsortedArr, sortedIdsArr) {
+        //             return sortedIdsArr.map(id => unsortedArr.find(elt => elt._id === id))
+        //         }
+        //         var boardTasks = this.$store.state.boardTasks
+        //         var tasksInList = boardTasks.filter(task => task.listId === this.list._id)
+        //         var listTasksIdsArr = this.list.taskIdsvar
+        //         orderedTasks = parallelSort(tasksInList, listTasksIdsArr)
+        //         return orderedTasks
+        //     }()
+        // },
         methods: {
             addNewTask() {
                 var newTask = {
@@ -90,16 +116,18 @@
                 this.$store.dispatch('deleteList', this.list)
             },
             dragover() {
-                //console.log("dragover")
+                console.log("dragover")
             },
             taskDrop() {
-
-                var data = {
-                    draggedTask: this.$store.state.draggedTask,
-                    dropListId: this.list._id
+                // Only handle the task-drop event here IF the List currently has NO Tasks. Otherwise, it will be handled in TaskCard.vue
+                if (this.list.taskIds.length === 0) {
+                    var payloadData = {
+                        originList: this.$store.state.draggedTaskInfo.list,
+                        draggedTask: this.$store.state.draggedTaskInfo.task,
+                        dropList: this.list
+                    }
+                    this.$store.dispatch('handleTaskDrop', payloadData)
                 }
-                this.$store.dispatch("updateTask", data)
-
             }
         }
     }

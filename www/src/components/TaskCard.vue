@@ -3,7 +3,7 @@
     <div class="row py-1 px-3 mb-2">
       <!-- <div v-if="!showQuickieEdit" @click='openTaskEditForm' @closeTaskCard='closeTaskEditForm' draggable="true" @dragover.prevent="dragover" @dragstart="dragStart" @drop="drop" class="task-title col-9 d-inline-block rounded-left">{{task.title}}</div> -->
       <div v-if="!showQuickieEdit" @click='openTaskEditForm' @closeTaskCard='closeTaskEditForm' draggable="true" 
-      @dragstart="dragStart" class="task-title col-9 task-txt d-inline-blockrounded-left">{{task.title}}</div>
+      @dragstart="dragStart" @dragover.prevent="dragover" @drop="taskDrop" class="task-title col-9 task-txt d-inline-blockrounded-left">{{task.title}}</div>
 
 
       <input v-if="showQuickieEdit" type="text"  class="task-title col-9 task-txt d-inline-block rounded-left" v-model="updatedTask.title">
@@ -19,7 +19,6 @@
       </div>
     </div>
     <taskEditForm :board="board" :list="list" :task="task" v-if="showTaskEditForm" @closeTaskEditForm='closeTaskEditForm'></taskEditForm>
-    <!-- <comment v-for="comment in taskComments"></comment> -->
 
   </div>
 </template>
@@ -38,11 +37,12 @@
         ],
         data() {
             return {
-                updatedTask: {
-                    title: this.task.title
-                },
                 showQuickieEdit: false,
-                showTaskEditForm: false
+                showTaskEditForm: false,
+                updatedTask: {
+                    // title: this.task.title // <-- CANNOT USE! The 'task' prop is 'slow' to be defined, so it is still undefined when the component's 'data' is set!
+                    title: ""
+                }
             }
         },
         computed: {
@@ -54,6 +54,9 @@
         },
         methods: {
             toggleQuickieEdit() {
+                // Assign a placeholder to the edit input-field when the field is toggled (...because it cannot be assigned via 'data')
+                this.updatedTask.title = this.updatedTask.title === "" ? this.task.title : this.updatedTask.title
+                
                 this.showQuickieEdit = this.showQuickieEdit ? false : true
             },
             editTaskName() {
@@ -79,9 +82,23 @@
                 this.showTaskEditForm = false
             },
             dragStart() {
-                this.$store.dispatch("setDraggedTask", this.task)
-                    // console.log("dragStart")
+                console.log("dragStart")
+                this.$store.dispatch("setDraggedTaskInfo", {list: this.list, task: this.task})
             },
+            dragover() {
+                console.log("dragover")
+            },
+            taskDrop() {
+
+                var payloadData = {
+                    originList: this.$store.state.draggedTaskInfo.list,
+                    draggedTask: this.$store.state.draggedTaskInfo.task,
+                    dropList: this.list,
+                    dropTaskId: this.task._id
+                }
+                this.$store.dispatch('handleTaskDrop', payloadData)
+
+            }
         }
     }
 </script>

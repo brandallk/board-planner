@@ -42,7 +42,7 @@ export default new vuex.Store({
         boardLists: [],
         boardTasks: [],
         boardComments: [],
-        draggedTask: {},
+        draggedTaskInfo: {},
         taskCommentOwners: []
     },
 
@@ -71,8 +71,8 @@ export default new vuex.Store({
         setBoardComments(state, comments) {
             state.boardComments = comments
         },
-        setDraggedTask(state, task) {
-            state.draggedTask = task
+        setDraggedTaskInfo(state, info) {
+            state.draggedTaskInfo = info
         },
         setBoardOwner(state, owner) {
             state.boardOwner = owner
@@ -157,7 +157,7 @@ export default new vuex.Store({
                     commit('setBoardLists', [])
                     commit('setBoardTasks', [])
                     commit('setBoardComments', [])
-                    commit('setDraggedTask', {})
+                    commit('setDraggedTaskInfo', {})
                     commit('setBoardOwner', {})
                     commit('setSharedBoards', [])
                     commit('setUserInfo', [])
@@ -333,21 +333,49 @@ export default new vuex.Store({
                     console.log(err)
                 })
         },
-        setDraggedTask({ commit, dispatch }, task) {
-            commit("setDraggedTask", task)
+        setDraggedTaskInfo({ commit, dispatch }, info) {
+            commit("setDraggedTaskInfo", info)
         },
-        updateTask({ commit, dispatch }, data) {
+        handleTaskDrop({ commit, dispatch }, data) {
             var taskId = data.draggedTask._id
             var boardId = data.draggedTask.boardId
             var task = {
-                listId: data.dropListId
+                listId: data.dropList._id
             }
-            api
-                .put(`tasks/${taskId}`, task)
-                .then(res => {
-                    var updatedTask = res.data.data
-                    dispatch('getBoardLists', boardId)
-                    dispatch('getBoardTasks', boardId)
+            api.put(`tasks/${taskId}`, task)
+                .then(() => {
+                    // If drop-target list has NO tasks of its own
+                    if (!data.dropTaskId) {
+                        var taskIdsArray = [taskId]
+                    }
+
+                    // If drop-target list DOES already have tasks of its own
+                    if (data.dropTaskId) {
+                        var taskIdsArray = data.dropList.taskIds
+                        var dropLocationIndex = taskIdsArray.indexOf(data.dropTaskId)
+                        
+                        var originList = data.originList
+                        if (originList._id === data.dropList._id) { // If dragging-&-dropping within the same list...
+                            taskIdsArray.splice(taskIdsArray.indexOf(taskId), 1) // Remove dragged Task from old location in that same list
+                        } else {
+                            var originTaskIdsArray = originList.taskIds
+                            originTaskIdsArray.splice(originTaskIdsArray.indexOf(taskId), 1) // Remove dragged Task from old location in its original list
+                            api.put(`lists/${data.originList._id}`, {taskIds: originTaskIdsArray}) // ...and update the original list's taskIds array
+                                .then(() => {
+                                    console.log('updated origin-list taskIds')
+                                }).catch(err => {console.log(err)})
+                        }
+                        
+                        taskIdsArray.splice(dropLocationIndex, 0, taskId) // Insert dragged Task at new location
+                    }
+                    
+                    api.put(`lists/${data.dropList._id}`, {taskIds: taskIdsArray}) // Update the drop-target list's taskIds array
+                        .then(res => {
+                            var updatedList = res.data.data
+                            console.log('updated list:', updatedList)
+                            dispatch('getBoardLists', boardId)
+                            dispatch('getBoardTasks', boardId)
+                        }).catch(err => {console.log(err)})
                 })
                 .catch(err => {
                     console.log(err)
