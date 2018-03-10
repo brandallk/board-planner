@@ -157,6 +157,10 @@ export default new vuex.Store({
                     commit('setBoardLists', [])
                     commit('setBoardTasks', [])
                     commit('setBoardComments', [])
+                    commit('setDraggedTask', {})
+                    commit('setBoardOwner', {})
+                    commit('setSharedBoards', [])
+                    commit('setUserInfo', [])
                     router.push({
                         name: 'Welcome'
                     })

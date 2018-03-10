@@ -1,14 +1,8 @@
 <template>
   <div class="topbar bgcolor row">
     
-    <div class="col-sm-4 menu p-4" v-if="user._id">
-      <a href="#" class="btn btn-info text-light" @click.prevent="showBoardsList">Home</a>
-    </div>
-    <div :class="{ 'col-sm-4': user._id, 'col-sm-12': !user._id }">
+    <div class="col-sm-12">
       <h1 class="text-center text-light py-4">Board-Planner</h1>
-    </div>
-    <div class="col-sm-4 logout p-4" v-if="user._id">
-      <a href="#" class="btn btn-danger text-light" @click.prevent="logout">LOGOUT</a>
     </div>
 
   </div>
