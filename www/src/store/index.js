@@ -81,7 +81,7 @@ export default new vuex.Store({
             state.sharedBoards = boards
         },
         setUserInfo(state, commentOwners) {
-            console.log('at User Info',commentOwners)
+            console.log('at User Info', commentOwners)
             state.taskCommentOwners.push(commentOwners)
         }
     },
@@ -344,7 +344,6 @@ export default new vuex.Store({
                 .put(`tasks/${taskId}`, task)
                 .then(res => {
                     var updatedTask = res.data.data
-                    // console.log("updatedTask", updatedTask)
                     dispatch('getBoardLists', boardId)
                     dispatch('getBoardTasks', boardId)
                 })
@@ -368,7 +367,6 @@ export default new vuex.Store({
             api
                 .delete(`comments/${comment._id}`)
                 .then(res => {
-                    //console.log('deleted task')
                     dispatch('getBoardComments', comment.boardId)
                 })
                 .catch(err => {
@@ -387,12 +385,10 @@ export default new vuex.Store({
                 })
         },
         getCommentByUser({ commit, dispatch }, userInfo) {
-            console.log("going to get userInfo", userInfo)
             api
                 .get(`users/${userInfo}/info`, userInfo)
                 .then(res => {
                     var commentOwners = res.data
-                    console.log("going to SET userInfo", commentOwners)
                     commit('setUserInfo', commentOwners)
                 })
                 .catch(err => {

@@ -7,32 +7,39 @@
     <div class="boardList container-fluid p-3">
           
             <div class="d-flex" >
-               <div class="board-title">
-                <h5 v-if="!showBoardTitleEdit" class="text-white mx-4">You are currently on your {{activeBoard.title}} board!</h5>
+                <div class="flex-start">
+                    <a href="#" class="ml-auto px-2 rounded text-white" @click.prevent="toggleBoardEdit">
+                            <i class="fas fa-pencil-alt"></i>
+                      </a>
+                    </div>
+                <div class="board-title">
+
+                <span v-if="!showBoardTitleEdit" class="d-block mb-2 pr-4 pb-2 rounded" @click="showBoardTitleEdit = true">
+                <h5 v-if="!showBoardTitleEdit" class="text-white mx-4">You are currently on your {{activeBoard.title}} board!</h5></span>
                 <input v-if="showBoardTitleEdit" type="text" class="board-title-input" v-model="updatedBoard.title">
                 <button v-if="showBoardTitleEdit" class="btn btn-success btn-sm mb-2" @click="editBoardTitle">save</button>
                 <button v-if="showBoardTitleEdit" class="btn btn-danger btn-sm mb-2" @click="showBoardTitleEdit = false">cancel</button>      
               </div>
-              <div class="">
-                <a href="#" class="ml-auto px-2 rounded text-white" @click.prevent="toggleBoardEdit">
-                <i class="fas fa-ellipsis-h"></i>
-              </a>
-              </div>
+
             </div>
 
             <div class="d-flex">
+                    <div class="">
+                            <a href="#" class="ml-auto px-2 rounded text-white" @click.prevent="toggleBoardDescEdit">
+                              <i class="fas fa-pencil-alt"></i>
+          
+                          </a>
+                          </div>
                 <div class="board-desc">
-                    <h6 v-if="!showBoardDescEdit" class="text-white mx-4">Description: {{activeBoard.description}}</h6>
+                    <span v-if="!showBoardDescEdit" class="d-block mb-2 pr-4 pb-2 rounded" @click="showBoardDescEdit = true">
+                        <h6 v-if="!showBoardDescEdit" class="text-white mx-4">Description: {{activeBoard.description}}</h6>
+                    </span>
                     <input v-if="showBoardDescEdit" type="text" class="board-desc" v-model="updatedBoard.description">
                     <button v-if="showBoardDescEdit" class="btn btn-success btn-sm mb-2" @click="editBoardDesc">save</button>
                     <button v-if="showBoardDescEdit" class="btn btn-danger btn-sm mb-2" @click="showBoardDescEdit = false">cancel</button>      
                         
                 </div>
-                <div class="">
-                  <a href="#" class="ml-auto px-2 rounded text-white" @click.prevent="toggleBoardDescEdit">
-                  <i class="fas fa-ellipsis-h"></i>
-                </a>
-                </div>
+               
             </div> 
     </div>   
     
@@ -162,12 +169,17 @@
     }
     
     .board-desc input {
-        width: 100%
+        width: 100%;
+    }
+    
+    .board-desc:hover span {
+        cursor: pointer;
+        background-color: rgb(174, 231, 207);
     }
     
     .board-title:hover span {
         cursor: pointer;
-        background-color: #57BC90;
+        background-color: rgb(174, 231, 207);
     }
     
     .bg-color {

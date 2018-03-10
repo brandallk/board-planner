@@ -12,7 +12,7 @@
                   <h3>Edit Form</h3>
 
                 </div>
-                <div class="div">
+                <div class="div txt-color">
                   <p class:="text-wrap">Board Name: {{board.title}}</p>
                   <p class:="text-wrap"> List:{{list.title}}</p>
                   <p class:="text-wrap"> Task Name:{{task.title}}</p>
@@ -40,11 +40,11 @@
                 <div class="row existing">
                   <h6>Existing Comments:</h6>
                 </div>
-                <div class="row">
-                  <div class="col">
-                    <comment class:="commentColor" v-for="comment in taskComments" :comment='comment'></comment>
-                  </div>
-                </div>
+                <!-- <div class="row">
+                  <div class="col"> -->
+                    <comment class="commentColor" v-for="comment in taskComments" :comment='comment'></comment>
+                  <!-- </div> -->
+                <!-- </div> -->
               </div>
               <div class="">
               </div>
@@ -93,28 +93,22 @@
       },
       saveTaskDescription() {
         if (!this.taskDescription.trim() == "") {
-        console.log('task description', this.taskDescription)
-        var updatetask = this.task
-        updatetask.description = this.taskDescription
-        this.$store.dispatch('editTask', updatetask)
+          var updatetask = this.task
+          updatetask.description = this.taskDescription
+          this.$store.dispatch('editTask', updatetask)
         }
       },
       saveCommentDescription() {
         if (!this.commentDescription.trim() == "") {
           var comment = {
-          body: this.commentDescription,
-          listId: this.task.listId,
-          taskId: this.task._id,
-          boardId: this.$store.state.activeBoard._id
+            body: this.commentDescription,
+            listId: this.task.listId,
+            taskId: this.task._id,
+            boardId: this.$store.state.activeBoard._id
+          }
+          this.$store.dispatch('createComment', comment)
+          this.commentDescription = ''
         }
-
-        // updatetask.description = this.taskDescription
-        // this.$store.dispatch('editTask', updatetask)
-        console.log('comment', comment)
-
-        this.$store.dispatch('createComment', comment)
-        this.commentDescription = ''
-      }
       },
     }
   }
@@ -202,8 +196,12 @@
   .existing {
     margin-top: 80px;
   }
+
+  .txt-color {
+    color: black;
+  }
+
   /* .commentColor {
     color: red
   } */
-
 </style>
