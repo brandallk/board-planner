@@ -267,6 +267,7 @@ export default new vuex.Store({
                     var newTask = res.data
                     //console.log('new task:', newTask)
                     dispatch('getBoardTasks', newTask.boardId)
+                    dispatch('getBoardLists', newTask.boardId)
                 })
                 .catch(err => {
                     console.log(err)
@@ -290,6 +291,7 @@ export default new vuex.Store({
                 .then(res => {
                     //console.log('deleted task')
                     dispatch('getBoardTasks', task.boardId)
+                    dispatch('getBoardLists', task.boardId)
                 })
                 .catch(err => {
                     console.log(err)

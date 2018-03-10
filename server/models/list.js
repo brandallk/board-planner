@@ -25,7 +25,13 @@ var schema = new Schema({
         type: ObjectId,
         ref: "Board",
         required: true
-    }
+    },
+    taskIds: [
+        {
+            type: ObjectId,
+            ref: "Task"
+        }
+    ]
 })
 
 module.exports = mongoose.model(schemaName, schema)
