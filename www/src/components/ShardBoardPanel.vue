@@ -9,9 +9,10 @@
         <button class="shared-board btn btn-sm btn-outline-light" @click="goToBoard(board)">{{board.title}}</button>
       </div>
 
-      <!-- <div class="wrapper col-4 p-5">
-        <div class="shared-board rounded text-dark py-4 px-5" v-for="board in sharedBoards" @click="goToBoard(board)">{{board.title}}</div>
-      </div> -->
+      <div v-if="sharedBoards.length === 0" class="text-center w-100">
+        <em>(No shared boards)</em>
+      </div>
+
     </div>
 
   </div>
