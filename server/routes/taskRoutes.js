@@ -58,7 +58,7 @@ router.delete("/api/tasks/:taskId", (req, res, next) => {
         .catch(next)
 })
 
-// updateTask (put)
+// Update a task by ID
 router.put("/api/tasks/:taskId", (req, res, next) => {
     Tasks.findByIdAndUpdate(req.params.taskId, req.body, { new: true })
         .then(task => {
@@ -67,17 +67,15 @@ router.put("/api/tasks/:taskId", (req, res, next) => {
         .catch(next)
 })
 
-// router.put("/api/userId/boards/lists/tasks/:taskId", (req, res, next) => {
+// Get tasks by ListId
+// router.get("/api/boards/lists/:listId", (req, res, next) => {
+//     Tasks.find({ listId: req.params.listId })
+//         .then(tasks => {
+//             return res.send(tasks)
 
-router.get("/api/boards/lists/:listId", (req, res, next) => {
-
-    Tasks.find({ listId: req.params.listId })
-        .then(tasks => {
-            return res.send(tasks)
-
-        })
-        .catch(next)
-})
+//         })
+//         .catch(next)
+// })
 
 // Get tasks by boardId
 router.get('/api/boards/:boardId/tasks', (req, res, next) => {

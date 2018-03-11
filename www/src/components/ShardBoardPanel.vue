@@ -21,11 +21,6 @@
 <script>
   export default {
     name: 'SharedBoardPanel',
-    data() {
-      return {
-
-      }
-    },
     computed: {
       sharedBoards() {
         return this.$store.state.sharedBoards

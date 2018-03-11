@@ -1,7 +1,6 @@
 <template>
   <div class="taskCard">
     <div class="row py-1 px-3 mb-2">
-      <!-- <div v-if="!showQuickieEdit" @click='openTaskEditForm' @closeTaskCard='closeTaskEditForm' draggable="true" @dragover.prevent="dragover" @dragstart="dragStart" @drop="drop" class="task-title col-9 d-inline-block rounded-left">{{task.title}}</div> -->
       <div v-if="!showQuickieEdit" @click='openTaskEditForm' @closeTaskCard='closeTaskEditForm' draggable="true" 
       @dragstart="dragStart" @dragover.prevent="dragover" @drop="taskDrop" class="task-title col-9 task-txt d-inline-blockrounded-left">{{task.title}}</div>
 
@@ -71,25 +70,19 @@
                 this.showQuickieEdit = false
             },
             openTaskEditForm() {
-                // this.getBoardLists(board)
-                // this.activeBoardId = board._id
                 this.showTaskEditForm = true
             },
             closeTaskEditForm() {
-
-                // this.getBoardLists(board)
-                // this.activeBoardId = board._id
                 this.showTaskEditForm = false
             },
             dragStart() {
-                console.log("dragStart")
+                // console.log("dragStart")
                 this.$store.dispatch("setDraggedTaskInfo", {list: this.list, task: this.task})
             },
             dragover() {
-                console.log("dragover")
+                // console.log("dragover")
             },
             taskDrop() {
-
                 var payloadData = {
                     originList: this.$store.state.draggedTaskInfo.list,
                     draggedTask: this.$store.state.draggedTaskInfo.task,
@@ -97,7 +90,6 @@
                     dropTaskId: this.task._id
                 }
                 this.$store.dispatch('handleTaskDrop', payloadData)
-
             }
         }
     }

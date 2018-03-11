@@ -25,7 +25,6 @@
           <taskCard v-for="listTask in listTasks" :board="board" :list="list" :task="listTask"></taskCard>
           <input type="text" class="form-control mt-3 task-txt border-success" v-model="task.title">
           <button class="btn btn-success px-3 mt-2" @click="addNewTask">Add Task</button>
-          <!-- <input v-if="showQuickieEdit" type="text" class="task-title col-9 d-inline-block rounded-left" v-model="updatedTask.title"> -->
         </div>
       </div>
     </div>
@@ -78,18 +77,6 @@
                 return orderedTasks
             }
         },
-        // mounted() {
-        //     this.listTasks = function() {
-        //         function parallelSort(unsortedArr, sortedIdsArr) {
-        //             return sortedIdsArr.map(id => unsortedArr.find(elt => elt._id === id))
-        //         }
-        //         var boardTasks = this.$store.state.boardTasks
-        //         var tasksInList = boardTasks.filter(task => task.listId === this.list._id)
-        //         var listTasksIdsArr = this.list.taskIdsvar
-        //         orderedTasks = parallelSort(tasksInList, listTasksIdsArr)
-        //         return orderedTasks
-        //     }()
-        // },
         methods: {
             addNewTask() {
                 var newTask = {
@@ -116,7 +103,7 @@
                 this.$store.dispatch('deleteList', this.list)
             },
             dragover() {
-                console.log("dragover")
+                // console.log("dragover")
             },
             taskDrop() {
                 // Only handle the task-drop event here IF the List currently has NO Tasks. Otherwise, it will be handled in TaskCard.vue

@@ -347,6 +347,13 @@ export default new vuex.Store({
                     // If drop-target list has NO tasks of its own
                     if (!data.dropTaskId) {
                         var taskIdsArray = [taskId]
+
+                        var originTaskIdsArray = data.originList.taskIds
+                        originTaskIdsArray.splice(originTaskIdsArray.indexOf(taskId), 1) // Remove dragged Task from old location in its original list
+                        api.put(`lists/${data.originList._id}`, {taskIds: originTaskIdsArray}) // ...and update the original list's taskIds array
+                            .then(() => {
+                                // console.log('updated origin-list taskIds')
+                            }).catch(err => {console.log(err)})
                     }
 
                     // If drop-target list DOES already have tasks of its own
@@ -358,11 +365,11 @@ export default new vuex.Store({
                         if (originList._id === data.dropList._id) { // If dragging-&-dropping within the same list...
                             taskIdsArray.splice(taskIdsArray.indexOf(taskId), 1) // Remove dragged Task from old location in that same list
                         } else {
-                            var originTaskIdsArray = originList.taskIds
+                            var originTaskIdsArray = data.originList.taskIds
                             originTaskIdsArray.splice(originTaskIdsArray.indexOf(taskId), 1) // Remove dragged Task from old location in its original list
                             api.put(`lists/${data.originList._id}`, {taskIds: originTaskIdsArray}) // ...and update the original list's taskIds array
                                 .then(() => {
-                                    console.log('updated origin-list taskIds')
+                                    // console.log('updated origin-list taskIds')
                                 }).catch(err => {console.log(err)})
                         }
                         
@@ -371,8 +378,8 @@ export default new vuex.Store({
                     
                     api.put(`lists/${data.dropList._id}`, {taskIds: taskIdsArray}) // Update the drop-target list's taskIds array
                         .then(res => {
-                            var updatedList = res.data.data
-                            console.log('updated list:', updatedList)
+                            // var updatedList = res.data.data
+                            // console.log('updated list:', updatedList)
                             dispatch('getBoardLists', boardId)
                             dispatch('getBoardTasks', boardId)
                         }).catch(err => {console.log(err)})
