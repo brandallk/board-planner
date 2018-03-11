@@ -2,7 +2,7 @@
   <div class="taskCard">
     <div class="row py-1 px-3 mb-2">
       <div v-if="!showQuickieEdit" @click='openTaskEditForm' @closeTaskCard='closeTaskEditForm' draggable="true" 
-      @dragstart="dragStart" @dragover.prevent="dragover" @drop="taskDrop" class="task-title col-9 task-txt d-inline-blockrounded-left">{{task.title}}</div>
+      @dragstart="dragStart" @dragover.prevent="dragover" @drop="taskDrop" class="task-title col-9 task-txt d-inline-block rounded-left">{{task.title}}</div>
 
 
       <input v-if="showQuickieEdit" type="text"  class="task-title col-9 task-txt d-inline-block rounded-left" v-model="updatedTask.title">
@@ -12,9 +12,9 @@
         </a>
       </div>
 
-      <div v-if="showQuickieEdit" class="quickieEdit-btns d-flex w-100 mt-1">
-        <button class="btn btn-sm btn-success" @click="editTaskName">save</button>
-        <button class="btn btn-sm btn-danger ml-auto" @click="deleteTask">delete task</button>
+      <div v-if="showQuickieEdit" class="quickieEdit-btns d-flex w-100 mt-2">
+        <button class="btn btn-sm btn-success py-0" @click="editTaskName">save</button>
+        <button class="btn btn-sm btn-danger py-0 ml-2" @click="deleteTask">delete task</button>
       </div>
     </div>
     <taskEditForm :board="board" :list="list" :task="task" v-if="showTaskEditForm" @closeTaskEditForm='closeTaskEditForm'></taskEditForm>
