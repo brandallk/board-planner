@@ -16,8 +16,8 @@
       </div>
   
       <div class="collaborators col-12 col-sm-5 ml-5 px-2 py-1">
+        <h6>Users currently sharing this board:</h6>
         <div class="row">
-          <h6>Users currently sharing this board:</h6>
           <div class="collabName col-md-6">
               <img src="./../assets/user.png" alt="user icon">
               <span class="text-light">{{boardOwner}} <em>(owner)</em></span>
