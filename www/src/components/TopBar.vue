@@ -1,8 +1,15 @@
 <template>
-  <div class="topbar bgcolor row">
+  <div class="topbar bgcolor">
     
-    <div class="col-sm-12">
-      <h1 class="text-center text-light py-4">Board-Planner</h1>
+    <div class="container-fluid d-flex align-items-center justify-content-between pt-3 pb-2 px-4">
+        <div>
+            <img src="./../assets/planner-icon.png" alt="planner icon">
+            <h1 class="h3 d-inline text-light font-weight-bold">board-planner</h1>
+        </div>
+        <div>
+            <img src="./../assets/user.png" alt="user icon">
+            <span class="h5 text-light">{{user.name}}</span>
+        </div>
     </div>
 
   </div>
@@ -33,6 +40,12 @@
 </script>
 
 <style scoped>
+    img {
+        width: 25px;
+        margin-bottom: 0.4rem;
+        margin-right: 0.5rem;
+    }
+
     .logout {
         flex-direction: row-reverse;
         align-self: center;
