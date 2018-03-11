@@ -1,5 +1,5 @@
 <template>
-  <div class="board bg-color">
+  <div class="board bg-color pb-5">
 
     <topBar></topBar>
     <navbar></navbar>
@@ -44,9 +44,9 @@
 
       <div class="row mx-4">
 
-        <list v-for="list in boardLists" :list="list" class="col-3 mt-4"></list>
+        <list v-for="list in boardLists" :list="list" class="col-12 col-sm-6 col-md-4 col-lg-3 mt-4"></list>
 
-        <div class="col-3 mt-4">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-4">
 
           <button v-if="!showAddListDropdown" class="add-list-toggle add-list btn btn-block mt-0" @click="showAddListDropdown = true">Add a list...</button>
 

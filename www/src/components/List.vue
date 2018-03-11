@@ -4,15 +4,24 @@
 
       <div class="list-heading">
         <div class="d-flex">
-          <div class="list-title">
-            <span v-if="!showListTitleEdit" class="d-block mb-2 pr-4 pb-2 rounded" @click="showListTitleEdit = true">List title: {{list.title}}</span>
-            <input v-if="showListTitleEdit" type="text" class="form-content d-block rounded pl-3" v-model="updatedList.title">
-            <button v-if="showListTitleEdit" class="btn btn-success btn-sm mb-2" @click="editListTitle">save</button>
-            <button v-if="showListTitleEdit" class="btn btn-danger btn-sm mb-2" @click="showListTitleEdit = false">cancel</button>
+
+          <div>
+
+            <div class="list-title mb-3 pr-2 rounded" v-if="!showListTitleEdit" @click="showListTitleEdit = true">
+                <span>List: </span>
+                <span class="d-inline-block">{{list.title}}</span>
+            </div>
+
+            <input v-if="showListTitleEdit" type="text" class="updated-list-title form-control mb-2 rounded pl-3" v-model="updatedList.title">
+            <button v-if="showListTitleEdit" class="btn btn-success btn-sm py-0 mb-2" @click="editListTitle">save</button>
+            <button v-if="showListTitleEdit" class="btn btn-danger btn-sm py-0 mb-2" @click="showListTitleEdit = false">cancel</button>
+
           </div>
+
           <a href="#" class="delete-list-toggle ml-auto px-2 rounded elipse-color text-muted" @click.prevent="toggleDeleteListDropdown">
             <i class="fas fa-ellipsis-h"></i>
           </a>
+
         </div>
 
         <div v-if="showDeleteListDropdown" class="delete-list-dropdown d-block mb-3">
@@ -24,7 +33,7 @@
         <div class="col">
           <taskCard v-for="listTask in listTasks" :board="board" :list="list" :task="listTask"></taskCard>
           <input type="text" class="form-control mt-3 task-txt border-success" v-model="task.title">
-          <button class="btn btn-success px-3 mt-2" @click="addNewTask">Add Task</button>
+          <button class="btn btn-sm btn-success px-3 mt-2" @click="addNewTask">Add Task</button>
         </div>
       </div>
     </div>
@@ -137,13 +146,13 @@
         width: 30px
     }
     
-    .list-title input {
-        width: 95%;
-    }
-    
-    .list-title:hover span {
+    .list-title:hover {
         cursor: pointer;
         background-color: #57BC90;
+    }
+
+    .updated-list-title.form-control {
+        width: 90%;
     }
     
     .delete-list-toggle:hover {
@@ -162,5 +171,11 @@
     
     .task-txt {
         color: #015249;
+    }
+
+    .form-control {
+        width: inherit;
+        display: inline-block;
+        height: 1.9rem;
     }
 </style>
