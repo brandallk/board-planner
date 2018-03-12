@@ -58,9 +58,15 @@
             }
         },
         props: [
-            'board',
-            'lists'
+            'board'
         ],
+        computed: {
+            lists() {
+                var lists = this.$store.state.boardLists
+                lists.sort((listA, listB) => listA.createdAt - listB.createdAt)
+                return lists
+            }
+        },
         methods: {
             close() {
                 this.$emit('closeBoardPreview')

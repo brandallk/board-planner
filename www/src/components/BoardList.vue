@@ -17,7 +17,7 @@
             <p class="text-center pb-2">{{board.description}}</p>
           </div>
   
-          <boardPreview :board="board" :lists="boardLists" v-if="showBoard(board)" @closeBoardPreview="closeBoardPreview"></boardPreview>
+          <boardPreview :board="board" v-if="showBoard(board)" @closeBoardPreview="closeBoardPreview"></boardPreview>
         </div>
       </div>
 
