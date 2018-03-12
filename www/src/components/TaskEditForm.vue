@@ -1,5 +1,5 @@
 <template>
-  <div class="taskEditForm">
+  <div class="taskEditForm text-dark">
     <!-- <button @click="showModal = true">Edit Tasks</button> -->
     <div v-if="showModal">
       <transition name="modal">
@@ -9,13 +9,13 @@
 
               <div class="modal-header">
                 <div class="col">
-                  <h3>Edit Form</h3>
+                  <h3>Edit Task</h3>
 
                 </div>
                 <div class="div txt-color">
-                  <p class:="text-wrap">Board Name: {{board.title}}</p>
-                  <p class:="text-wrap"> List:{{list.title}}</p>
-                  <p class:="text-wrap"> Task Name:{{task.title}}</p>
+                  <p class:="text-wrap"><em>Board</em>: {{board.title}}</p>
+                  <p class:="text-wrap"><em>List</em>: {{list.title}}</p>
+                  <p class:="text-wrap"><em>Task</em>: {{task.title}}</p>
                 </div>
               </div>
               <div class="modal-body">
