@@ -15,6 +15,7 @@ router.get("/api/lists/:listId", (req, res, next) => {
 // Create a list
 router.post("/api/lists", (req, res, next) => {
     req.body.userId = req.session.uid // Get the userId from the logged-in user session
+    req.body.createdAt = Date.now() // Get the current timestamp. NOTE: SETTING A DEFAULT IN THE MONGOOSE SCHEMA DOES NOT GIVE A UNIQUE TIMESTAMP.
     Lists.create(req.body)
         .then(list => {
             res.send(list)

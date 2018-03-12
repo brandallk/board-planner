@@ -54,7 +54,7 @@
             <input type="text" class="list-title form-control" v-model="newList.title">
             <div class="add-list-btns d-flex w-100 mt-1">
               <button class="btn btn-sm px-3 btn-success" @click="createList">save</button>
-              <button class="btn btn-sm px-3 btn-danger ml-auto" @click="showAddListDropdown = false">cancel</button>
+              <button class="btn btn-sm px-3 btn-danger ml-2" @click="showAddListDropdown = false">cancel</button>
             </div>
           </div>
 
@@ -99,7 +99,10 @@
         return this.$store.state.activeBoard
       },
       boardLists() {
-        return this.$store.state.boardLists
+        var lists = this.$store.state.boardLists
+        lists.sort((listA, listB) => listB.createdAt - listA._id.createdAt)
+        console.log(lists)
+        return lists
       }
     },
     methods: {

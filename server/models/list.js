@@ -13,8 +13,7 @@ var schema = new Schema({
         required: true
     },
     createdAt: {
-        type: Number,
-        default: Date.now()
+        type: Number
     },
     userId: {
         type: ObjectId,
