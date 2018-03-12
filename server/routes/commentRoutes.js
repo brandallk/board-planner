@@ -55,14 +55,12 @@ router.get('/api/boards/:boardId/comments', (req, res, next) => {
 })
 
 //TEST ONLY
-router.get("/api/comments", (req, res, next) => {
-    Comments.find()
-        .then(comments => {
-            return res.send(comments)
-        })
-        .catch(next)
-})
-
-
+// router.get("/api/comments", (req, res, next) => {
+//     Comments.find()
+//         .then(comments => {
+//             return res.send(comments)
+//         })
+//         .catch(next)
+// })
 
 module.exports = { router };

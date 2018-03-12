@@ -67,6 +67,14 @@ router.put("/api/tasks/:taskId", (req, res, next) => {
         .catch(next)
 })
 
+// Get tasks by boardId
+router.get('/api/boards/:boardId/tasks', (req, res, next) => {
+    Tasks.find({boardId: req.params.boardId})
+        .then(tasks => {
+            return res.send(tasks)
+        })
+})
+
 // Get tasks by ListId
 // router.get("/api/boards/lists/:listId", (req, res, next) => {
 //     Tasks.find({ listId: req.params.listId })
@@ -77,21 +85,13 @@ router.put("/api/tasks/:taskId", (req, res, next) => {
 //         .catch(next)
 // })
 
-// Get tasks by boardId
-router.get('/api/boards/:boardId/tasks', (req, res, next) => {
-    Tasks.find({boardId: req.params.boardId})
-        .then(tasks => {
-            return res.send(tasks)
-        })
-})
-
 //FOR TESTING ONLY - GET ALL TASKS
-router.get("/api/tasks", (req, res, next) => {
-    Tasks.find()
-        .then(tasks => {
-            return res.send(tasks)
-        })
-        .catch(next)
-})
+// router.get("/api/tasks", (req, res, next) => {
+//     Tasks.find()
+//         .then(tasks => {
+//             return res.send(tasks)
+//         })
+//         .catch(next)
+// })
 
 module.exports = { router };

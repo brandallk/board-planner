@@ -53,53 +53,53 @@ router.get('/api/user/:userId/shared', (req, res, next) => {
 })
 
 // TEMPORARY FOR TESTING!!! Get all Users
-router.get('/api/users', getAllUsers)
-function getAllUsers(req, res, next) {
-  User.find(req.query)
-    .then(users => {
-      res.send(users)
-    })
-    .catch(next)
-}
+// router.get('/api/users', getAllUsers)
+// function getAllUsers(req, res, next) {
+//   User.find(req.query)
+//     .then(users => {
+//       res.send(users)
+//     })
+//     .catch(next)
+// }
 
 // TEMPORARY FOR TESTING!!! Delete a User
-router.delete('/api/users/:userId', deleteUser)
-function deleteUser(req, res, next) {
-  User.findByIdAndRemove(req.params.userId)
-    .then(user => {
-      return res.send({
-        message: 'Sucessfully deleted a user'
-      })
-    })
-    .catch(next)
-  Board.deleteMany({
-      userId: req.params.userId
-    })
-    .then(() => {
-      console.log('Deleted user boards')
-    })
-    .catch(next)
-  List.deleteMany({
-      userId: req.params.userId
-    })
-    .then(() => {
-      console.log('Deleted user lists')
-    })
-    .catch(next)
-  Task.deleteMany({
-      userId: req.params.userId
-    })
-    .then(() => {
-      console.log('Deleted user tasks')
-    })
-    .catch(next)
-  Comment.deleteMany({
-      userId: req.params.userId
-    })
-    .then(() => {
-      console.log('Deleted user comments')
-    })
-    .catch(next)
-}
+// router.delete('/api/users/:userId', deleteUser)
+// function deleteUser(req, res, next) {
+//   User.findByIdAndRemove(req.params.userId)
+//     .then(user => {
+//       return res.send({
+//         message: 'Sucessfully deleted a user'
+//       })
+//     })
+//     .catch(next)
+//   Board.deleteMany({
+//       userId: req.params.userId
+//     })
+//     .then(() => {
+//       console.log('Deleted user boards')
+//     })
+//     .catch(next)
+//   List.deleteMany({
+//       userId: req.params.userId
+//     })
+//     .then(() => {
+//       console.log('Deleted user lists')
+//     })
+//     .catch(next)
+//   Task.deleteMany({
+//       userId: req.params.userId
+//     })
+//     .then(() => {
+//       console.log('Deleted user tasks')
+//     })
+//     .catch(next)
+//   Comment.deleteMany({
+//       userId: req.params.userId
+//     })
+//     .then(() => {
+//       console.log('Deleted user comments')
+//     })
+//     .catch(next)
+// }
 
 module.exports = { router }

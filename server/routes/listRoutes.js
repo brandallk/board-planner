@@ -65,12 +65,12 @@ router.get("/api/boards/:boardId/lists", (req, res, next) => {
 })
 
 //FOR TESTING ONLY: Get all lists
-router.get("/api/boards/lists", (req, res, next) => {
-    Lists.find()
-        .then(lists => {
-            return res.send(lists)
-        })
-        .catch(next)
-})
+// router.get("/api/boards/lists", (req, res, next) => {
+//     Lists.find()
+//         .then(lists => {
+//             return res.send(lists)
+//         })
+//         .catch(next)
+// })
 
 module.exports = { router };

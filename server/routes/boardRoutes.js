@@ -62,13 +62,13 @@ router.get("/myBoards", (req, res, next) => {
 })
 
 // FOR TESTING ONLY: Get all boards
-router.get("/api/boards", (req, res, next) => {
-    Boards.find()
-        .then(boards => {
-            return res.send(boards)
-        })
-        .catch(next)
-})
+// router.get("/api/boards", (req, res, next) => {
+//     Boards.find()
+//         .then(boards => {
+//             return res.send(boards)
+//         })
+//         .catch(next)
+// })
 
 
 module.exports = { router }
