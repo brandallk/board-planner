@@ -1,15 +1,19 @@
 <template>
-  <div class="welcome">
-    <div class="container-fluid pb-5">
+  <div class="welcome text-dark">
+    <div class="pb-5">
       <topBar></topBar>
 
       <div class="welcome-message container">
-        <h1 class="text-center m-5">Welcome to Board-Planner!</h1>
-        <p>We are a startup that is aimed at helping people plan out their projects...</p>
-        <p class="p-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda dolores alias id, quaerat quos dolore earum ducimus
-          eaque velit dignissimos. Doloremque blanditiis aliquid nesciunt! Delectus, aperiam quisquam? Atque dolores autem
-          explicabo porro facere accusamus sint libero, reprehenderit soluta labore voluptatem!
-        </p>
+        <h1 class="text-center m-3">Welcome!</h1>
+        <p>Use this productivity app to organize your projects, todo-lists, and collaborators.</p>
+        <ul>
+          <li>Register/sign-in to access your private account</li>
+          <li>Create a 'Board' dedicated to each of your projects</li>
+          <li>Within a Board, create Lists and post Tasks and Comments</li>
+          <li>Rearrange Tasks in any order or swap them from List to List</li>
+          <li>Invite new team-members to collaborate on shared Boards</li>
+          <li>Don't worry: Your own contributions cannot be deleted by a collaborator</li>
+        </ul>
       </div>
 
       <errorMsg v-if="authError.error">{{authError.message}}</errorMsg>

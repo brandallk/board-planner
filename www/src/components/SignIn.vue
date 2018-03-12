@@ -1,21 +1,26 @@
 <template>
   <div class="signIn container">
-    <div class="signInForm">
-        <form class="border border-secondary p-4" @submit.prevent="submit">
-          <h4 class="text-center">Sign In</h4>
+    <div class="signInForm text-dark">
+
+        <form class="border border-secondary rounded p-4" @submit.prevent="submit">
+          
           <div class="form-group">
             <label class="ml-4" for="email">Email:</label>
-            <input type="text" id="email" class="form-control" v-model="user.email">
+            <input type="text" id="email" class="form-control" v-model="user.email" placeholder="my@address.com">
           </div>
           <div class="form-group">
             <label class="ml-4" for="password">Password:</label>
-            <input type="password" id="password" class="form-control" v-model="user.password">
+            <input type="password" id="password" class="form-control" v-model="user.password" placeholder="********">
           </div>
-          <button class="btn btn-info px-4" type="submit">I want in!</button>
+
+          <button class="btn btn-success px-4" type="submit">Sign in</button>
+
         </form>
+
         <div class="text-center pt-4">
-          <a href="#" class="text-muted" @click.prevent="showRegisterForm">Register!</a>
+          <a href="#" class="text-muted" @click.prevent="showRegisterForm">Click here to register.</a>
         </div>
+
     </div>
   </div>
 </template>
@@ -43,7 +48,6 @@
 
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   div.signIn {
     width: 95%;
@@ -54,8 +58,6 @@
     }
   }
   .signInForm {
-    /* height: 160px;
-    width: 130px; */
     padding: 1rem;
   }
 

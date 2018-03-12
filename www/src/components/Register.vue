@@ -1,28 +1,27 @@
 <template>
   <div class="register container mt-4">
-    <form action="#" class="border border-secondary p-4" @submit.prevent="submit">
 
-      <h4 class="text-center">Register</h4>
+    <form action="#" class="border border-secondary rounded p-4" @submit.prevent="submit">
 
       <div class="form-group">
-        <label for="username">Name: </label>
-        <input type="text" id="username" class="form-control" v-model="user.name">
+        <label class="ml-4" for="username">Name: </label>
+        <input type="text" id="username" class="form-control" v-model="user.name" placeholder="My Name">
       </div>
       <div class="form-group">
-        <label for="email">Email: </label>
-        <input type="text" id="email" class="form-control" v-model="user.email">
+        <label class="ml-4" for="email">Email: </label>
+        <input type="text" id="email" class="form-control" v-model="user.email" placeholder="my@address.com">
       </div>
       <div class="form-group">
-        <label for="password">Password: </label>
-        <input type="password" id="password" class="form-control" v-model="user.password">
+        <label class="ml-4" for="password">Password: </label>
+        <input type="password" id="password" class="form-control" v-model="user.password" placeholder="********">
       </div>
 
-      <button type="submit" class="btn btn-info px-4">Submit</button>
+      <button type="submit" class="btn btn-success px-4">Register</button>
 
     </form>
 
     <div class="text-center pt-4">
-      <a href="#" class="text-muted" @click.prevent="showSignInForm">Sign In</a>
+      <a href="#" class="text-muted" @click.prevent="showSignInForm">Already registered? Sign in here.</a>
     </div>
   </div>
 </template>
