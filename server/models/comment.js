@@ -31,7 +31,7 @@ var schema = new Schema({
     created: {
         type: Date,
         required: true,
-        default: Date.now()
+        // default: Date.now()
     }
 })
 

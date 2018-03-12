@@ -12,13 +12,14 @@
       <button v-if="showCommentEdit" class="btn btn-danger btn-sm mb-2" @click="showCommentEdit = false">cancel</button>
       <div class="div">
         <h6 class="ml-2 txt-color2">{{userInfo.name}},</h6>
-        <p class="ml-4 txt-color2">{{comment.created}}</p>
+        <p class="ml-4 txt-color2" v-text="formattedDate"></p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import moment from 'moment'
   export default {
     name: 'Comments',
     data() {
@@ -38,6 +39,10 @@
           return user.userId === this.comment.userId
         })
         return commentCreator
+      },
+      formattedDate() {
+        var createdAt = moment(this.comment.created)
+        return '-- ' + createdAt.startOf('minute').calendar()
       }
 
     },
@@ -61,7 +66,7 @@
       },
       getUserId() {
         this.$store.dispatch('getCommentByUser', this.comment.userId)
-      },
+      }
     }
   }
 </script>

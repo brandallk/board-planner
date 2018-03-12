@@ -1,10 +1,10 @@
 var router = require("express").Router()
 var Comments = require("../models/comment")
 
-//  createComment
-
+//  Create a Comment
 router.post("/api/comments", (req, res, next) => {
-    req.body.userId=req.session.uid
+    req.body.userId = req.session.uid
+    req.body.created = Date.now()
     Comments.create(req.body)
         .then(comment => {
             res.send(comment)

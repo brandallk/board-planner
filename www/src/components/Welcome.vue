@@ -53,7 +53,7 @@
 
 <style scoped>
   .welcome-message {
-    width: 95%;
+    max-width: 600px;
   }
 
   @media (min-width: 576px) {
