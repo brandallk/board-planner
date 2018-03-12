@@ -1,42 +1,42 @@
 <template>
   <div class="boardPreview">
 
-    <!-- {{ board.title }} -->
-
     <transition name="modal-fade">
       <div class="modal-backdrop">
-        <div class="modal" role="dialog">
+        <div class="modal rounded" role="dialog">
+            
           <header class="modal-header">
-            <h5>{{board.title}}</h5>
+            <h4 class="text-center w-100 mt-2 font-weight-bold">{{board.title}}</h4>
           </header>
-          <div class="modal-body">
+
+          <div class="modal-body container px-5">
             <div name="section body">
               <div class="card-Body">
                 {{board.description}}
-              </div>
- 
+              </div> 
             </div>
           </div>
-          <div class="row boardList p-3">
-            <h5 class="p-3">Board Lists:</h5>
-            <ol class="">
+          
+          <div class="boardList container px-5 py-3">
+            <h5>Board Lists:</h5>
+            <ol>
               <li class="listEntry mt-4" v-for="list in lists">
-                <div class="col">
+                <span>
                   {{list.title}}
-                </div>
-                <div class="col">
-                  {{list.description}}
-                </div>
- 
+                </span>
+                <span class="d-block font-italic">
+                  <small>{{list.description}}</small>
+                </span> 
               </li>
             </ol>
           </div>
+
           <footer class="modal-footer">
             <div class="col">
-              <button type="button" class="btn btn-alert btnDelete" @click="deleteBoard(board)">Delete Board!</button>
+              <button type="button" class="btn btn-danger btnDelete" @click="deleteBoard(board)">Delete this board</button>
             </div>
-            <button type="button" class="btn" @click="close">Close!</button>
-            <button type="button" class="btn" @click="gotoBoard(board)">Go to Board</button>
+            <button type="button" class="btn" @click="close">Cancel</button>
+            <button type="button" class="btn btn-success" @click="gotoBoard(board)">Load board</button>
           </footer>
         </div>
       </div>
