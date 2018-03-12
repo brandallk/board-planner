@@ -14,7 +14,7 @@
           <div @click="showBoardPreview(board)" class="boardToggle text-white">
             <h3 class="h4 text-center mt-2">{{board.title}}</h3>
             <hr>
-            <p class="text-center pb-2">{{board.description}}</p>
+            <p class="text-center pb-2" v-text="truncate(board.description)"></p>
           </div>
   
           <boardPreview :board="board" v-if="showBoard(board)" @closeBoardPreview="closeBoardPreview"></boardPreview>
@@ -75,6 +75,13 @@
           "#E7CE18",
         ]
         return colors[Math.floor(Math.random() * 5.99)]
+      },
+      truncate(description) {
+        const MAX_LETTER_COUNT = 56
+        if (description.length > MAX_LETTER_COUNT) {
+          description = description.substr(0, MAX_LETTER_COUNT) + '...'
+        }
+        return description
       },
       getBoardLists(board) {
         this.$store.dispatch('getBoardLists', board._id)
