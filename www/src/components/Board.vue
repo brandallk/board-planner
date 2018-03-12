@@ -100,8 +100,7 @@
       },
       boardLists() {
         var lists = this.$store.state.boardLists
-        lists.sort((listA, listB) => listB.createdAt - listA._id.createdAt)
-        console.log(lists)
+        lists.sort((listA, listB) => listA.createdAt - listB.createdAt)
         return lists
       }
     },
