@@ -3,6 +3,7 @@
 ##### Make, Save & Share Music in the Browser
 
 Link to the live project (on Heroku): [Board Planner](https://board-planner.herokuapp.com/)
+(Note: For a quick preview of the app, you can log in as test-user Chico Marx -- email: chico@marx.com, password: password. This test-user has a few boards and collaborators already.)
 
 ##### About the project
 
